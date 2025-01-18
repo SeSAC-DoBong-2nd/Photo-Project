@@ -27,6 +27,10 @@
 		9E57016D2D3BC56700D62846 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5701642D3BC56700D62846 /* UIImageView+Extension.swift */; };
 		9E57016E2D3BC56700D62846 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5701632D3BC56700D62846 /* UIButton+Extension.swift */; };
 		9E5701702D3BC67000D62846 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E57016F2D3BC67000D62846 /* UIStackView+Extension.swift */; };
+		9ED690FA2D3BC821007E76E8 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED690F92D3BC821007E76E8 /* TabBarViewController.swift */; };
+		9ED690FC2D3BC870007E76E8 /* PhotoSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED690FB2D3BC870007E76E8 /* PhotoSearchViewController.swift */; };
+		9ED690FE2D3BC87B007E76E8 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED690FD2D3BC87B007E76E8 /* PhotoDetailViewController.swift */; };
+		9ED691002D3BC884007E76E8 /* PhotoTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED690FF2D3BC884007E76E8 /* PhotoTopicViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +52,10 @@
 		9E5701662D3BC56700D62846 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		9E5701672D3BC56700D62846 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		9E57016F2D3BC67000D62846 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
+		9ED690F92D3BC821007E76E8 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		9ED690FB2D3BC870007E76E8 /* PhotoSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchViewController.swift; sourceTree = "<group>"; };
+		9ED690FD2D3BC87B007E76E8 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
+		9ED690FF2D3BC884007E76E8 /* PhotoTopicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTopicViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +140,7 @@
 		9E5701282D3BBB3E00D62846 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				9ED690F82D3BC7E9007E76E8 /* TabBar */,
 				9E5701292D3BBB4800D62846 /* PhotoSearch */,
 				9E57012A2D3BBB5400D62846 /* PhotoDetail */,
 				9E57012B2D3BBB6300D62846 /* PhotoTopic */,
@@ -142,6 +151,7 @@
 		9E5701292D3BBB4800D62846 /* PhotoSearch */ = {
 			isa = PBXGroup;
 			children = (
+				9ED690FB2D3BC870007E76E8 /* PhotoSearchViewController.swift */,
 			);
 			path = PhotoSearch;
 			sourceTree = "<group>";
@@ -149,6 +159,7 @@
 		9E57012A2D3BBB5400D62846 /* PhotoDetail */ = {
 			isa = PBXGroup;
 			children = (
+				9ED690FD2D3BC87B007E76E8 /* PhotoDetailViewController.swift */,
 			);
 			path = PhotoDetail;
 			sourceTree = "<group>";
@@ -156,6 +167,7 @@
 		9E57012B2D3BBB6300D62846 /* PhotoTopic */ = {
 			isa = PBXGroup;
 			children = (
+				9ED690FF2D3BC884007E76E8 /* PhotoTopicViewController.swift */,
 			);
 			path = PhotoTopic;
 			sourceTree = "<group>";
@@ -191,6 +203,14 @@
 				9E57016F2D3BC67000D62846 /* UIStackView+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		9ED690F82D3BC7E9007E76E8 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				9ED690F92D3BC821007E76E8 /* TabBarViewController.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,10 +305,14 @@
 				9E57016D2D3BC56700D62846 /* UIImageView+Extension.swift in Sources */,
 				9E57016E2D3BC56700D62846 /* UIButton+Extension.swift in Sources */,
 				9E5701222D3BBAF800D62846 /* SceneDelegate.swift in Sources */,
+				9ED690FE2D3BC87B007E76E8 /* PhotoDetailViewController.swift in Sources */,
+				9ED690FC2D3BC870007E76E8 /* PhotoSearchViewController.swift in Sources */,
 				9E5701602D3BBF9200D62846 /* DateFormatterManager.swift in Sources */,
 				9E5701612D3BBF9200D62846 /* UIAlertManager.swift in Sources */,
 				9E5701592D3BBF1F00D62846 /* BaseViewController.swift in Sources */,
 				9E57015A2D3BBF1F00D62846 /* BaseCollectionViewCell.swift in Sources */,
+				9ED691002D3BC884007E76E8 /* PhotoTopicViewController.swift in Sources */,
+				9ED690FA2D3BC821007E76E8 /* TabBarViewController.swift in Sources */,
 				9E57015B2D3BBF1F00D62846 /* BaseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,7 +343,7 @@
 				INFOPLIST_FILE = PhotoProject/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "";
@@ -353,7 +377,7 @@
 				INFOPLIST_FILE = PhotoProject/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "";
