@@ -18,6 +18,8 @@
 		9E5701592D3BBF1F00D62846 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5701552D3BBF1F00D62846 /* BaseViewController.swift */; };
 		9E57015A2D3BBF1F00D62846 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5701572D3BBF1F00D62846 /* BaseCollectionViewCell.swift */; };
 		9E57015B2D3BBF1F00D62846 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5701562D3BBF1F00D62846 /* BaseView.swift */; };
+		9E5701602D3BBF9200D62846 /* DateFormatterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E57015E2D3BBF9200D62846 /* DateFormatterManager.swift */; };
+		9E5701612D3BBF9200D62846 /* UIAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E57015F2D3BBF9200D62846 /* UIAlertManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		9E5701552D3BBF1F00D62846 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		9E5701562D3BBF1F00D62846 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		9E5701572D3BBF1F00D62846 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		9E57015E2D3BBF9200D62846 /* DateFormatterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterManager.swift; sourceTree = "<group>"; };
+		9E57015F2D3BBF9200D62846 /* UIAlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,7 @@
 		9E5701252D3BBB1700D62846 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				9E57015D2D3BBF8B00D62846 /* Utils */,
 				9E5701582D3BBF1F00D62846 /* Base */,
 				9E5701262D3BBB2B00D62846 /* Resource */,
 			);
@@ -148,6 +153,15 @@
 				9E5701572D3BBF1F00D62846 /* BaseCollectionViewCell.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		9E57015D2D3BBF8B00D62846 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9E57015E2D3BBF9200D62846 /* DateFormatterManager.swift */,
+				9E57015F2D3BBF9200D62846 /* UIAlertManager.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,6 +249,8 @@
 			files = (
 				9E5701212D3BBAF800D62846 /* AppDelegate.swift in Sources */,
 				9E5701222D3BBAF800D62846 /* SceneDelegate.swift in Sources */,
+				9E5701602D3BBF9200D62846 /* DateFormatterManager.swift in Sources */,
+				9E5701612D3BBF9200D62846 /* UIAlertManager.swift in Sources */,
 				9E5701592D3BBF1F00D62846 /* BaseViewController.swift in Sources */,
 				9E57015A2D3BBF1F00D62846 /* BaseCollectionViewCell.swift in Sources */,
 				9E57015B2D3BBF1F00D62846 /* BaseView.swift in Sources */,
