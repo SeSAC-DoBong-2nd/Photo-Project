@@ -49,6 +49,8 @@ class TabBarController: UITabBarController {
         
         self.tabBar.layer.borderWidth = 0.6
         self.tabBar.layer.borderColor = UIColor.lightGray.cgColor
+        
+        self.selectedIndex = 2
     }
     
     func setTabBarAppearence () {
