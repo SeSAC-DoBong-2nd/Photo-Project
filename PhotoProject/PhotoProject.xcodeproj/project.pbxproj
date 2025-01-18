@@ -6,30 +6,21 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		9E57011D2D3BBAF800D62846 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E5701142D3BBAF800D62846 /* Assets.xcassets */; };
+		9E57011F2D3BBAF800D62846 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E5701172D3BBAF800D62846 /* LaunchScreen.storyboard */; };
+		9E5701212D3BBAF800D62846 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5701132D3BBAF800D62846 /* AppDelegate.swift */; };
+		9E5701222D3BBAF800D62846 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E57011A2D3BBAF800D62846 /* SceneDelegate.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		9E5700FB2D3BBAD900D62846 /* PhotoProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E5701132D3BBAF800D62846 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9E5701142D3BBAF800D62846 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9E5701152D3BBAF800D62846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E5701162D3BBAF800D62846 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9E57011A2D3BBAF800D62846 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		9E57010D2D3BBADB00D62846 /* Exceptions for "PhotoProject" folder in "PhotoProject" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 9E5700FA2D3BBAD900D62846 /* PhotoProject */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		9E5700FD2D3BBAD900D62846 /* PhotoProject */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				9E57010D2D3BBADB00D62846 /* Exceptions for "PhotoProject" folder in "PhotoProject" target */,
-			);
-			path = PhotoProject;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		9E5700F82D3BBAD900D62846 /* Frameworks */ = {
@@ -45,7 +36,7 @@
 		9E5700F22D3BBAD900D62846 = {
 			isa = PBXGroup;
 			children = (
-				9E5700FD2D3BBAD900D62846 /* PhotoProject */,
+				9E57011C2D3BBAF800D62846 /* PhotoProject */,
 				9E5700FC2D3BBAD900D62846 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +47,82 @@
 				9E5700FB2D3BBAD900D62846 /* PhotoProject.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9E57011C2D3BBAF800D62846 /* PhotoProject */ = {
+			isa = PBXGroup;
+			children = (
+				9E5701242D3BBAFB00D62846 /* Application */,
+				9E5701272D3BBB3600D62846 /* Network */,
+				9E5701282D3BBB3E00D62846 /* Present */,
+				9E5701252D3BBB1700D62846 /* Global */,
+			);
+			path = PhotoProject;
+			sourceTree = "<group>";
+		};
+		9E5701242D3BBAFB00D62846 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				9E5701132D3BBAF800D62846 /* AppDelegate.swift */,
+				9E57011A2D3BBAF800D62846 /* SceneDelegate.swift */,
+				9E5701152D3BBAF800D62846 /* Info.plist */,
+				9E5701172D3BBAF800D62846 /* LaunchScreen.storyboard */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		9E5701252D3BBB1700D62846 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				9E5701262D3BBB2B00D62846 /* Resource */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		9E5701262D3BBB2B00D62846 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				9E5701142D3BBAF800D62846 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		9E5701272D3BBB3600D62846 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		9E5701282D3BBB3E00D62846 /* Present */ = {
+			isa = PBXGroup;
+			children = (
+				9E5701292D3BBB4800D62846 /* PhotoSearch */,
+				9E57012A2D3BBB5400D62846 /* PhotoDetail */,
+				9E57012B2D3BBB6300D62846 /* PhotoTopic */,
+			);
+			path = Present;
+			sourceTree = "<group>";
+		};
+		9E5701292D3BBB4800D62846 /* PhotoSearch */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PhotoSearch;
+			sourceTree = "<group>";
+		};
+		9E57012A2D3BBB5400D62846 /* PhotoDetail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PhotoDetail;
+			sourceTree = "<group>";
+		};
+		9E57012B2D3BBB6300D62846 /* PhotoTopic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PhotoTopic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -72,9 +139,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				9E5700FD2D3BBAD900D62846 /* PhotoProject */,
 			);
 			name = PhotoProject;
 			packageProductDependencies = (
@@ -122,6 +186,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E57011D2D3BBAF800D62846 /* Assets.xcassets in Resources */,
+				9E57011F2D3BBAF800D62846 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,10 +198,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E5701212D3BBAF800D62846 /* AppDelegate.swift in Sources */,
+				9E5701222D3BBAF800D62846 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		9E5701172D3BBAF800D62846 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9E5701162D3BBAF800D62846 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		9E57010F2D3BBADB00D62846 /* Debug */ = {
