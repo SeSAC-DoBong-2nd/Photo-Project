@@ -12,36 +12,32 @@ import Then
 
 final class PhotoDetailView: BaseView {
     
-    let underLineView = UIView()
+    private let underLineView = UIView()
     
-    let scrollView = UIScrollView()
-    let contentView = UIView()
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
     
-    let profileContainerView = UIView()
-    let profileImageView = UIImageView()
-    let nameLabel = UILabel()
-    let creatAtLabel = UILabel()
-    let heartBtn = UIButton()
+    private let profileContainerView = UIView()
+    private let profileImageView = UIImageView()
+    private let nameLabel = UILabel()
+    private let creatAtLabel = UILabel()
+    private let heartBtn = UIButton()
     
-    let mainPosterImage = UIImageView()
-    let infoContainerView = UIView()
-    let infoLabel = UILabel()
-    let sizeLabel = UILabel()
-    let sizeNumLabel = UILabel()
-    let viewLabel = UILabel()
-    let viewNumLabel = UILabel()
-    let downloadLabel = UILabel()
-    let downloadNumLabel = UILabel()
+    private let mainPosterImage = UIImageView()
+    private let infoContainerView = UIView()
+    private let infoLabel = UILabel()
+    private let sizeLabel = UILabel()
+    private let sizeNumLabel = UILabel()
+    private let viewLabel = UILabel()
+    private let viewNumLabel = UILabel()
+    private let downloadLabel = UILabel()
+    private let downloadNumLabel = UILabel()
     
-//    let chartContainerView = UIView()
-    let chartLabel = UILabel()
+    private let chartLabel = UILabel()
     let chartSegmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["조회", "다운로드"])
         return control
       }()
-    
-    let lookUpTitleLabel = UILabel()
-    let downloadTitleLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -93,7 +89,7 @@ final class PhotoDetailView: BaseView {
         
         profileContainerView.snp.makeConstraints {
             $0.top.equalTo(underLineView.snp.bottom).offset(2)
-            $0.leading.equalToSuperview().offset(25)
+            $0.leading.equalToSuperview().offset(15)
             $0.width.greaterThanOrEqualTo(40)
             $0.height.equalTo(50)
         }
@@ -118,7 +114,7 @@ final class PhotoDetailView: BaseView {
         
         heartBtn.snp.makeConstraints {
             $0.centerY.equalTo(profileImageView.snp.centerY)
-            $0.trailing.equalToSuperview().offset(-25)
+            $0.trailing.equalToSuperview().offset(-15)
             $0.width.equalTo(30)
             $0.height.equalTo(28)
         }
@@ -131,7 +127,7 @@ final class PhotoDetailView: BaseView {
         
         infoContainerView.snp.makeConstraints {
             $0.top.equalTo(mainPosterImage.snp.bottom).offset(15)
-            $0.horizontalEdges.equalToSuperview().inset(25)
+            $0.horizontalEdges.equalToSuperview().inset(15)
             //            $0.height.greaterThanOrEqualTo(40)
         }
         
@@ -185,8 +181,6 @@ final class PhotoDetailView: BaseView {
     override func setStyle() {
         underLineView.backgroundColor = .lightGray
         
-        profileContainerView.backgroundColor = .brown
-        
         profileImageView.do {
             $0.image = UIImage(systemName: "star")
             $0.layer.cornerRadius = 40/2
@@ -210,8 +204,6 @@ final class PhotoDetailView: BaseView {
             $0.contentMode = .scaleAspectFill
         }
         
-        infoContainerView.backgroundColor = .yellow
-        
         infoLabel.setLabelUI("정보", font: .systemFont(ofSize: 18, weight: .heavy))
         
         sizeLabel.setLabelUI("크기", font: .systemFont(ofSize: 14, weight: .bold))
@@ -229,8 +221,17 @@ final class PhotoDetailView: BaseView {
             $0.isEnabled = true
             $0.isUserInteractionEnabled = true
         }
+    }
+    
+    func setDataUI(photoDetailModel: PhotoDetailModel) {
+        mainPosterImage.setImageKfDownSampling(with: photoDetailModel.selectedImageURL, cornerRadius: 0)
+        profileImageView.setImageKfDownSampling(with: photoDetailModel.profileImageURL, cornerRadius: 40/2)
+        nameLabel.text = photoDetailModel.profileName
+        creatAtLabel.text = photoDetailModel.createAt
+        sizeNumLabel.text = "\(photoDetailModel.selectedImageWidth) x \(photoDetailModel.selectedImageHeight)"
+        viewNumLabel.text = photoDetailModel.viewCount.formatted()
+        downloadNumLabel.text = photoDetailModel.downloadCount.formatted()
         
-
     }
     
 }

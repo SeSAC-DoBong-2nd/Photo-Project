@@ -40,6 +40,7 @@
 		9ED691152D3CC244007E76E8 /* ToggleButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691142D3CC244007E76E8 /* ToggleButtonState.swift */; };
 		9ED691182D3D0824007E76E8 /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691172D3D0824007E76E8 /* PhotoDetailView.swift */; };
 		9ED6911E2D3D1FA5007E76E8 /* PhotoDetailResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6911D2D3D1FA5007E76E8 /* PhotoDetailResponseModel.swift */; };
+		9ED691222D3D2484007E76E8 /* PhotoDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691212D3D247F007E76E8 /* PhotoDetailModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		9ED691142D3CC244007E76E8 /* ToggleButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleButtonState.swift; sourceTree = "<group>"; };
 		9ED691172D3D0824007E76E8 /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
 		9ED6911D2D3D1FA5007E76E8 /* PhotoDetailResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailResponseModel.swift; sourceTree = "<group>"; };
+		9ED691212D3D247F007E76E8 /* PhotoDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 		9E57012A2D3BBB5400D62846 /* PhotoDetail */ = {
 			isa = PBXGroup;
 			children = (
+				9ED691202D3D247A007E76E8 /* Model */,
 				9ED691162D3D0815007E76E8 /* View */,
 				9ED690FD2D3BC87B007E76E8 /* PhotoDetailViewController.swift */,
 			);
@@ -288,6 +291,14 @@
 			path = PhotoDetail;
 			sourceTree = "<group>";
 		};
+		9ED691202D3D247A007E76E8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9ED691212D3D247F007E76E8 /* PhotoDetailModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -382,6 +393,7 @@
 				9E57016E2D3BC56700D62846 /* UIButton+Extension.swift in Sources */,
 				9E5701222D3BBAF800D62846 /* SceneDelegate.swift in Sources */,
 				9ED690FE2D3BC87B007E76E8 /* PhotoDetailViewController.swift in Sources */,
+				9ED691222D3D2484007E76E8 /* PhotoDetailModel.swift in Sources */,
 				9ED690FC2D3BC870007E76E8 /* PhotoSearchViewController.swift in Sources */,
 				9ED691112D3CA546007E76E8 /* NetworkManager.swift in Sources */,
 				9E5701602D3BBF9200D62846 /* DateFormatterManager.swift in Sources */,

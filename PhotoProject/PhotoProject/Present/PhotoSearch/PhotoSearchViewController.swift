@@ -240,16 +240,40 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(#function)
-        let imageID = searchList[indexPath.item].id
-        NetworkManager.shared.getPhotoDetailAPI(imageID: imageID) { result, statusCode in
+        let item = searchList[indexPath.item]
+        let imageID = item.id
+        
+        NetworkManager.shared.getPhotoDetailAPI(imageID: imageID) {
+            result,
+            statusCode in
             switch statusCode {
             case (200..<299):
                 print("result : \n", result)
+                let profileImageURL = item.user.profile_image.medium
+                let profileName = item.user.name
+                let createAt = item.created_at
+                let selectedImageURL = item.urls.raw
+                let selectedImageWidth = item.width
+                let selectedImageHeight = item.height
+                let downloadCount = result.downloads.historical.change
+                let viewCount = result.views.historical.change
                 
+                let vc = PhotoDetailViewController()
+                vc.photoDetailModel = PhotoDetailModel(profileImageURL: profileImageURL,
+                                                       profileName: profileName,
+                                                       createAt: createAt,
+                                                       selectedImageURL: selectedImageURL,
+                                                       selectedImageWidth: selectedImageWidth,
+                                                       selectedImageHeight: selectedImageHeight,
+                                                       downloadCount: downloadCount,
+                                                       viewCount: viewCount)
+                
+                self.navigationController?.pushViewController(vc, animated: true)
             default:
                 return print("getPhotoSearch Error")
             }
         }
+        collectionView.reloadItems(at: [indexPath])
     }
     
 }

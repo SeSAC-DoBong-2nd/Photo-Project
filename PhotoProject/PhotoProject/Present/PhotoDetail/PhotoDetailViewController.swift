@@ -9,10 +9,18 @@ import UIKit
 
 final class PhotoDetailViewController: BaseViewController {
     
-    let mainView = PhotoDetailView()
+    private let mainView = PhotoDetailView()
+    var photoDetailModel: PhotoDetailModel?
     
     override func loadView() {
         view = mainView
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let photoDetailModel else {return}
+        mainView.setDataUI(photoDetailModel: photoDetailModel)
     }
 
     override func viewDidLoad() {
@@ -20,14 +28,6 @@ final class PhotoDetailViewController: BaseViewController {
 
         setNavUI()
         setAddtarget()
-    }
-
-    override func setHierarchy() {}
-    
-    override func setLayout() {
-    }
-    
-    override func setStyle() {
     }
 
 }
@@ -43,9 +43,6 @@ private extension PhotoDetailViewController {
         navigationItem.leftBarButtonItem = navLeftItem
     }
     
-    func setDelegate() {
-    }
-    
     func setAddtarget() {
         mainView.chartSegmentedControl.addTarget(self, action: #selector(segmentedControlTapped), for: .valueChanged)
     }
@@ -56,7 +53,7 @@ private extension PhotoDetailViewController {
     
     @objc
     func navLeftBtnTapped() {
-        
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc
