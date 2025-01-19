@@ -48,4 +48,25 @@ class NetworkManager {
         
     }
     
+    func getPhotoDetailAPI(imageID: String,
+                           complitionHandler: @escaping (PhotoDetailResponseModel, Int) -> (Void))
+    {
+        let url = "https://api.unsplash.com/photos/\(imageID)/statistics"
+        let method: HTTPMethod = .get
+        var parameters: [String: Any] = ["client_id": "qky6eUPqTsK4jy8oaYfp8vaxWwoIHzuH5gPWhivTFTA"]
+        
+        print("parameters : \(parameters)")
+        
+        AF.request(url, method: method, parameters: parameters).responseDecodable(of: PhotoDetailResponseModel.self) { response in
+            switch response.result {
+            case .success(let result):
+                print("success")
+                complitionHandler(result, response.response?.statusCode ?? 0)
+            case .failure(let error):
+                print("failure\n", error)
+            }
+        }
+        
+    }
+    
 }

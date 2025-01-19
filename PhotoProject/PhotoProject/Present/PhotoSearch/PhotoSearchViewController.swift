@@ -11,6 +11,7 @@ import Alamofire
 
 final class PhotoSearchViewController: BaseViewController {
     
+    //MARK: - Property
     private let perPage = 20
     private var page = 1
     private var searchText: String? = nil
@@ -18,14 +19,14 @@ final class PhotoSearchViewController: BaseViewController {
     private var selectedColorFilterBtn: String? = nil
     private var isEnd = false
     
-    let dummyData = DummyDataGenerator.generateDummyData()
     private var searchList: [Result] = [] {
         didSet {
             mainView.searchCollectionView.reloadData()
         }
     }
     
-    let mainView = PhotoSearchView()
+    //MARK: - UI Property
+    private let mainView = PhotoSearchView()
     
     override func loadView() {
         view = mainView
@@ -41,10 +42,6 @@ final class PhotoSearchViewController: BaseViewController {
         mainView.toggleButton.isHidden = true
     }
     
-    override func setHierarchy() {}
-    
-    override func setLayout() {}
-    
     override func setStyle() {
         navigationItem.title = "SEARCH PHOTO"
     }
@@ -52,6 +49,7 @@ final class PhotoSearchViewController: BaseViewController {
 
 }
 
+//MARK: - private extension
 private extension PhotoSearchViewController {
     
     func setDelegate() {
@@ -114,6 +112,7 @@ private extension PhotoSearchViewController {
     
 }
 
+//MARK: - @objc private extension
 private extension PhotoSearchViewController {
     
     @objc
@@ -157,6 +156,7 @@ private extension PhotoSearchViewController {
     
 }
 
+//MARK: - UISearchBarDelegate
 extension PhotoSearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -180,6 +180,7 @@ extension PhotoSearchViewController: UISearchBarDelegate {
     
 }
 
+//MARK: - UIScrollViewDelegate
 //스크롤 중 & 스크롤에서 손을 뗀 2초 이후까지 toggleBtn이 보이도록 함
 extension PhotoSearchViewController: UIScrollViewDelegate {
     
@@ -200,6 +201,7 @@ extension PhotoSearchViewController: UIScrollViewDelegate {
     
 }
 
+//MARK: - UICollectionViewDataSourcePrefetching
 extension PhotoSearchViewController: UICollectionViewDataSourcePrefetching {
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
@@ -221,6 +223,7 @@ extension PhotoSearchViewController: UICollectionViewDataSourcePrefetching {
     
 }
 
+//MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -240,6 +243,40 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(#function)
+        let item = searchList[indexPath.item]
+        let imageID = item.id
+        
+        NetworkManager.shared.getPhotoDetailAPI(imageID: imageID) {
+            result,
+            statusCode in
+            switch statusCode {
+            case (200..<299):
+                print("result : \n", result)
+                let profileImageURL = item.user.profile_image.medium
+                let profileName = item.user.name
+                let createAt = item.created_at
+                let selectedImageURL = item.urls.raw
+                let selectedImageWidth = item.width
+                let selectedImageHeight = item.height
+                let downloadCount = result.downloads.historical.change
+                let viewCount = result.views.historical.change
+                
+                let vc = PhotoDetailViewController()
+                vc.photoDetailModel = PhotoDetailModel(profileImageURL: profileImageURL,
+                                                       profileName: profileName,
+                                                       createAt: createAt,
+                                                       selectedImageURL: selectedImageURL,
+                                                       selectedImageWidth: selectedImageWidth,
+                                                       selectedImageHeight: selectedImageHeight,
+                                                       downloadCount: downloadCount,
+                                                       viewCount: viewCount)
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            default:
+                return print("getPhotoSearch Error")
+            }
+        }
+        collectionView.reloadItems(at: [indexPath])
     }
     
 }

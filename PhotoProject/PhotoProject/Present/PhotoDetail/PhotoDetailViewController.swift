@@ -7,23 +7,62 @@
 
 import UIKit
 
-class PhotoDetailViewController: UIViewController {
+final class PhotoDetailViewController: BaseViewController {
+    
+    private let mainView = PhotoDetailView()
+    var photoDetailModel: PhotoDetailModel?
+    
+    override func loadView() {
+        view = mainView
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let photoDetailModel else {return}
+        mainView.setDataUI(photoDetailModel: photoDetailModel)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setNavUI()
+        setAddtarget()
+    }
+
+}
+
+//MARK: - private extension
+private extension PhotoDetailViewController {
+    
+    func setNavUI() {
+        let navLeftItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"),
+                                          style: .done,
+                                          target: self,
+                                          action: #selector(navLeftBtnTapped))
+        navLeftItem.tintColor = .black
+        navigationItem.leftBarButtonItem = navLeftItem
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setAddtarget() {
+        mainView.chartSegmentedControl.addTarget(self, action: #selector(segmentedControlTapped), for: .valueChanged)
     }
-    */
+    
+}
 
+//MARK: - @objc private extension
+private extension PhotoDetailViewController {
+    
+    @objc
+    func navLeftBtnTapped() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc
+    func segmentedControlTapped(_ sender: UISegmentedControl) {
+        print(#function)
+        sender.selectedSegmentIndex = (sender.selectedSegmentIndex == 0)
+        ? 1 : 0
+    }
+    
 }
