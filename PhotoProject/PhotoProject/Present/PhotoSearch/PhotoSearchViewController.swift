@@ -220,6 +220,7 @@ extension PhotoSearchViewController: UICollectionViewDataSourcePrefetching {
 }
 
 extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print(#function)
         print("self.searchList.count \(self.searchList.count)")
@@ -233,6 +234,10 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
         cell.configureCell(image: row.urls.raw, likes: row.likes)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(#function)
     }
     
 }
