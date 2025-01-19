@@ -7,17 +7,25 @@
 
 import UIKit
 
-class PhotoDetailViewController: BaseViewController {
+final class PhotoDetailViewController: BaseViewController {
+    
+    let mainView = PhotoDetailView()
+    
+    override func loadView() {
+        view = mainView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setNavUI()
+        setAddtarget()
     }
 
     override func setHierarchy() {}
     
-    override func setLayout() {}
+    override func setLayout() {
+    }
     
     override func setStyle() {
     }
@@ -35,6 +43,13 @@ private extension PhotoDetailViewController {
         navigationItem.leftBarButtonItem = navLeftItem
     }
     
+    func setDelegate() {
+    }
+    
+    func setAddtarget() {
+        mainView.chartSegmentedControl.addTarget(self, action: #selector(segmentedControlTapped), for: .valueChanged)
+    }
+    
 }
 
 private extension PhotoDetailViewController {
@@ -42,6 +57,13 @@ private extension PhotoDetailViewController {
     @objc
     func navLeftBtnTapped() {
         
+    }
+    
+    @objc
+    func segmentedControlTapped(_ sender: UISegmentedControl) {
+        print(#function)
+        sender.selectedSegmentIndex = (sender.selectedSegmentIndex == 0)
+        ? 1 : 0
     }
     
 }

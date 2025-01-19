@@ -38,6 +38,8 @@
 		9ED6910F2D3C09A8007E76E8 /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6910E2D3C09A8007E76E8 /* SearchResultCollectionViewCell.swift */; };
 		9ED691112D3CA546007E76E8 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691102D3CA53D007E76E8 /* NetworkManager.swift */; };
 		9ED691152D3CC244007E76E8 /* ToggleButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691142D3CC244007E76E8 /* ToggleButtonState.swift */; };
+		9ED691182D3D0824007E76E8 /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691172D3D0824007E76E8 /* PhotoDetailView.swift */; };
+		9ED6911E2D3D1FA5007E76E8 /* PhotoDetailResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6911D2D3D1FA5007E76E8 /* PhotoDetailResponseModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +72,8 @@
 		9ED6910E2D3C09A8007E76E8 /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		9ED691102D3CA53D007E76E8 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		9ED691142D3CC244007E76E8 /* ToggleButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleButtonState.swift; sourceTree = "<group>"; };
+		9ED691172D3D0824007E76E8 /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
+		9ED6911D2D3D1FA5007E76E8 /* PhotoDetailResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailResponseModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +153,7 @@
 			children = (
 				9ED691102D3CA53D007E76E8 /* NetworkManager.swift */,
 				9ED6910A2D3C075D007E76E8 /* PhotoSearch */,
+				9ED6911C2D3D1DCC007E76E8 /* PhotoDetail */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 		9E57012A2D3BBB5400D62846 /* PhotoDetail */ = {
 			isa = PBXGroup;
 			children = (
+				9ED691162D3D0815007E76E8 /* View */,
 				9ED690FD2D3BC87B007E76E8 /* PhotoDetailViewController.swift */,
 			);
 			path = PhotoDetail;
@@ -264,6 +270,22 @@
 				9ED6910E2D3C09A8007E76E8 /* SearchResultCollectionViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		9ED691162D3D0815007E76E8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9ED691172D3D0824007E76E8 /* PhotoDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9ED6911C2D3D1DCC007E76E8 /* PhotoDetail */ = {
+			isa = PBXGroup;
+			children = (
+				9ED6911D2D3D1FA5007E76E8 /* PhotoDetailResponseModel.swift */,
+			);
+			path = PhotoDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -367,6 +389,8 @@
 				9E5701612D3BBF9200D62846 /* UIAlertManager.swift in Sources */,
 				9E5701592D3BBF1F00D62846 /* BaseViewController.swift in Sources */,
 				9ED6910F2D3C09A8007E76E8 /* SearchResultCollectionViewCell.swift in Sources */,
+				9ED6911E2D3D1FA5007E76E8 /* PhotoDetailResponseModel.swift in Sources */,
+				9ED691182D3D0824007E76E8 /* PhotoDetailView.swift in Sources */,
 				9ED691062D3BCFF5007E76E8 /* PhotoSearchColorButton.swift in Sources */,
 				9E57015A2D3BBF1F00D62846 /* BaseCollectionViewCell.swift in Sources */,
 				9ED6910C2D3C077B007E76E8 /* PhotoSearchResponseModel.swift in Sources */,

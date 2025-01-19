@@ -240,6 +240,16 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(#function)
+        let imageID = searchList[indexPath.item].id
+        NetworkManager.shared.getPhotoDetailAPI(imageID: imageID) { result, statusCode in
+            switch statusCode {
+            case (200..<299):
+                print("result : \n", result)
+                
+            default:
+                return print("getPhotoSearch Error")
+            }
+        }
     }
     
 }
