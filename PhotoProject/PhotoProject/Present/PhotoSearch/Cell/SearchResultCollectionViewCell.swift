@@ -11,15 +11,15 @@ import Kingfisher
 import SnapKit
 import Then
 
-class SearchResultCollectionViewCell: BaseCollectionViewCell {
+final class SearchResultCollectionViewCell: BaseCollectionViewCell {
     
-    let imageView = UIImageView()
+    private let imageView = UIImageView()
     
-    let starContainerView = UIView()
-    let starImageView = UIImageView()
-    let startCountLabel = UILabel()
+    private let starContainerView = UIView()
+    private let starImageView = UIImageView()
+    private let startCountLabel = UILabel()
     
-    let heartBtn = UIButton()
+    private let heartBtn = UIButton()
     
     override func setHierarchy() {
         contentView.addSubviews(imageView,
@@ -87,7 +87,6 @@ class SearchResultCollectionViewCell: BaseCollectionViewCell {
     
     func configureCell(image: String, likes: Int) {
         imageView.setImageKfDownSampling(with: image, cornerRadius: 0)
-//        imageView.kf.setImage(with: URL(string: image))
         startCountLabel.text = likes.formatted()
     }
     

@@ -65,8 +65,6 @@ final class PhotoDetailView: BaseView {
                                       downloadNumLabel,
                                       chartLabel,
                                       chartSegmentedControl)
-        
-//        chartContainerView.addSubviews(chartLabel)
     }
     
     override func setLayout() {

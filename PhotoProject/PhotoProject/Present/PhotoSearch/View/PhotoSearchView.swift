@@ -15,25 +15,25 @@ final class PhotoSearchView: BaseView {
     var searchResultState = SearchResultState.yet
     var toggleButtonState = ToggleButtonState.relevant
     
-    let underLineView = UIView()
+    private let underLineView = UIView()
     
-    let scrollView = UIScrollView()
-    let contentsView = UIView()
-    let stackView = UIStackView()
-    lazy var blackButton = UIButton()
-    lazy var whiteButton = UIButton()
-    lazy var yellowButton = UIButton()
-    lazy var redButton = UIButton()
-    lazy var purpleButton = UIButton()
-    lazy var greenButton = UIButton()
-    lazy var blueButton = UIButton()
-    lazy var emptyButton = UIButton()
+    private let scrollView = UIScrollView()
+    private let contentsView = UIView()
+    private let stackView = UIStackView()
+    private lazy var blackButton = UIButton()
+    private lazy var whiteButton = UIButton()
+    private lazy var yellowButton = UIButton()
+    private lazy var redButton = UIButton()
+    private lazy var purpleButton = UIButton()
+    private lazy var greenButton = UIButton()
+    private lazy var blueButton = UIButton()
+    private lazy var emptyButton = UIButton()
     lazy var colorFilterBtnArr = [blackButton, whiteButton, yellowButton, redButton, purpleButton, greenButton, blueButton, emptyButton]
     
     let toggleButton = UIButton()
     
-    let emptyView = UIView()
-    let emptyLabel = UILabel()
+    private let emptyView = UIView()
+    private let emptyLabel = UILabel()
     lazy var searchCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
 
     override func setHierarchy() {
@@ -166,6 +166,7 @@ final class PhotoSearchView: BaseView {
 
 }
 
+//MARK: - private extension
 private extension PhotoSearchView {
     
     func setColorFilterBtnUI(btnArr: [UIButton]) {

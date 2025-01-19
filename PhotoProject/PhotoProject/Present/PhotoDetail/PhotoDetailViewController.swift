@@ -32,6 +32,7 @@ final class PhotoDetailViewController: BaseViewController {
 
 }
 
+//MARK: - private extension
 private extension PhotoDetailViewController {
     
     func setNavUI() {
@@ -49,6 +50,7 @@ private extension PhotoDetailViewController {
     
 }
 
+//MARK: - @objc private extension
 private extension PhotoDetailViewController {
     
     @objc
