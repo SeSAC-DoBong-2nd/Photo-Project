@@ -160,6 +160,8 @@ private extension PhotoSearchViewController {
 extension PhotoSearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
+        
         //공백 방지
         guard let text = searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         if text.count < 2 {
