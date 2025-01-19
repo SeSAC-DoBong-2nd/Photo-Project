@@ -17,28 +17,28 @@ class TabBarController: UITabBarController {
     }
     
     func setTabBarControllerStyle() {
-        let topicVC = PhotoTopicViewController()
+        let topicVC = UINavigationController(rootViewController: PhotoTopicViewController())
         topicVC.tabBarItem = UITabBarItem(
             title: nil,
             image: UIImage(systemName: "chart.line.uptrend.xyaxis"),
             selectedImage: UIImage(systemName: "chart.line.uptrend.xyaxis")
         )
         
-        let secondVC = PhotoSearchViewController()
+        let secondVC = UINavigationController(rootViewController: PhotoSearchViewController())
         secondVC.tabBarItem = UITabBarItem(
             title: nil,
             image: UIImage(systemName: "play.laptopcomputer"),
             selectedImage: UIImage(systemName: "play.laptopcomputer")
         )
         
-        let searchVC = PhotoSearchViewController()
+        let searchVC = UINavigationController(rootViewController: PhotoSearchViewController())
         searchVC.tabBarItem = UITabBarItem(
             title: nil,
             image: UIImage(systemName: "magnifyingglass"),
             selectedImage: UIImage(systemName: "magnifyingglass")
         )
         
-        let heartVC = PhotoDetailViewController()
+        let heartVC = UINavigationController(rootViewController: PhotoSearchViewController())
         heartVC.tabBarItem = UITabBarItem(
             title: nil,
             image: UIImage(systemName: "heart"),
@@ -49,6 +49,8 @@ class TabBarController: UITabBarController {
         
         self.tabBar.layer.borderWidth = 0.6
         self.tabBar.layer.borderColor = UIColor.lightGray.cgColor
+        
+        self.selectedIndex = 2
     }
     
     func setTabBarAppearence () {
