@@ -13,7 +13,7 @@ extension UIImageView {
     
     func setImageView(image: UIImage, cornerRadius: CGFloat) {
         self.image = image
-        self.contentMode = .scaleAspectFill
+        self.contentMode = .scaleAspectFit
         self.layer.cornerRadius = cornerRadius
         self.layer.borderWidth = 0.1
         self.layer.borderColor = .none
