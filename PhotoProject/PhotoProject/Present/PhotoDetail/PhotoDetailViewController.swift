@@ -7,23 +7,41 @@
 
 import UIKit
 
-class PhotoDetailViewController: UIViewController {
+class PhotoDetailViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setNavUI()
+    }
+
+    override func setHierarchy() {}
+    
+    override func setLayout() {}
+    
+    override func setStyle() {
+    }
+
+}
+
+private extension PhotoDetailViewController {
+    
+    func setNavUI() {
+        let navLeftItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"),
+                                          style: .done,
+                                          target: self,
+                                          action: #selector(navLeftBtnTapped))
+        navLeftItem.tintColor = .black
+        navigationItem.leftBarButtonItem = navLeftItem
     }
     
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+private extension PhotoDetailViewController {
+    
+    @objc
+    func navLeftBtnTapped() {
+        
     }
-    */
-
+    
 }
