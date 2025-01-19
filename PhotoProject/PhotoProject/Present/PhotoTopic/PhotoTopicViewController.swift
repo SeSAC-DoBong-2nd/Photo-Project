@@ -13,9 +13,7 @@ final class PhotoTopicViewController: BaseViewController {
     private let topicListFixedCount = 10
     private let page = 1
     private let perpage = 10
-    
-    
-    private let mainView = PhotoTopicView()
+    private var isRefreshEnabled = true
     
     private var topicHeaderTitleArr: [String] = ["", "", ""]
     private lazy var horizontalSections: [[PhotoTopicResponseModel]] = [[], [], []] {
@@ -24,19 +22,19 @@ final class PhotoTopicViewController: BaseViewController {
         }
     }
     
+    private let mainView = PhotoTopicView()
+    
     override func loadView() {
         view = mainView
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        getPhotoTopic()
         setNavUI()
         setDelegate()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        getPhotoTopic()
+        setRefreshControl()
     }
     
     override func setHierarchy() {}
@@ -45,16 +43,16 @@ final class PhotoTopicViewController: BaseViewController {
     
     override func setStyle() {
     }
-
+    
 }
 
 private extension PhotoTopicViewController {
     
     func setNavUI() {
         let navRightItem = UIBarButtonItem(image: UIImage(systemName: "person.fill"),
-                                          style: .done,
-                                          target: self,
-                                          action: #selector(navRightBtnTapped))
+                                           style: .done,
+                                           target: self,
+                                           action: #selector(navRightBtnTapped))
         navRightItem.tintColor = .black
         navigationItem.rightBarButtonItem = navRightItem
     }
@@ -66,7 +64,7 @@ private extension PhotoTopicViewController {
         mainView.topicCollectionView.register(PhotoTopicCollectionHeaderView.self, forSupplementaryViewOfKind: PhotoTopicCollectionHeaderView.elementKinds, withReuseIdentifier: PhotoTopicCollectionHeaderView.identifier)
     }
     
-    func getPhotoTopic() {
+    func getPhotoTopic(isRefreshControl: Bool? = false) {
         var topicIDTypeSet = Set<TopicIDType>()
         while topicIDTypeSet.count < 3 {
             topicIDTypeSet.insert(TopicIDType.allCases.randomElement() ?? TopicIDType.goldenHour)
@@ -77,19 +75,26 @@ private extension PhotoTopicViewController {
             NetworkManager.shared.getPhotoTopicAPI(topicID: topicIDArr[i].rawValue) { result, statusCode in
                 switch statusCode {
                 case (200..<299):
-                    print("!!!", result)
                     self.topicHeaderTitleArr[i] = topicIDArr[i].title
+                    if (isRefreshControl ?? false) {
+                        self.horizontalSections[i].removeAll()
+                    }
                     for j in result {
                         self.horizontalSections[i].append(j)
                     }
-                    
+                    self.mainView.topicCollectionView.refreshControl?.endRefreshing()
                 default:
                     return print("getPhotoSearch Error")
                 }
             }
         }
-        
-        
+    }
+    
+    func setRefreshControl () {
+        mainView.topicCollectionView.refreshControl = UIRefreshControl()
+        mainView.topicCollectionView.refreshControl?.addTarget(self, action:
+                                                                #selector(handleRefreshControl),
+                                                               for: .valueChanged)
     }
     
 }
@@ -99,6 +104,26 @@ private extension PhotoTopicViewController {
     @objc
     func navRightBtnTapped() {
         print(#function)
+    }
+    
+    @objc
+    func handleRefreshControl() {
+        guard isRefreshEnabled else {
+            mainView.topicCollectionView.refreshControl?.endRefreshing()
+            return
+        }
+        
+        // 새로고침 비활성화
+        isRefreshEnabled = false
+        
+        DispatchQueue.main.async {
+            self.getPhotoTopic(isRefreshControl: true)
+        }
+        
+        // 60초 후 다시 새로고침 활성화
+        DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+            self.isRefreshEnabled = true
+        }
     }
     
 }
