@@ -15,6 +15,28 @@ enum PhotoSearchColorButton: String, CaseIterable {
     case purple = "퍼플"
     case green = "그린"
     case blue = "블루"
+    case empty = "              "
+    
+    var buttonTitle: String {
+        switch self {
+        case .black:
+            return "black"
+        case .white:
+            return "white"
+        case .yellow:
+            return "yellow"
+        case .red:
+            return "red"
+        case .purple:
+            return "purple"
+        case .green:
+            return "green"
+        case .blue:
+            return "blue"
+        case .empty:
+            return ""
+        }
+    }
     
     var buttonimageColor: UIColor {
         switch self {
@@ -32,6 +54,8 @@ enum PhotoSearchColorButton: String, CaseIterable {
             return .systemGreen
         case .blue:
             return .blue
+        case .empty:
+            return .clear
         }
     }
 }

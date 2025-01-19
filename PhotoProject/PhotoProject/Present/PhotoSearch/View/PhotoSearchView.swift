@@ -12,7 +12,8 @@ import Then
 
 final class PhotoSearchView: BaseView {
     
-    var searchResultState = SearchResultState.none
+    var searchResultState = SearchResultState.yet
+    var toggleButtonState = ToggleButtonState.relevant
     
     let underLineView = UIView()
     
@@ -26,9 +27,10 @@ final class PhotoSearchView: BaseView {
     lazy var purpleButton = UIButton()
     lazy var greenButton = UIButton()
     lazy var blueButton = UIButton()
-    lazy var colorFilterBtnArr = [blackButton, whiteButton, yellowButton, redButton, purpleButton, greenButton, blueButton]
+    lazy var emptyButton = UIButton()
+    lazy var colorFilterBtnArr = [blackButton, whiteButton, yellowButton, redButton, purpleButton, greenButton, blueButton, emptyButton]
     
-    let toggleButton = UISwitch()
+    let toggleButton = UIButton()
     
     let emptyView = UIView()
     let emptyLabel = UILabel()
@@ -45,7 +47,8 @@ final class PhotoSearchView: BaseView {
                                       redButton,
                                       purpleButton,
                                       greenButton,
-                                      blueButton)
+                                      blueButton,
+                                      emptyButton)
         
         emptyView.addSubview(emptyLabel)
     }
@@ -58,7 +61,7 @@ final class PhotoSearchView: BaseView {
         }
         
         scrollView.snp.makeConstraints {
-            $0.top.equalTo(underLineView)
+            $0.top.equalTo(underLineView).offset(2)
             $0.height.equalTo(50)
             $0.horizontalEdges.equalToSuperview()
         }
@@ -71,6 +74,12 @@ final class PhotoSearchView: BaseView {
         stackView.snp.makeConstraints {
             $0.verticalEdges.equalToSuperview().inset(6)
             $0.horizontalEdges.equalToSuperview().inset(10)
+        }
+        
+        toggleButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().offset(8)
+            $0.centerY.equalTo(scrollView.snp.centerY)
+            $0.height.equalTo(stackView.snp.height)
         }
         
         emptyView.snp.makeConstraints {
@@ -95,10 +104,11 @@ final class PhotoSearchView: BaseView {
         scrollView.do {
             $0.layer.backgroundColor = UIColor.white.cgColor
             $0.showsHorizontalScrollIndicator = false
+//            $0.bouncesHorizontally = false
         }
         
         contentsView.do {
-            $0.backgroundColor = .brown
+            $0.backgroundColor = .clear
         }
         
         stackView.do {
@@ -108,10 +118,12 @@ final class PhotoSearchView: BaseView {
             $0.distribution = .equalSpacing
         }
         
-        buttonUI(btnArr: colorFilterBtnArr)
+        setColorFilterBtnUI(btnArr: colorFilterBtnArr)
+        
+        setToggleBtnUI(btn: toggleButton)
         
         emptyView.do {
-            $0.backgroundColor = .systemPink
+            $0.backgroundColor = .clear
             $0.isHidden = searchResultState.isEmptyViewHidden
         }
         
@@ -119,7 +131,7 @@ final class PhotoSearchView: BaseView {
             $0.isHidden = !searchResultState.isEmptyViewHidden
         }
         
-        emptyLabel.setLabelUI(searchResultState.title,
+        emptyLabel.setLabelUI(searchResultState.title ?? "",
                               font: .systemFont(ofSize: 18, weight: .black),
                               alignment: .center)
         
@@ -136,12 +148,27 @@ final class PhotoSearchView: BaseView {
                         forCellWithReuseIdentifier: SearchResultCollectionViewCell.cellIdentifier)
         }
     }
+    
+    //api에서도 query 없이는 검색이 안되는 것에 따라 text를
+    //  입력하기 전까지는 colorBtn과 toggleBtn이 눌리면 안될 것 같아 이렇게 설정하였습니다.
+    func setBtnAbled() {
+        for i in colorFilterBtnArr {
+            i.isEnabled = true
+        }
+        toggleButton.isEnabled = true
+    }
+    
+    func searchResultState(state: SearchResultState) {
+        emptyView.isHidden = state.isEmptyViewHidden
+        searchCollectionView.isHidden = !state.isEmptyViewHidden
+        emptyLabel.text = searchResultState.title
+    }
 
 }
 
 private extension PhotoSearchView {
     
-    func buttonUI(btnArr: [UIButton]) {
+    func setColorFilterBtnUI(btnArr: [UIButton]) {
         for i in 0..<colorFilterBtnArr.count {
             var buttonConfig = UIButton.Configuration.gray()
             
@@ -158,14 +185,19 @@ private extension PhotoSearchView {
             buttonConfig.baseBackgroundColor = .lightGray.withAlphaComponent(0.6)
             
             let buttonStateHandler: UIButton.ConfigurationUpdateHandler = { button in
+                if button == self.emptyButton {
+                    button.configuration?.background.backgroundColor = .clear
+                    button.configuration?.image = .none
+                    return
+                }
                 switch button.state {
                 case .normal:
-                    button.configuration?.background.backgroundColor = .lightGray.withAlphaComponent(0.6)
+                    button.configuration?.background.backgroundColor = .lightGray.withAlphaComponent(0.4)
                     var attributedTitle = AttributedString(button.configuration?.title ?? "")
                     attributedTitle.foregroundColor = .black
                     button.configuration?.attributedTitle = attributedTitle
                 case .selected:
-                    button.configuration?.background.backgroundColor = .systemBlue
+                    button.configuration?.background.backgroundColor = .systemBlue.withAlphaComponent(0.6)
                     var attributedTitle = AttributedString(button.configuration?.title ?? "")
                     attributedTitle.foregroundColor = .white
                     button.configuration?.attributedTitle = attributedTitle
@@ -185,22 +217,42 @@ private extension PhotoSearchView {
             colorFilterBtnArr[i].do {
                 $0.clipsToBounds = true
                 $0.layer.cornerRadius = 18
-//                $0.tintColor = colorFilterBtnTitleArr[i].buttonimageColor
-                $0.addTarget(self, action: #selector(tappedBtn), for: .touchUpInside)
+                $0.isEnabled = false
             }
         }
     }
     
-    @objc
-    func tappedBtn(_ sender: UIButton) {
-        for i in colorFilterBtnArr {
-            if i == sender {
-                i.isSelected = true
-            } else {
-                i.isSelected = false
+    func setToggleBtnUI(btn: UIButton) {
+        var btnConfig = UIButton.Configuration.plain()
+        btnConfig.cornerStyle = .capsule
+        btnConfig.image = UIImage(systemName: "list.number")
+        btnConfig.imagePadding = 3
+        btnConfig.title = toggleButtonState.title
+        btnConfig.image?.withTintColor(.black)
+        btnConfig.baseBackgroundColor = .white
+        toggleButton.configuration = btnConfig
+        
+        let buttonStateHandler: UIButton.ConfigurationUpdateHandler = { button in
+            switch button.state {
+            case .normal:
+                button.configuration?.title = self.toggleButtonState.title
+            case .selected:
+                button.configuration?.title = self.toggleButtonState.title
+            default:
+                return
             }
         }
-        print(#function)
+        toggleButton.configurationUpdateHandler = buttonStateHandler
+        
+        toggleButton.do {
+            $0.layer.cornerRadius = 16
+            $0.backgroundColor = .white
+            $0.layer.borderWidth = 0.6
+            $0.layer.borderColor = UIColor.lightGray.cgColor
+            $0.tintColor = .black
+            $0.isEnabled = false
+        }
+        toggleButton.isHidden = true
     }
     
 }

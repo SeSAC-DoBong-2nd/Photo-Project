@@ -36,6 +36,8 @@
 		9ED691092D3BFEEE007E76E8 /* SearchResultState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691082D3BFEEE007E76E8 /* SearchResultState.swift */; };
 		9ED6910C2D3C077B007E76E8 /* PhotoSearchResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6910B2D3C077B007E76E8 /* PhotoSearchResponseModel.swift */; };
 		9ED6910F2D3C09A8007E76E8 /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6910E2D3C09A8007E76E8 /* SearchResultCollectionViewCell.swift */; };
+		9ED691112D3CA546007E76E8 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691102D3CA53D007E76E8 /* NetworkManager.swift */; };
+		9ED691152D3CC244007E76E8 /* ToggleButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691142D3CC244007E76E8 /* ToggleButtonState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,8 @@
 		9ED691082D3BFEEE007E76E8 /* SearchResultState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultState.swift; sourceTree = "<group>"; };
 		9ED6910B2D3C077B007E76E8 /* PhotoSearchResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchResponseModel.swift; sourceTree = "<group>"; };
 		9ED6910E2D3C09A8007E76E8 /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
+		9ED691102D3CA53D007E76E8 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		9ED691142D3CC244007E76E8 /* ToggleButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleButtonState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +147,7 @@
 		9E5701272D3BBB3600D62846 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				9ED691102D3CA53D007E76E8 /* NetworkManager.swift */,
 				9ED6910A2D3C075D007E76E8 /* PhotoSearch */,
 			);
 			path = Network;
@@ -240,6 +245,7 @@
 			children = (
 				9ED691052D3BCFF5007E76E8 /* PhotoSearchColorButton.swift */,
 				9ED691082D3BFEEE007E76E8 /* SearchResultState.swift */,
+				9ED691142D3CC244007E76E8 /* ToggleButtonState.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -355,7 +361,9 @@
 				9E5701222D3BBAF800D62846 /* SceneDelegate.swift in Sources */,
 				9ED690FE2D3BC87B007E76E8 /* PhotoDetailViewController.swift in Sources */,
 				9ED690FC2D3BC870007E76E8 /* PhotoSearchViewController.swift in Sources */,
+				9ED691112D3CA546007E76E8 /* NetworkManager.swift in Sources */,
 				9E5701602D3BBF9200D62846 /* DateFormatterManager.swift in Sources */,
+				9ED691152D3CC244007E76E8 /* ToggleButtonState.swift in Sources */,
 				9E5701612D3BBF9200D62846 /* UIAlertManager.swift in Sources */,
 				9E5701592D3BBF1F00D62846 /* BaseViewController.swift in Sources */,
 				9ED6910F2D3C09A8007E76E8 /* SearchResultCollectionViewCell.swift in Sources */,

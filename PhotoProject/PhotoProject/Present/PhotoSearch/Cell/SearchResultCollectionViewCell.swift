@@ -58,9 +58,6 @@ class SearchResultCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func setStyle() {
-        imageView.backgroundColor = .blue
-        starContainerView.backgroundColor = .red
-        
         starImageView.do {
             $0.backgroundColor = .clear
             $0.image = UIImage(systemName: "star.fill")
@@ -88,8 +85,10 @@ class SearchResultCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    func configureCell(image: String) {
-        imageView.image = UIImage(systemName: image)
+    func configureCell(image: String, likes: Int) {
+        imageView.setImageKfDownSampling(with: image, cornerRadius: 0)
+//        imageView.kf.setImage(with: URL(string: image))
+        startCountLabel.text = likes.formatted()
     }
     
 }
