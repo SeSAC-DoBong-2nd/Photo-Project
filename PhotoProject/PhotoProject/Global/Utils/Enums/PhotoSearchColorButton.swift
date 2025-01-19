@@ -31,7 +31,7 @@ enum PhotoSearchColorButton: String, CaseIterable {
         case .green:
             return .systemGreen
         case .blue:
-            return .cyan
+            return .blue
         }
     }
 }
