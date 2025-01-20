@@ -124,23 +124,20 @@ final class PhotoDetailView: BaseView {
         mainPosterImage.snp.makeConstraints {
             $0.top.equalTo(profileContainerView.snp.bottom)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(400)
         }
         
         infoContainerView.snp.makeConstraints {
             $0.top.equalTo(mainPosterImage.snp.bottom).offset(15)
             $0.horizontalEdges.equalToSuperview().inset(15)
-            //            $0.height.greaterThanOrEqualTo(40)
         }
         
         infoLabel.snp.makeConstraints {
             $0.top.leading.equalToSuperview()
-            $0.width.equalTo(100)
         }
         
         sizeLabel.snp.makeConstraints {
             $0.bottom.equalTo(infoLabel.snp.bottom)
-            $0.leading.equalTo(infoLabel.snp.trailing)
+            $0.leading.equalTo(infoLabel.snp.trailing).offset(100)
         }
         
         sizeNumLabel.snp.makeConstraints {
