@@ -45,6 +45,7 @@
 		9ED6912A2D3D3BF8007E76E8 /* PhotoTopicCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691292D3D3BF8007E76E8 /* PhotoTopicCollectionHeaderView.swift */; };
 		9ED6912F2D3D57D2007E76E8 /* PhotoTopicResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6912E2D3D57D2007E76E8 /* PhotoTopicResponseModel.swift */; };
 		9ED691312D3D59E4007E76E8 /* TopicIDType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691302D3D59E4007E76E8 /* TopicIDType.swift */; };
+		9ED691342D3DCA1A007E76E8 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 9ED691332D3DCA1A007E76E8 /* DGCharts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 			files = (
 				9E5701532D3BBD8300D62846 /* Kingfisher in Frameworks */,
 				9E57014A2D3BBD6800D62846 /* SnapKit in Frameworks */,
+				9ED691342D3DCA1A007E76E8 /* DGCharts in Frameworks */,
 				9E5701502D3BBD7A00D62846 /* Then in Frameworks */,
 				9E57014D2D3BBD7200D62846 /* Alamofire in Frameworks */,
 			);
@@ -356,6 +358,7 @@
 				9E57014C2D3BBD7200D62846 /* Alamofire */,
 				9E57014F2D3BBD7A00D62846 /* Then */,
 				9E5701522D3BBD8300D62846 /* Kingfisher */,
+				9ED691332D3DCA1A007E76E8 /* DGCharts */,
 			);
 			productName = PhotoProject;
 			productReference = 9E5700FB2D3BBAD900D62846 /* PhotoProject.app */;
@@ -390,6 +393,7 @@
 				9E57014B2D3BBD7200D62846 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				9E57014E2D3BBD7A00D62846 /* XCRemoteSwiftPackageReference "Then" */,
 				9E5701512D3BBD8300D62846 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				9ED691322D3DCA1A007E76E8 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9E5700FC2D3BBAD900D62846 /* Products */;
@@ -710,6 +714,14 @@
 				minimumVersion = 8.1.3;
 			};
 		};
+		9ED691322D3DCA1A007E76E8 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ChartsOrg/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -732,6 +744,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9E5701512D3BBD8300D62846 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		9ED691332D3DCA1A007E76E8 /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9ED691322D3DCA1A007E76E8 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
