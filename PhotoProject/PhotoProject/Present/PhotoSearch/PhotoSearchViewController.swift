@@ -260,6 +260,14 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
                 let selectedImageHeight = item.height
                 let downloadCount = result.downloads.historical.change
                 let viewCount = result.views.historical.change
+                var day30ViewCount: [Int] = []
+                for i in result.views.historical.values {
+                    day30ViewCount.append(i.value)
+                }
+                var day30DownCount: [Int] = []
+                for i in result.downloads.historical.values {
+                    day30DownCount.append(i.value)
+                }
                 
                 let vc = PhotoDetailViewController()
                 vc.photoDetailModel = PhotoDetailModel(profileImageURL: profileImageURL,
@@ -269,7 +277,8 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
                                                        selectedImageWidth: selectedImageWidth,
                                                        selectedImageHeight: selectedImageHeight,
                                                        downloadCount: downloadCount,
-                                                       viewCount: viewCount)
+                                                       viewCount: viewCount, day30ViewCount: day30ViewCount,
+                                                       day30DownCount: day30DownCount)
                 
                 self.navigationController?.pushViewController(vc, animated: true)
             default:

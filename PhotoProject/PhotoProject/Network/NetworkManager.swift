@@ -15,6 +15,8 @@ class NetworkManager {
     
     private init() {}
     
+    
+    
     func getPhotoSearchAPI(query: String,
                            page: Int,
                            perPage: Int,

@@ -149,6 +149,14 @@ extension PhotoTopicViewController: UICollectionViewDelegate, UICollectionViewDa
                 let selectedImageHeight = item.height
                 let downloadCount = result.downloads.historical.change
                 let viewCount = result.views.historical.change
+                var day30ViewCount: [Int] = []
+                for i in result.views.historical.values {
+                    day30ViewCount.append(i.value)
+                }
+                var day30DownCount: [Int] = []
+                for i in result.downloads.historical.values {
+                    day30DownCount.append(i.value)
+                }
                 
                 let vc = PhotoDetailViewController()
                 vc.photoDetailModel = PhotoDetailModel(profileImageURL: profileImageURL,
@@ -158,7 +166,8 @@ extension PhotoTopicViewController: UICollectionViewDelegate, UICollectionViewDa
                                                        selectedImageWidth: selectedImageWidth,
                                                        selectedImageHeight: selectedImageHeight,
                                                        downloadCount: downloadCount,
-                                                       viewCount: viewCount)
+                                                       viewCount: viewCount, day30ViewCount: day30ViewCount,
+                                                       day30DownCount: day30ViewCount)
                 
                 self.navigationController?.pushViewController(vc, animated: true)
             default:

@@ -46,6 +46,7 @@
 		9ED6912F2D3D57D2007E76E8 /* PhotoTopicResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6912E2D3D57D2007E76E8 /* PhotoTopicResponseModel.swift */; };
 		9ED691312D3D59E4007E76E8 /* TopicIDType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691302D3D59E4007E76E8 /* TopicIDType.swift */; };
 		9ED691342D3DCA1A007E76E8 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 9ED691332D3DCA1A007E76E8 /* DGCharts */; };
+		9ED6913A2D3DCECC007E76E8 /* Secret.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9ED691392D3DCEC8007E76E8 /* Secret.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		9ED691292D3D3BF8007E76E8 /* PhotoTopicCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTopicCollectionHeaderView.swift; sourceTree = "<group>"; };
 		9ED6912E2D3D57D2007E76E8 /* PhotoTopicResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTopicResponseModel.swift; sourceTree = "<group>"; };
 		9ED691302D3D59E4007E76E8 /* TopicIDType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicIDType.swift; sourceTree = "<group>"; };
+		9ED691392D3DCEC8007E76E8 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 		9E5701242D3BBAFB00D62846 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				9ED691392D3DCEC8007E76E8 /* Secret.xcconfig */,
 				9E5701132D3BBAF800D62846 /* AppDelegate.swift */,
 				9E57011A2D3BBAF800D62846 /* SceneDelegate.swift */,
 				9E5701152D3BBAF800D62846 /* Info.plist */,
@@ -410,6 +413,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ED6913A2D3DCECC007E76E8 /* Secret.xcconfig in Resources */,
 				9E57011D2D3BBAF800D62846 /* Assets.xcassets in Resources */,
 				9E57011F2D3BBAF800D62846 /* LaunchScreen.storyboard in Resources */,
 			);

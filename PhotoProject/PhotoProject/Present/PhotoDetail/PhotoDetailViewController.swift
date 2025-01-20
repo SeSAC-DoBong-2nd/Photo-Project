@@ -6,11 +6,17 @@
 //
 
 import UIKit
+import DGCharts
 
 final class PhotoDetailViewController: BaseViewController {
     
     private let mainView = PhotoDetailView()
     var photoDetailModel: PhotoDetailModel?
+    
+    lazy var graphArray = Array(repeating: "", count: photoDetailModel?.day30DownCount.count ?? 0)
+
+    let barUnitsSold = [10.0, 17.0, 9.0, 1.0, 8.0, 13.0, 16.0, 14.0, 7.0, 1.0]
+    let lineUnitsSold = [10.0, 18.0, 7.0, 1.0, 5.0, 15.0, 14.0, 17.0, 7.0, 1.0]
     
     override func loadView() {
         view = mainView
@@ -28,6 +34,42 @@ final class PhotoDetailViewController: BaseViewController {
 
         setNavUI()
         setAddtarget()
+        setChart(dataPoints: graphArray, barValues: barUnitsSold, lineValues: lineUnitsSold)
+    }
+    
+    func setChart(dataPoints: [String], barValues: [Double], lineValues: [Double]) {
+        var barDataEntries: [BarChartDataEntry] = []
+        var lineDataEntries: [ChartDataEntry] = []
+                
+        for i in 0..<dataPoints.count {
+            let barDataEntry = BarChartDataEntry(x: Double(i), y: barValues[i])
+            let lineDataEntry = ChartDataEntry(x: Double(i), y: lineValues[i])
+            barDataEntries.append(barDataEntry)
+            lineDataEntries.append(lineDataEntry)
+        }
+
+        let barChartDataSet = BarChartDataSet(entries: barDataEntries, label: "")
+        let lineChartDataSet = LineChartDataSet(entries: lineDataEntries, label: "")
+        
+        lineChartDataSet.colors = [.blue]
+        lineChartDataSet.circleColors = [.white]
+
+        let data: CombinedChartData = CombinedChartData()
+
+        // bar 데이터 지정
+        data.barData = BarChartData(dataSet: barChartDataSet)
+        // line 데이터 지정
+        data.lineData = LineChartData(dataSet: lineChartDataSet)
+        
+        lineChartDataSet.mode = .cubicBezier
+
+        // 콤비 데이터 지정
+        mainView.combinedChartView.data = data
+        
+        mainView.combinedChartView.do {
+            $0.xAxis.valueFormatter = IndexAxisValueFormatter(values: graphArray)
+            $0.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
+        }
     }
 
 }

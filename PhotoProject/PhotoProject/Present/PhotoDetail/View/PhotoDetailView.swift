@@ -9,6 +9,8 @@ import UIKit
 
 import SnapKit
 import Then
+import Charts
+import DGCharts
 
 final class PhotoDetailView: BaseView {
     
@@ -39,6 +41,8 @@ final class PhotoDetailView: BaseView {
         return control
       }()
     
+    lazy var combinedChartView = CombinedChartView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -50,7 +54,7 @@ final class PhotoDetailView: BaseView {
         contentView.addSubviews(profileContainerView,
                                 heartBtn,
                                 mainPosterImage,
-                                infoContainerView)
+                                infoContainerView, combinedChartView)
         
         profileContainerView.addSubviews(profileImageView,
                                          nameLabel,
@@ -174,6 +178,13 @@ final class PhotoDetailView: BaseView {
             $0.bottom.equalTo(chartLabel.snp.bottom)
         }
         
+        combinedChartView.snp.makeConstraints {
+            $0.top.equalTo(chartSegmentedControl.snp.bottom).offset(10)
+            $0.leading.equalTo(sizeLabel.snp.leading)
+            $0.trailing.equalToSuperview().offset(-15)
+            $0.height.equalTo(300)
+        }
+        
     }
     
     override func setStyle() {
@@ -219,6 +230,10 @@ final class PhotoDetailView: BaseView {
             $0.isEnabled = true
             $0.isUserInteractionEnabled = true
         }
+        
+        combinedChartView.do {
+            $0.backgroundColor = .blue
+        }
     }
     
     func setDataUI(photoDetailModel: PhotoDetailModel) {
@@ -254,4 +269,5 @@ final class PhotoDetailView: BaseView {
  )
  3. view안에 label들로만 채운다면 view snp 설정할 때 height을 주지않아도 알아서 계산으로 들어가는데, 그 view의 bottom을 기준으로 다른 프로퍼티의 top을 잡으니 레이아웃이 원하는대로 되지않는다. 뷰가 그려지는 사이클이 꼬여서 그런거 같은데, 이걸 해결할 수 있는 방법이 있을까
  4. segmentControl이 왜 안 눌리는가..
+ 5. 레이아웃 문제로 스크롤이 안돼서 차트를 확인 못하는 구만..
  */
