@@ -38,7 +38,7 @@ class TabBarController: UITabBarController {
             selectedImage: UIImage(systemName: "magnifyingglass")
         )
         
-        let heartVC = UINavigationController(rootViewController: PhotoSearchViewController())
+        let heartVC = UINavigationController(rootViewController: PhotoTopicViewController())
         heartVC.tabBarItem = UITabBarItem(
             title: nil,
             image: UIImage(systemName: "heart"),
@@ -50,7 +50,7 @@ class TabBarController: UITabBarController {
         self.tabBar.layer.borderWidth = 0.6
         self.tabBar.layer.borderColor = UIColor.lightGray.cgColor
         
-        self.selectedIndex = 2
+        self.selectedIndex = 0
     }
     
     func setTabBarAppearence () {

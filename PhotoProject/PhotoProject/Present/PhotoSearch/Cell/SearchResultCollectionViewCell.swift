@@ -90,4 +90,10 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
         startCountLabel.text = likes.formatted()
     }
     
+    func configureCellInTopic(image: String, likes: Int) {
+        imageView.setImageKfDownSampling(with: image, cornerRadius: 10)
+        startCountLabel.text = likes.formatted()
+        heartBtn.isHidden = true
+    }
+    
 }

@@ -16,11 +16,11 @@ class NetworkManager {
     private init() {}
     
     func getPhotoSearchAPI(query: String,
-                        page: Int,
-                        perPage: Int,
-                        orderBy: String,
+                           page: Int,
+                           perPage: Int,
+                           orderBy: String,
                            color: String? = nil,
-                        complitionHandler: @escaping (PhotoSearchResponseModel, Int) -> (Void))
+                           complitionHandler: @escaping (PhotoSearchResponseModel, Int) -> (Void))
     {
         let url = "https://api.unsplash.com/search/photos"
         let method: HTTPMethod = .get
@@ -53,11 +53,30 @@ class NetworkManager {
     {
         let url = "https://api.unsplash.com/photos/\(imageID)/statistics"
         let method: HTTPMethod = .get
-        var parameters: [String: Any] = ["client_id": "qky6eUPqTsK4jy8oaYfp8vaxWwoIHzuH5gPWhivTFTA"]
+        let parameters: [String: Any] = ["client_id": "qky6eUPqTsK4jy8oaYfp8vaxWwoIHzuH5gPWhivTFTA"]
         
         print("parameters : \(parameters)")
         
         AF.request(url, method: method, parameters: parameters).responseDecodable(of: PhotoDetailResponseModel.self) { response in
+            switch response.result {
+            case .success(let result):
+                print("success")
+                complitionHandler(result, response.response?.statusCode ?? 0)
+            case .failure(let error):
+                print("failure\n", error)
+            }
+        }
+        
+    }
+    
+    func getPhotoTopicAPI(topicID: String,
+                          complitionHandler: @escaping ([PhotoTopicResponseModel], Int) -> (Void))
+    {
+        let url = "https://api.unsplash.com/topics/\(topicID)/photos"
+        let method: HTTPMethod = .get
+        let parameters: [String: Any] = ["client_id": "qky6eUPqTsK4jy8oaYfp8vaxWwoIHzuH5gPWhivTFTA"]
+        
+        AF.request(url, method: method, parameters: parameters).responseDecodable(of: [PhotoTopicResponseModel].self) { response in
             switch response.result {
             case .success(let result):
                 print("success")
