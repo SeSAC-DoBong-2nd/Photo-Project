@@ -15,8 +15,6 @@ class NetworkManager {
     
     private init() {}
     
-    
-    
     func getPhotoSearchAPI(query: String,
                            page: Int,
                            perPage: Int,
@@ -24,9 +22,11 @@ class NetworkManager {
                            color: String? = nil,
                            complitionHandler: @escaping (PhotoSearchResponseModel, Int) -> (Void))
     {
+        guard let clientID = Bundle.main.client_id else {return}
         let url = "https://api.unsplash.com/search/photos"
         let method: HTTPMethod = .get
-        var parameters: [String: Any] = ["query": query, "page": page, "per_page": perPage, "order_by": orderBy, "client_id": "qky6eUPqTsK4jy8oaYfp8vaxWwoIHzuH5gPWhivTFTA"]
+        var parameters: [String: Any] = ["query": query, "page": page, "per_page": perPage, "order_by": orderBy, "client_id": clientID]
+        
         
         switch color != nil {
         case true:
@@ -53,9 +53,10 @@ class NetworkManager {
     func getPhotoDetailAPI(imageID: String,
                            complitionHandler: @escaping (PhotoDetailResponseModel, Int) -> (Void))
     {
+        guard let clientID = Bundle.main.client_id else {return}
         let url = "https://api.unsplash.com/photos/\(imageID)/statistics"
         let method: HTTPMethod = .get
-        let parameters: [String: Any] = ["client_id": "qky6eUPqTsK4jy8oaYfp8vaxWwoIHzuH5gPWhivTFTA"]
+        let parameters: [String: Any] = ["client_id": clientID]
         
         print("parameters : \(parameters)")
         
@@ -74,9 +75,12 @@ class NetworkManager {
     func getPhotoTopicAPI(topicID: String,
                           complitionHandler: @escaping ([PhotoTopicResponseModel], Int) -> (Void))
     {
+        guard let clientID = Bundle.main.client_id else {return}
         let url = "https://api.unsplash.com/topics/\(topicID)/photos"
         let method: HTTPMethod = .get
-        let parameters: [String: Any] = ["client_id": "qky6eUPqTsK4jy8oaYfp8vaxWwoIHzuH5gPWhivTFTA"]
+        let parameters: [String: Any] = ["client_id": clientID]
+        print("clientID :",clientID)
+        
         
         AF.request(url, method: method, parameters: parameters).responseDecodable(of: [PhotoTopicResponseModel].self) { response in
             switch response.result {
