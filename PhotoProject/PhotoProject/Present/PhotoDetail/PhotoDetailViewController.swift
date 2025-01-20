@@ -13,20 +13,26 @@ final class PhotoDetailViewController: BaseViewController {
     private let mainView = PhotoDetailView()
     var photoDetailModel: PhotoDetailModel?
     
-    lazy var graphArray = Array(repeating: "", count: photoDetailModel?.day30DownCount.count ?? 0)
+//    lazy var graphArray = Array(repeating: "", count: photoDetailModel?.day30DownCount.count ?? 0)
+    var graphArray: [String] = ["09시", "10시", "11시", "12시", "13시", "14시", "15시", "16시", "17시", "18시"]
 
     let barUnitsSold = [10.0, 17.0, 9.0, 1.0, 8.0, 13.0, 16.0, 14.0, 7.0, 1.0]
     let lineUnitsSold = [10.0, 18.0, 7.0, 1.0, 5.0, 15.0, 14.0, 17.0, 7.0, 1.0]
     
     override func loadView() {
         view = mainView
+        print(#function)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         guard let photoDetailModel else {return}
-        mainView.setDataUI(photoDetailModel: photoDetailModel)
+        DispatchQueue.main.async {
+            self.mainView.setDataUI(photoDetailModel: photoDetailModel)
+            print(#function)
+        }
+        print(#function)
     }
 
     override func viewDidLoad() {
@@ -35,6 +41,7 @@ final class PhotoDetailViewController: BaseViewController {
         setNavUI()
         setAddtarget()
         setChart(dataPoints: graphArray, barValues: barUnitsSold, lineValues: lineUnitsSold)
+        print(#function)
     }
     
     func setChart(dataPoints: [String], barValues: [Double], lineValues: [Double]) {
