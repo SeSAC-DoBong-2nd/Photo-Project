@@ -31,7 +31,7 @@ struct Result: Decodable {
 
 // MARK: - Urls
 struct Urls: Decodable {
-    let raw, small, thumb: String
+    let raw, small, thumb, regular: String
 }
 
 // MARK: - User
@@ -56,7 +56,7 @@ struct DummyDataGenerator {
                 color: ["#FF5733", "#33FF57", "#3357FF", "#F0F0F0", "#000000"].randomElement()!,
                 urls: Urls(
                     raw: "star",
-                    small: "star", thumb: "star"
+                    small: "star", thumb: "star", regular: "star"
                 ),
                 likes: Int.random(in: 0...1000),
                 user: User(

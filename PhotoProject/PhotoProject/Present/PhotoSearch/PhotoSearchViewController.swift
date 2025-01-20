@@ -255,7 +255,7 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
                 let profileImageURL = item.user.profile_image.medium
                 let profileName = item.user.name
                 let createAt = item.created_at
-                let selectedImageURL = item.urls.raw
+                let selectedImageURL = item.urls.regular
                 let selectedImageWidth = item.width
                 let selectedImageHeight = item.height
                 let downloadCount = result.downloads.historical.change
