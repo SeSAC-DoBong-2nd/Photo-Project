@@ -236,7 +236,7 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.cellIdentifier, for: indexPath) as! SearchResultCollectionViewCell
         let row = searchList[indexPath.item]
         
-        cell.configureCell(image: row.urls.raw, likes: row.likes)
+        cell.configureCell(image: row.urls.thumb, likes: row.likes)
         
         return cell
     }

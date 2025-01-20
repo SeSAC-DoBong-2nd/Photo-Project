@@ -202,7 +202,7 @@ extension PhotoTopicViewController: UICollectionViewDelegate, UICollectionViewDa
         
         let item = horizontalSections[indexPath.section][indexPath.item]
         
-        cell.configureCellInTopic(image: item.urls.raw, likes: item.likes)
+        cell.configureCellInTopic(image: item.urls.thumb, likes: item.likes)
         
         return cell
     }
