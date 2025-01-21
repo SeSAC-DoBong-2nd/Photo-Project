@@ -82,7 +82,15 @@ private extension PhotoTopicViewController {
                     for j in result {
                         self.horizontalSections[i].append(j)
                     }
-                    self.mainView.topicCollectionView.refreshControl?.endRefreshing()
+                    DispatchQueue.main.async {
+                        if (isRefreshControl ?? false) {
+                            for i in 0..<self.horizontalSections.count {
+                                self.mainView.topicCollectionView.scrollToItem(at: IndexPath(item: 0, section: i), at: .left, animated: true)
+                            }
+                        }
+                        self.mainView.topicCollectionView.refreshControl?.endRefreshing()
+                    }
+                    
                 default:
                     return print("getPhotoSearch Error")
                 }
@@ -148,6 +156,7 @@ extension PhotoTopicViewController: UICollectionViewDelegate, UICollectionViewDa
                 let selectedImageHeight = item.height
                 let downloadCount = result.downloads.historical.change
                 let viewCount = result.views.historical.change
+                
                 var day30ViewCount: [Int] = []
                 for i in result.views.historical.values {
                     day30ViewCount.append(i.value)
