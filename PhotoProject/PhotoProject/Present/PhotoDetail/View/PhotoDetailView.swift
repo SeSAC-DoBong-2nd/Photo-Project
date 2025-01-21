@@ -26,6 +26,7 @@ final class PhotoDetailView: BaseView {
     private let heartBtn = UIButton()
     
     private let mainPosterImage = UIImageView()
+    
     private let infoContainerView = UIView()
     private let infoLabel = UILabel()
     private let sizeLabel = UILabel()
@@ -36,17 +37,8 @@ final class PhotoDetailView: BaseView {
     private let downloadNumLabel = UILabel()
     
     private let chartLabel = UILabel()
-    let chartSegmentedControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: ["조회", "다운로드"])
-        return control
-      }()
-    
-    lazy var combinedChartView = CombinedChartView()
-    
-    override init(frame: CGRect) {
-        
-        super.init(frame: frame)
-    }
+    let chartSegmentedControl = UISegmentedControl(items: ["조회", "다운로드"])
+    let combinedChartView = CombinedChartView()
     
     override func setHierarchy() {
         addSubviews(underLineView, scrollView)
@@ -55,7 +47,7 @@ final class PhotoDetailView: BaseView {
         contentView.addSubviews(profileContainerView,
                                 heartBtn,
                                 mainPosterImage,
-                                infoContainerView, combinedChartView)
+                                infoContainerView, chartLabel, chartSegmentedControl, combinedChartView)
         
         profileContainerView.addSubviews(profileImageView,
                                          nameLabel,
@@ -67,124 +59,8 @@ final class PhotoDetailView: BaseView {
                                       viewLabel,
                                       viewNumLabel,
                                       downloadLabel,
-                                      downloadNumLabel,
-                                      chartLabel,
-                                      chartSegmentedControl)
+                                      downloadNumLabel)
     }
-    
-//    override func setLayout() {
-//        underLineView.snp.makeConstraints {
-//            $0.top.equalTo(safeAreaLayoutGuide)
-//            $0.horizontalEdges.equalToSuperview()
-//            $0.height.equalTo(0.6)
-//        }
-//        
-//        scrollView.snp.makeConstraints {
-//            $0.width.equalToSuperview()
-//            $0.top.equalTo(underLineView.snp.bottom).offset(2)
-//            $0.bottom.equalToSuperview()
-//        }
-//        
-//        contentView.snp.makeConstraints {
-//            $0.width.equalTo(scrollView.snp.width)
-//            $0.verticalEdges.equalTo(scrollView)
-//        }
-//        
-//        profileContainerView.snp.makeConstraints {
-//            $0.top.equalTo(underLineView.snp.bottom).offset(2)
-//            $0.leading.equalToSuperview().offset(15)
-//            $0.width.greaterThanOrEqualTo(40)
-//            $0.height.equalTo(50)
-//        }
-//        
-//        profileImageView.snp.makeConstraints {
-//            $0.leading.equalToSuperview()
-//            $0.centerY.equalToSuperview()
-//            $0.size.equalTo(35)
-//        }
-//        
-//        creatAtLabel.snp.makeConstraints {
-//            $0.leading.equalTo(profileImageView.snp.trailing).offset(10)
-//            $0.bottom.equalTo(profileImageView.snp.bottom)
-//            $0.trailing.equalToSuperview()
-//        }
-//        
-//        nameLabel.snp.makeConstraints {
-//            $0.leading.equalTo(creatAtLabel.snp.leading)
-//            $0.bottom.equalTo(creatAtLabel.snp.top).offset(-2)
-//            $0.trailing.equalTo(creatAtLabel.snp.trailing)
-//        }
-//        
-//        heartBtn.snp.makeConstraints {
-//            $0.centerY.equalTo(profileImageView.snp.centerY)
-//            $0.trailing.equalToSuperview().offset(-15)
-//            $0.width.equalTo(30)
-//            $0.height.equalTo(28)
-//        }
-//        
-//        mainPosterImage.snp.makeConstraints {
-//            $0.top.equalTo(profileContainerView.snp.bottom)
-//            $0.horizontalEdges.equalToSuperview()
-//        }
-//        
-//        infoContainerView.snp.makeConstraints {
-//            $0.top.equalTo(mainPosterImage.snp.bottom).offset(15)
-//            $0.horizontalEdges.equalToSuperview().inset(15)
-//        }
-//        
-//        infoLabel.snp.makeConstraints {
-//            $0.top.leading.equalToSuperview()
-//        }
-//        
-//        sizeLabel.snp.makeConstraints {
-//            $0.bottom.equalTo(infoLabel.snp.bottom)
-//            $0.leading.equalTo(infoLabel.snp.trailing).offset(100)
-//        }
-//        
-//        sizeNumLabel.snp.makeConstraints {
-//            $0.bottom.equalTo(sizeLabel.snp.bottom)
-//            $0.trailing.equalToSuperview()
-//        }
-//        
-//        viewLabel.snp.makeConstraints {
-//            $0.top.equalTo(sizeLabel.snp.bottom).offset(10)
-//            $0.leading.equalTo(sizeLabel.snp.leading)
-//        }
-//        
-//        viewNumLabel.snp.makeConstraints {
-//            $0.bottom.equalTo(viewLabel.snp.bottom)
-//            $0.trailing.equalToSuperview()
-//        }
-//        
-//        downloadLabel.snp.makeConstraints {
-//            $0.top.equalTo(viewLabel.snp.bottom).offset(10)
-//            $0.leading.equalTo(sizeLabel.snp.leading)
-//        }
-//        
-//        downloadNumLabel.snp.makeConstraints {
-//            $0.bottom.equalTo(downloadLabel.snp.bottom)
-//            $0.trailing.equalToSuperview()
-//        }
-//        
-//        chartLabel.snp.makeConstraints {
-//            $0.top.equalTo(downloadLabel.snp.bottom).offset(50)
-//            $0.leading.equalTo(infoLabel.snp.leading)
-//        }
-//        
-//        chartSegmentedControl.snp.makeConstraints {
-//            $0.leading.equalTo(sizeLabel.snp.leading)
-//            $0.bottom.equalTo(chartLabel.snp.bottom)
-//        }
-//        
-//        combinedChartView.snp.makeConstraints {
-//            $0.top.equalTo(chartSegmentedControl.snp.bottom).offset(10)
-//            $0.leading.equalTo(sizeLabel.snp.leading)
-//            $0.trailing.equalToSuperview().offset(-15)
-//            $0.height.equalTo(300)
-//        }
-//        print(#function, "setLayout 종료")
-//        
-//    }
     
     override func setStyle() {
         underLineView.backgroundColor = .lightGray
@@ -237,7 +113,11 @@ final class PhotoDetailView: BaseView {
     
     func setDataUI(photoDetailModel: PhotoDetailModel) {
         //view.setLayout이 처음 불리는 시점에는 self.view의 width와 height의 크기가 결정되지 않았었음, 왜냐?! vc의 viewDidLoad가 실행되기 이전에 이미 view.setLayout함수는 끝이 나니까
-        
+        DispatchQueue.main.async {
+            print("ScrollView Frame: \(self.scrollView.frame)")
+            print("ScrollView Content Size: \(self.scrollView.contentSize)")
+        }
+        scrollView.alwaysBounceVertical = true
         underLineView.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview()
@@ -245,7 +125,7 @@ final class PhotoDetailView: BaseView {
         }
         
         scrollView.snp.makeConstraints {
-            $0.width.equalToSuperview()
+            $0.horizontalEdges.equalTo(safeAreaLayoutGuide)
             $0.top.equalTo(underLineView.snp.bottom).offset(2)
             $0.bottom.equalToSuperview()
         }
@@ -346,6 +226,7 @@ final class PhotoDetailView: BaseView {
             $0.leading.equalTo(sizeLabel.snp.leading)
             $0.trailing.equalToSuperview().offset(-15)
             $0.height.equalTo(300)
+            $0.bottom.equalToSuperview()
         }
         
         mainPosterImage.setImageKfDownSampling(with: photoDetailModel.selectedImageURL, cornerRadius: 0)
@@ -355,7 +236,6 @@ final class PhotoDetailView: BaseView {
         sizeNumLabel.text = "\(photoDetailModel.selectedImageWidth) x \(photoDetailModel.selectedImageHeight)"
         viewNumLabel.text = photoDetailModel.viewCount.formatted()
         downloadNumLabel.text = photoDetailModel.downloadCount.formatted()
-        
     }
     
 }
@@ -363,14 +243,14 @@ final class PhotoDetailView: BaseView {
 
 
 /*
- 1. line 94에 아래와 같은 코드를 사용하면 왜 레이아웃 에러가 날까
+ 미해결 1.line 94에 아래와 같은 코드를 사용하면 왜 레이아웃 에러가 날까
  profileContainerView.snp.makeConstraints {
      $0.top.equalTo(underLineView.snp.bottom).offset(2)
      $0.leading.equalToSuperview().offset(15)
      $0.trailing.lessThanOrEqualTo(heartBtn.snp.leading).offset(-10)
      $0.height.equalTo(50)
  }
- 2. 아래 레이아웃 에러가 왜 나는지 모르겠다..
+ 해결 / 2. 아래 레이아웃 에러가 왜 나는지 모르겠다..
  (
      "<SnapKit.LayoutConstraint:0x600002606a00@PhotoDetailView.swift#78 UIView:0x101d05320.top == UILayoutGuide:0x600003b089a0.top>",
      "<SnapKit.LayoutConstraint:0x6000026055c0@PhotoDetailView.swift#85 UIScrollView:0x103009e00.top == UIView:0x101d05320.bottom + 2.0>",
@@ -378,7 +258,15 @@ final class PhotoDetailView: BaseView {
      "<NSLayoutConstraint:0x600002131c20 '_UITemporaryLayoutHeight' PhotoProject.PhotoDetailView:0x101d050e0.height == 0   (active)>",
      "<NSLayoutConstraint:0x600002138370 'UIViewSafeAreaLayoutGuide-top' V:|-(0)-[UILayoutGuide:0x600003b089a0'UIViewSafeAreaLayoutGuide']   (active, names: '|':PhotoProject.PhotoDetailView:0x101d050e0 )>"
  )
- 3. view안에 label들로만 채운다면 view snp 설정할 때 height을 주지않아도 알아서 계산으로 들어가는데, 그 view의 bottom을 기준으로 다른 프로퍼티의 top을 잡으니 레이아웃이 원하는대로 되지않는다. 뷰가 그려지는 사이클이 꼬여서 그런거 같은데, 이걸 해결할 수 있는 방법이 있을까
- 4. segmentControl이 왜 안 눌리는가..
- 5. 레이아웃 문제로 스크롤이 안돼서 차트를 확인 못하는 구만..
+ 
+ 해결 / 3. view안에 label들로만 채운다면 view snp 설정할 때 height을 주지않아도 알아서 계산으로 들어가는데, 그 view의 bottom을 기준으로 다른 프로퍼티의 top을 잡으니 레이아웃이 원하는대로 되지않는다. 뷰가 그려지는 사이클이 꼬여서 그런거 같은데, 이걸 해결할 수 있는 방법이 있을까
+ 
+ 해결 / 4. segmentControl이 왜 안 눌리는가..
+ 
+ 미해결 / 5. 레이아웃 문제로 스크롤이 안돼서 차트를 확인 못하는 구만..
+   - 이게 아님. 해결했음에도 스크롤이 안 되는 중..
  */
+
+
+//현재 차트는 구현하였으나, 스크롤이 되지 않고있습니다..
+//차트를 확인하시려면 정말 죄송하지만.. mainPosterImage의 height을 10으로 설정해주시면 차트가 보입니다요..!

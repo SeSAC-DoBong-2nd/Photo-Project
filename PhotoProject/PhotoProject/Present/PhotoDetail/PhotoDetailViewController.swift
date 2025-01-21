@@ -10,29 +10,23 @@ import DGCharts
 
 final class PhotoDetailViewController: BaseViewController {
     
-    private let mainView = PhotoDetailView()
     var photoDetailModel: PhotoDetailModel?
     
-//    lazy var graphArray = Array(repeating: "", count: photoDetailModel?.day30DownCount.count ?? 0)
-    var graphArray: [String] = ["09시", "10시", "11시", "12시", "13시", "14시", "15시", "16시", "17시", "18시"]
-
-    let barUnitsSold = [10.0, 17.0, 9.0, 1.0, 8.0, 13.0, 16.0, 14.0, 7.0, 1.0]
-    let lineUnitsSold = [10.0, 18.0, 7.0, 1.0, 5.0, 15.0, 14.0, 17.0, 7.0, 1.0]
+    private let mainView = PhotoDetailView()
     
     override func loadView() {
         view = mainView
-        print(#function)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard let photoDetailModel else {return}
+        guard let photoDetailModel
+        else {return}
         DispatchQueue.main.async {
             self.mainView.setDataUI(photoDetailModel: photoDetailModel)
-            print(#function)
+            self.setChart(title: "한달 조회 수", dataPoints: photoDetailModel.monthView.monthViewDates, lineValues: photoDetailModel.monthView.monthViewValues)
         }
-        print(#function)
     }
 
     override func viewDidLoad() {
@@ -40,44 +34,9 @@ final class PhotoDetailViewController: BaseViewController {
 
         setNavUI()
         setAddtarget()
-        setChart(dataPoints: graphArray, barValues: barUnitsSold, lineValues: lineUnitsSold)
-        print(#function)
     }
     
-    func setChart(dataPoints: [String], barValues: [Double], lineValues: [Double]) {
-        var barDataEntries: [BarChartDataEntry] = []
-        var lineDataEntries: [ChartDataEntry] = []
-                
-        for i in 0..<dataPoints.count {
-            let barDataEntry = BarChartDataEntry(x: Double(i), y: barValues[i])
-            let lineDataEntry = ChartDataEntry(x: Double(i), y: lineValues[i])
-            barDataEntries.append(barDataEntry)
-            lineDataEntries.append(lineDataEntry)
-        }
-
-        let barChartDataSet = BarChartDataSet(entries: barDataEntries, label: "")
-        let lineChartDataSet = LineChartDataSet(entries: lineDataEntries, label: "")
-        
-        lineChartDataSet.colors = [.blue]
-        lineChartDataSet.circleColors = [.white]
-
-        let data: CombinedChartData = CombinedChartData()
-
-        // bar 데이터 지정
-        data.barData = BarChartData(dataSet: barChartDataSet)
-        // line 데이터 지정
-        data.lineData = LineChartData(dataSet: lineChartDataSet)
-        
-        lineChartDataSet.mode = .cubicBezier
-
-        // 콤비 데이터 지정
-        mainView.combinedChartView.data = data
-        
-        mainView.combinedChartView.do {
-            $0.xAxis.valueFormatter = IndexAxisValueFormatter(values: graphArray)
-            $0.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
-        }
-    }
+    
 
 }
 
@@ -97,6 +56,36 @@ private extension PhotoDetailViewController {
         mainView.chartSegmentedControl.addTarget(self, action: #selector(segmentedControlTapped), for: .valueChanged)
     }
     
+    func setChart(title: String, dataPoints: [String], lineValues: [Int]) {
+        var lineDataEntries: [ChartDataEntry] = []
+                
+        for i in 0..<dataPoints.count {
+            let lineDataEntry = ChartDataEntry(x: Double(i), y: Double(lineValues[i]))
+            lineDataEntries.append(lineDataEntry)
+        }
+
+        let lineChartDataSet = LineChartDataSet(entries: lineDataEntries, label: title)
+        
+        lineChartDataSet.colors = [.cyan]
+        lineChartDataSet.circleColors = [.blue]
+
+        let data: CombinedChartData = CombinedChartData()
+        
+        data.lineData = LineChartData(dataSet: lineChartDataSet)
+        
+        lineChartDataSet.mode = .cubicBezier
+        lineChartDataSet.circleHoleRadius = 2.0
+        lineChartDataSet.circleRadius = 3
+
+        // 콤비 데이터 지정
+        mainView.combinedChartView.data = data
+        
+        mainView.combinedChartView.do {
+            $0.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
+            $0.backgroundColor = .clear
+        }
+    }
+    
 }
 
 //MARK: - @objc private extension
@@ -109,9 +98,19 @@ private extension PhotoDetailViewController {
     
     @objc
     func segmentedControlTapped(_ sender: UISegmentedControl) {
-        print(#function)
-        sender.selectedSegmentIndex = (sender.selectedSegmentIndex == 0)
-        ? 1 : 0
+        guard let monthView = photoDetailModel?.monthView,
+              let monthDownload = photoDetailModel?.monthDownload
+        else { return print("segmentedControlTapped") }
+        
+        switch sender.selectedSegmentIndex {
+        case 0:
+            print("000")
+            self.setChart(title: "한달 조회 수", dataPoints: monthView.monthViewDates, lineValues: monthView.monthViewValues)
+        case 1:
+            print("111")
+            self.setChart(title: "한달 다운로드 수", dataPoints: monthDownload.monthDownloadDates, lineValues: monthDownload.monthDownloadValues)
+        default: return
+        }
     }
     
 }

@@ -268,6 +268,28 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
                 for i in result.downloads.historical.values {
                     day30DownCount.append(i.value)
                 }
+                var view30Days = [String]()
+                for i in result.views.historical.values {
+                    print(i.date)
+                    view30Days.append(DateFormatterManager.shard.setDateString(strDate: i.date, format: "MM.dd"))
+                }
+                var view30DaysValue = [Int]()
+                for i in result.views.historical.values {
+                    view30DaysValue.append(i.value)
+                }
+                
+                var download30Days = [String]()
+                for i in result.downloads.historical.values {
+                    print(i.date)
+                    download30Days.append(DateFormatterManager.shard.setDateString(strDate: i.date, format: "MM.dd"))
+                }
+                var download30DaysValue = [Int]()
+                for i in result.downloads.historical.values {
+                    download30DaysValue.append(i.value)
+                }
+                
+                let monthView = MonthView(monthViewDates: view30Days, monthViewValues: view30DaysValue)
+                let monthDownload = MonthDownload(monthDownloadDates: download30Days, monthDownloadValues: download30DaysValue)
                 
                 let vc = PhotoDetailViewController()
                 vc.photoDetailModel = PhotoDetailModel(profileImageURL: profileImageURL,
@@ -277,8 +299,10 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
                                                        selectedImageWidth: selectedImageWidth,
                                                        selectedImageHeight: selectedImageHeight,
                                                        downloadCount: downloadCount,
-                                                       viewCount: viewCount, day30ViewCount: day30ViewCount,
-                                                       day30DownCount: day30DownCount)
+                                                       viewCount: viewCount, monthViewTotalCount: day30ViewCount,
+                                                       monthDownloadTotalCount: day30ViewCount,
+                                                       monthView: monthView,
+                                                       monthDownload: monthDownload)
                 
                 self.navigationController?.pushViewController(vc, animated: true)
             default:

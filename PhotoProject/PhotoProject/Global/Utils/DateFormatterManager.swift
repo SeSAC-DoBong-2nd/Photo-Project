@@ -16,14 +16,18 @@ final class DateFormatterManager {
     
     let dateFormatter = DateFormatter()
     
-    func setDateInTravelTalk(strDate: String) -> String {
+    func setDateString(strDate: String, format: String) -> String {
         let inputDate = DateFormatter()
+        inputDate.dateFormat = "yyyy-MM-dd"
         let date = inputDate.date(from: strDate)
         
         let outputDate = DateFormatter()
-        outputDate.dateFormat = "yy.MM.dd"
-        
-        return outputDate.string(from: date ?? Date())
+        outputDate.dateFormat = format
+        guard let date else {
+            print("setDateString error")
+            return ""
+        }
+        return outputDate.string(from: date)
     }
     
     func setDateInChat(strDate: String) -> String {
