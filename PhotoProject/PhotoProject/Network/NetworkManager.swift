@@ -49,7 +49,8 @@ class NetworkManager {
     }
     
     func getPhotoTopic(apiHandler: UnsplashTargetType,
-                       complitionHandler: @escaping ([PhotoTopicResponseModel], Int) -> (Void))
+                       complitionHandler: @escaping ([PhotoTopicResponseModel], Int) -> (Void),
+                       failHandler: @escaping () -> Void)
     {
         
         AF.request(apiHandler.endPoint, method: apiHandler.method, headers: apiHandler.header).responseDecodable(of: [PhotoTopicResponseModel].self) { response in
@@ -59,6 +60,7 @@ class NetworkManager {
                 complitionHandler(result, response.response?.statusCode ?? 0)
             case .failure(let error):
                 print("failure\n", error)
+                failHandler()
             }
         }
         

@@ -69,31 +69,45 @@ private extension PhotoTopicViewController {
         while topicIDTypeSet.count < 3 {
             topicIDTypeSet.insert(TopicIDType.allCases.randomElement() ?? TopicIDType.goldenHour)
         }
-        let topicIDArr = Array(topicIDTypeSet)
         
+        let topicIDArr = Array(topicIDTypeSet)
+        let group = DispatchGroup()
+        var items: [[PhotoTopicResponseModel]] = [[], [], []]
         for i in 0..<topicIDArr.count {
+            group.enter()
             NetworkManager.shared.getPhotoTopic(apiHandler:.getPhotoTopic(topicID: topicIDArr[i].rawValue)) { result, statusCode in
                 switch statusCode {
                 case (200..<299):
                     self.topicHeaderTitleArr[i] = topicIDArr[i].title
-                    if (isRefreshControl ?? false) {
-                        self.horizontalSections[i].removeAll()
-                    }
-                    for j in result {
-                        self.horizontalSections[i].append(j)
-                    }
-                    DispatchQueue.main.async {
-                        if (isRefreshControl ?? false) {
-                            for i in 0..<self.horizontalSections.count {
-                                self.mainView.topicCollectionView.scrollToItem(at: IndexPath(item: 0, section: i), at: .left, animated: true)
-                            }
-                        }
-                        self.mainView.topicCollectionView.refreshControl?.endRefreshing()
-                    }
                     
+                    for j in result {
+                        items[i].append(j)
+                    }
+                    group.leave()
                 default:
                     return print("getPhotoSearchData Error")
                 }
+            } failHandler: {
+                print("getPhotoTopic failHandler")
+                group.leave()
+            }
+        }
+        
+        DispatchQueue.main.async {
+            group.notify(queue: .main) {
+                print("지금 group 끝나서 작업 시작!")
+                self.horizontalSections = items
+
+                // RefreshControl 상태에 따라 첫 번째 인덱스로 이동하는 동작 추가
+                if isRefreshControl ?? false {
+                    for i in 0..<self.horizontalSections.count {
+                        self.mainView.topicCollectionView.scrollToItem(at: IndexPath(item: 0, section: i),
+                                                                       at: .left,
+                                                                       animated: true)
+                    }
+                }
+                print("지금 group 작업 끝!")
+                self.mainView.topicCollectionView.refreshControl?.endRefreshing()
             }
         }
     }
