@@ -31,7 +31,7 @@ final class PhotoTopicViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getPhotoTopic()
+        getPhotoTopicData()
         setNavUI()
         setDelegate()
         setRefreshControl()
@@ -64,7 +64,7 @@ private extension PhotoTopicViewController {
         mainView.topicCollectionView.register(PhotoTopicCollectionHeaderView.self, forSupplementaryViewOfKind: PhotoTopicCollectionHeaderView.elementKinds, withReuseIdentifier: PhotoTopicCollectionHeaderView.identifier)
     }
     
-    func getPhotoTopic(isRefreshControl: Bool? = false) {
+    func getPhotoTopicData(isRefreshControl: Bool? = false) {
         var topicIDTypeSet = Set<TopicIDType>()
         while topicIDTypeSet.count < 3 {
             topicIDTypeSet.insert(TopicIDType.allCases.randomElement() ?? TopicIDType.goldenHour)
@@ -72,7 +72,7 @@ private extension PhotoTopicViewController {
         let topicIDArr = Array(topicIDTypeSet)
         
         for i in 0..<topicIDArr.count {
-            NetworkManager.shared.getPhotoTopicAPI(topicID: topicIDArr[i].rawValue) { result, statusCode in
+            NetworkManager.shared.getPhotoTopic(apiHandler:.getPhotoTopic(topicID: topicIDArr[i].rawValue)) { result, statusCode in
                 switch statusCode {
                 case (200..<299):
                     self.topicHeaderTitleArr[i] = topicIDArr[i].title
@@ -92,7 +92,7 @@ private extension PhotoTopicViewController {
                     }
                     
                 default:
-                    return print("getPhotoSearch Error")
+                    return print("getPhotoSearchData Error")
                 }
             }
         }
@@ -125,7 +125,7 @@ private extension PhotoTopicViewController {
         isRefreshEnabled = false
         
         DispatchQueue.main.async {
-            self.getPhotoTopic(isRefreshControl: true)
+            self.getPhotoTopicData(isRefreshControl: true)
         }
         
         // 60초 후 다시 새로고침 활성화
@@ -143,7 +143,7 @@ extension PhotoTopicViewController: UICollectionViewDelegate, UICollectionViewDa
         let item = horizontalSections[indexPath.section][indexPath.item]
         let imageID = item.id
         
-        NetworkManager.shared.getPhotoDetailAPI(imageID: imageID) {
+        NetworkManager.shared.getPhotoDetail(apiHandler: .getPhotoDetail(imageID: imageID)) {
             result,
             statusCode in
             switch statusCode {
@@ -203,7 +203,7 @@ extension PhotoTopicViewController: UICollectionViewDelegate, UICollectionViewDa
                 
                 self.navigationController?.pushViewController(vc, animated: true)
             default:
-                return print("getPhotoSearch Error")
+                return print("getPhotoSearchData Error")
             }
         }
         collectionView.reloadItems(at: [indexPath])

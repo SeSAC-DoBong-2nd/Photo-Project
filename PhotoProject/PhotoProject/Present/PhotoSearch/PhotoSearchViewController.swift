@@ -86,9 +86,9 @@ private extension PhotoSearchViewController {
         page = 1
     }
     
-    func getPhotoSearch(query: String, page: Int, perPage: Int, orderBy: String, color: String? = nil) {
-        print(perPage)
-        NetworkManager.shared.getPhotoSearchAPI(query: query, page: page, perPage: perPage, orderBy: orderBy, color: color) { result,statusCode  in
+    func getPhotoSearchData(query: String, page: Int, perPage: Int, orderBy: String, color: String? = nil) {
+//        query: query, page: page, perPage: perPage, orderBy: orderBy, color: color
+        NetworkManager.shared.getPhotoSearch(apiHandler: .getPhotoSearch(query: query, page: page, perPage: perPage, orderBy: orderBy, color: color)) { result,statusCode  in
             switch statusCode {
             case (200..<299):
                 self.searchList.append(contentsOf: result.results)
@@ -105,7 +105,7 @@ private extension PhotoSearchViewController {
                 }
                 
             default:
-                return print("getPhotoSearch Error")
+                return print("getPhotoSearchData Error")
             }
         }
     }
@@ -133,7 +133,7 @@ private extension PhotoSearchViewController {
         
         resetSearchListWithPage()
         
-        getPhotoSearch(query: searchText ?? "", page: page, perPage: perPage, orderBy: orderBy, color: selectedColorFilterBtn)
+        getPhotoSearchData(query: searchText ?? "", page: page, perPage: perPage, orderBy: orderBy, color: selectedColorFilterBtn)
     }
     
     //toggle 버튼 눌린 이후 2초 뒤 hidden 처리
@@ -144,7 +144,7 @@ private extension PhotoSearchViewController {
         
         resetSearchListWithPage()
         
-        self.getPhotoSearch(query: self.searchText ?? "",
+        self.getPhotoSearchData(query: self.searchText ?? "",
                             page: self.page,
                             perPage: self.perPage,
                             orderBy: orderBy)
@@ -171,7 +171,7 @@ extension PhotoSearchViewController: UISearchBarDelegate {
             if text != searchText {
                 searchText = text
                 page = 1
-                getPhotoSearch(query: text, page: page, perPage: perPage, orderBy: orderBy)
+                getPhotoSearchData(query: text, page: page, perPage: perPage, orderBy: orderBy)
             } else {
                 print("같은 검색어 입력 방지")
             }
@@ -212,7 +212,7 @@ extension PhotoSearchViewController: UICollectionViewDataSourcePrefetching {
                 page += 1
                 
                 //color filter가 눌려있다면 color 조건 역시 들어가야하니 selectedColorFilterBtn 변수 사용
-                getPhotoSearch(query: searchText ?? "",
+                getPhotoSearchData(query: searchText ?? "",
                                page: page,
                                perPage: perPage,
                                orderBy: orderBy,
@@ -246,7 +246,7 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
         let item = searchList[indexPath.item]
         let imageID = item.id
         
-        NetworkManager.shared.getPhotoDetailAPI(imageID: imageID) {
+        NetworkManager.shared.getPhotoDetail(apiHandler: .getPhotoDetail(imageID: imageID)) {
             result,
             statusCode in
             switch statusCode {
@@ -306,7 +306,7 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
                 
                 self.navigationController?.pushViewController(vc, animated: true)
             default:
-                return print("getPhotoSearch Error")
+                return print("getPhotoSearchData Error")
             }
         }
         collectionView.reloadItems(at: [indexPath])
