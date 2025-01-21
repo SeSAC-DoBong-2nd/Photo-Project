@@ -82,7 +82,15 @@ private extension PhotoTopicViewController {
                     for j in result {
                         self.horizontalSections[i].append(j)
                     }
-                    self.mainView.topicCollectionView.refreshControl?.endRefreshing()
+                    DispatchQueue.main.async {
+                        if (isRefreshControl ?? false) {
+                            for i in 0..<self.horizontalSections.count {
+                                self.mainView.topicCollectionView.scrollToItem(at: IndexPath(item: 0, section: i), at: .left, animated: true)
+                            }
+                        }
+                        self.mainView.topicCollectionView.refreshControl?.endRefreshing()
+                    }
+                    
                 default:
                     return print("getPhotoSearch Error")
                 }
@@ -140,15 +148,45 @@ extension PhotoTopicViewController: UICollectionViewDelegate, UICollectionViewDa
             statusCode in
             switch statusCode {
             case (200..<299):
-                print("result : \n", result)
                 let profileImageURL = item.user.profile_image.medium
                 let profileName = item.user.name
                 let createAt = item.createdAt
-                let selectedImageURL = item.urls.raw
+                let selectedImageURL = item.urls.regular
                 let selectedImageWidth = item.width
                 let selectedImageHeight = item.height
                 let downloadCount = result.downloads.historical.change
                 let viewCount = result.views.historical.change
+                
+                var day30ViewCount: [Int] = []
+                for i in result.views.historical.values {
+                    day30ViewCount.append(i.value)
+                }
+                var day30DownCount: [Int] = []
+                for i in result.downloads.historical.values {
+                    day30DownCount.append(i.value)
+                }
+                var view30Days = [String]()
+                for i in result.views.historical.values {
+                    print(i.date)
+                    view30Days.append(DateFormatterManager.shard.setDateString(strDate: i.date, format: "MM.dd"))
+                }
+                var view30DaysValue = [Int]()
+                for i in result.views.historical.values {
+                    view30DaysValue.append(i.value)
+                }
+                
+                var download30Days = [String]()
+                for i in result.downloads.historical.values {
+                    print(i.date)
+                    download30Days.append(DateFormatterManager.shard.setDateString(strDate: i.date, format: "MM.dd"))
+                }
+                var download30DaysValue = [Int]()
+                for i in result.downloads.historical.values {
+                    download30DaysValue.append(i.value)
+                }
+                
+                let monthView = MonthView(monthViewDates: view30Days, monthViewValues: view30DaysValue)
+                let monthDownload = MonthDownload(monthDownloadDates: download30Days, monthDownloadValues: download30DaysValue)
                 
                 let vc = PhotoDetailViewController()
                 vc.photoDetailModel = PhotoDetailModel(profileImageURL: profileImageURL,
@@ -158,7 +196,10 @@ extension PhotoTopicViewController: UICollectionViewDelegate, UICollectionViewDa
                                                        selectedImageWidth: selectedImageWidth,
                                                        selectedImageHeight: selectedImageHeight,
                                                        downloadCount: downloadCount,
-                                                       viewCount: viewCount)
+                                                       viewCount: viewCount, monthViewTotalCount: day30ViewCount,
+                                                       monthDownloadTotalCount: day30ViewCount,
+                                                       monthView: monthView,
+                                                       monthDownload: monthDownload)
                 
                 self.navigationController?.pushViewController(vc, animated: true)
             default:
@@ -193,7 +234,7 @@ extension PhotoTopicViewController: UICollectionViewDelegate, UICollectionViewDa
         
         let item = horizontalSections[indexPath.section][indexPath.item]
         
-        cell.configureCellInTopic(image: item.urls.raw, likes: item.likes)
+        cell.configureCellInTopic(image: item.urls.thumb, likes: item.likes)
         
         return cell
     }

@@ -15,4 +15,18 @@ struct PhotoDetailModel {
     let selectedImageWidth, selectedImageHeight: Int
     let downloadCount: Int
     let viewCount: Int
+    let monthViewTotalCount: [Int]
+    let monthDownloadTotalCount: [Int]
+    let monthView: MonthView
+    let monthDownload: MonthDownload
+}
+
+struct MonthView {
+    let monthViewDates: [String]
+    let monthViewValues: [Int]
+}
+
+struct MonthDownload {
+    let monthDownloadDates: [String]
+    let monthDownloadValues: [Int]
 }
