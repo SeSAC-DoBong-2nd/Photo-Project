@@ -120,7 +120,7 @@ private extension PhotoSearchViewController {
         for i in mainView.colorFilterBtnArr {
             if i == sender {
                 guard let text = i.titleLabel?.text else { return }
-                for j in PhotoSearchColorButton.allCases {
+                for j in PhotoSearchColorButtonType.allCases {
                     if j.rawValue == text {
                         i.isSelected = true
                         selectedColorFilterBtn = j.buttonTitle

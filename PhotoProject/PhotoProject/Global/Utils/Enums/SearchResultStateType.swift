@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SearchResultState {
+enum SearchResultStateType {
     case yet
     case none
     case some

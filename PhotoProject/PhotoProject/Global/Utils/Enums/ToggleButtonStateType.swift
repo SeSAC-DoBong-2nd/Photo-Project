@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ToggleButtonState: String {
+enum ToggleButtonStateType: String {
     case relevant = "relevant"
     case latest = "latest"
     

@@ -12,8 +12,8 @@ import Then
 
 final class PhotoSearchView: BaseView {
     
-    var searchResultState = SearchResultState.yet
-    var toggleButtonState = ToggleButtonState.relevant
+    var searchResultState = SearchResultStateType.yet
+    var toggleButtonState = ToggleButtonStateType.relevant
     
     private let underLineView = UIView()
     
@@ -158,7 +158,7 @@ final class PhotoSearchView: BaseView {
         toggleButton.isEnabled = true
     }
     
-    func searchResultState(state: SearchResultState) {
+    func searchResultState(state: SearchResultStateType) {
         emptyView.isHidden = state.isEmptyViewHidden
         searchCollectionView.isHidden = !state.isEmptyViewHidden
         emptyLabel.text = searchResultState.title
@@ -173,7 +173,7 @@ private extension PhotoSearchView {
         for i in 0..<colorFilterBtnArr.count {
             var buttonConfig = UIButton.Configuration.gray()
             
-            let colorFilterBtnTitleArr = PhotoSearchColorButton.allCases
+            let colorFilterBtnTitleArr = PhotoSearchColorButtonType.allCases
             let buttonTitle = colorFilterBtnTitleArr[i].rawValue
 
             var attributedTitle = AttributedString(buttonTitle)

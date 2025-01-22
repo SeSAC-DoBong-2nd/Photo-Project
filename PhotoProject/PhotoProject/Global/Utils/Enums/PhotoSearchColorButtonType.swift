@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum PhotoSearchColorButton: String, CaseIterable {
+enum PhotoSearchColorButtonType: String, CaseIterable {
     case black = "블랙"
     case white = "화이트"
     case yellow = "옐로우"
