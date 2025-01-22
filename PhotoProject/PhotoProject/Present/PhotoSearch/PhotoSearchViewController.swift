@@ -146,14 +146,17 @@ private extension PhotoSearchViewController {
     @objc
     func toggleBtnTapped(_ sender: UIButton) {
         sender.isSelected.toggle()
-        self.mainView.toggleButtonState = sender.isSelected ? .latest : .relevant
+        mainView.toggleButtonState = sender.isSelected ? .latest : .relevant
+        orderBy = mainView.toggleButtonState.rawValue
         
         resetSearchListWithPage()
         
-        self.getPhotoSearchData(query: self.searchText ?? "",
-                            page: self.page,
-                            perPage: self.perPage,
-                            orderBy: orderBy)
+        //color filter가 눌려있다면 color 조건 역시 들어가야하니 selectedColorFilterBtn 변수 사용
+        getPhotoSearchData(query: searchText ?? "",
+                       page: page,
+                       perPage: perPage,
+                       orderBy: orderBy,
+                       color: selectedColorFilterBtn)
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
             self.mainView.toggleButton.isHidden = true
