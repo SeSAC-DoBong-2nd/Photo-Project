@@ -47,6 +47,7 @@
 		9ED691312D3D59E4007E76E8 /* TopicIDType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691302D3D59E4007E76E8 /* TopicIDType.swift */; };
 		9ED691342D3DCA1A007E76E8 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 9ED691332D3DCA1A007E76E8 /* DGCharts */; };
 		9ED6913A2D3DCECC007E76E8 /* Secret.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9ED691392D3DCEC8007E76E8 /* Secret.xcconfig */; };
+		9ED691A72D3FE8AE007E76E8 /* UnsplahTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691A62D3FE8AE007E76E8 /* UnsplahTargetType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 		9ED6912E2D3D57D2007E76E8 /* PhotoTopicResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTopicResponseModel.swift; sourceTree = "<group>"; };
 		9ED691302D3D59E4007E76E8 /* TopicIDType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicIDType.swift; sourceTree = "<group>"; };
 		9ED691392D3DCEC8007E76E8 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
+		9ED691A62D3FE8AE007E76E8 /* UnsplahTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplahTargetType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				9ED691102D3CA53D007E76E8 /* NetworkManager.swift */,
+				9ED691A62D3FE8AE007E76E8 /* UnsplahTargetType.swift */,
 				9ED6912D2D3D57BE007E76E8 /* PhotoTopic */,
 				9ED6910A2D3C075D007E76E8 /* PhotoSearch */,
 				9ED6911C2D3D1DCC007E76E8 /* PhotoDetail */,
@@ -433,6 +436,7 @@
 				9ED691312D3D59E4007E76E8 /* TopicIDType.swift in Sources */,
 				9E57016A2D3BC56700D62846 /* Bundle+Extension.swift in Sources */,
 				9E57016B2D3BC56700D62846 /* UILabel+Extension.swift in Sources */,
+				9ED691A72D3FE8AE007E76E8 /* UnsplahTargetType.swift in Sources */,
 				9E57016C2D3BC56700D62846 /* UITextField+Extension.swift in Sources */,
 				9E57016D2D3BC56700D62846 /* UIImageView+Extension.swift in Sources */,
 				9ED691252D3D37F7007E76E8 /* PhotoTopicView.swift in Sources */,
