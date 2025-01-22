@@ -47,6 +47,7 @@
 		9ED691342D3DCA1A007E76E8 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 9ED691332D3DCA1A007E76E8 /* DGCharts */; };
 		9ED6913A2D3DCECC007E76E8 /* Secret.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9ED691392D3DCEC8007E76E8 /* Secret.xcconfig */; };
 		9ED691A72D3FE8AE007E76E8 /* UnsplahTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691A62D3FE8AE007E76E8 /* UnsplahTargetType.swift */; };
+		9EEB88872D40E64B00E0C6C4 /* NetworkResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88862D40E64B00E0C6C4 /* NetworkResultType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 		9ED691302D3D59E4007E76E8 /* TopicIDType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicIDType.swift; sourceTree = "<group>"; };
 		9ED691392D3DCEC8007E76E8 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
 		9ED691A62D3FE8AE007E76E8 /* UnsplahTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplahTargetType.swift; sourceTree = "<group>"; };
+		9EEB88862D40E64B00E0C6C4 /* NetworkResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResultType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +274,7 @@
 				9ED691082D3BFEEE007E76E8 /* SearchResultStateType.swift */,
 				9ED691142D3CC244007E76E8 /* ToggleButtonStateType.swift */,
 				9ED691302D3D59E4007E76E8 /* TopicIDType.swift */,
+				9EEB88862D40E64B00E0C6C4 /* NetworkResultType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				9ED691062D3BCFF5007E76E8 /* PhotoSearchColorButtonType.swift in Sources */,
 				9E57015A2D3BBF1F00D62846 /* BaseCollectionViewCell.swift in Sources */,
 				9ED6910C2D3C077B007E76E8 /* PhotoSearchResponseModel.swift in Sources */,
+				9EEB88872D40E64B00E0C6C4 /* NetworkResultType.swift in Sources */,
 				9ED691002D3BC884007E76E8 /* PhotoTopicViewController.swift in Sources */,
 				9ED690FA2D3BC821007E76E8 /* TabBarViewController.swift in Sources */,
 				9E57015B2D3BBF1F00D62846 /* BaseView.swift in Sources */,

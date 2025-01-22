@@ -70,21 +70,20 @@ private extension PhotoTopicViewController {
         var items: [[PhotoTopicResponseModel]] = [[], [], []]
         for i in 0..<topicIDArr.count {
             group.enter()
-            NetworkManager.shared.getPhotoTopic(apiHandler:.getPhotoTopic(topicID: topicIDArr[i].rawValue)) { result, statusCode in
-                switch statusCode {
-                case (200..<299):
+            NetworkManager.shared.getUnsplashAPIWithMetaType(apiHandler:.getPhotoTopic(topicID: topicIDArr[i].rawValue), responseModel: [PhotoTopicResponseModel].self) { result, networkResultType in
+                switch networkResultType {
+                case .success:
+                    print("networkResultType : Success")
                     self.topicHeaderTitleArr[i] = topicIDArr[i].title
-                    
                     for j in result {
                         items[i].append(j)
                     }
                     group.leave()
-                default:
-                    return print("getPhotoSearchData Error")
+                case .badRequest, .unauthorized, .forbidden, .notFound, .serverError, .anotherError:
+                    group.leave()
+                    let alert = networkResultType.alert
+                    self.present(alert, animated: true)
                 }
-            } failHandler: {
-                print("getPhotoTopic failHandler")
-                group.leave()
             }
         }
         
@@ -151,12 +150,11 @@ extension PhotoTopicViewController: UICollectionViewDelegate, UICollectionViewDa
         print(#function)
         let item = horizontalSections[indexPath.section][indexPath.item]
         let imageID = item.id
-        
-        NetworkManager.shared.getPhotoDetail(apiHandler: .getPhotoDetail(imageID: imageID)) {
-            result,
-            statusCode in
-            switch statusCode {
-            case (200..<299):
+
+        NetworkManager.shared.getUnsplashAPIWithMetaType(apiHandler: .getPhotoDetail(imageID: imageID), responseModel: PhotoDetailResponseModel.self) { result, networkResultType in
+            switch networkResultType {
+            case .success:
+                print("networkResultType: success")
                 let profileImageURL = item.user.profile_image.medium
                 let profileName = item.user.name
                 let createAt = item.createdAt
@@ -211,10 +209,12 @@ extension PhotoTopicViewController: UICollectionViewDelegate, UICollectionViewDa
                                                        monthDownload: monthDownload)
                 
                 self.navigationController?.pushViewController(vc, animated: true)
-            default:
-                return print("getPhotoSearchData Error")
+            case .badRequest, .unauthorized, .forbidden, .notFound, .serverError, .anotherError:
+                let alert = networkResultType.alert
+                self.present(alert, animated: true)
             }
         }
+
         collectionView.reloadItems(at: [indexPath])
     }
     

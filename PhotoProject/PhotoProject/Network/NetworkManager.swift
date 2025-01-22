@@ -15,56 +15,87 @@ final class NetworkManager {
     
     private init() {}
     
-    func getPhotoSearch(apiHandler: UnsplashTargetType,
-                        complitionHandler: @escaping (PhotoSearchResponseModel, Int) -> (Void))
+    func returnErrorType(_ statusCode: Int) -> NetworkResultType {
+        switch statusCode {
+        case (200..<299):
+            return .success
+        case 400:
+            return .badRequest
+        case 401:
+            return .unauthorized
+        case 403:
+            return .forbidden
+        case 404:
+            return .notFound
+        case (500...):
+            return .serverError
+        default:
+            return .anotherError
+        }
+    }
+    
+    //Generic 활용: (Type Annotation).ver
+    func getUnsplashAPIWithTypeAnnotation<T: Decodable>(apiHandler: UnsplashTargetType,
+                                                       complitionHandler: @escaping (T, NetworkResultType) -> (Void))
     {
         print("parameter : ",apiHandler.parameter)
         AF.request(apiHandler.endPoint, method: apiHandler.method, parameters: apiHandler.parameter, headers: apiHandler.header)
-            .responseDecodable(of: PhotoSearchResponseModel.self) { response in
+            .responseDecodable(of: T.self) { response in
                 debugPrint(response)
             switch response.result {
             case .success(let result):
                 print("success")
-                complitionHandler(result, response.response?.statusCode ?? 0)
+                let networkResultType = self.returnErrorType(response.response?.statusCode ?? 0)
+                complitionHandler(result, networkResultType)
             case .failure(let error):
                 print("failure\n", error)
             }
         }
-        
     }
     
-    func getPhotoDetail(apiHandler: UnsplashTargetType,
-                        complitionHandler: @escaping (PhotoDetailResponseModel, Int) -> (Void))
+    //Generic 활용: (Meta Type).ver
+    func getUnsplashAPIWithMetaType<T: Decodable>(apiHandler: UnsplashTargetType,
+                                                  responseModel: T.Type,
+                                                  complitionHandler: @escaping (T, NetworkResultType) -> (Void))
     {
-        AF.request(apiHandler.endPoint, method: apiHandler.method, parameters: apiHandler.parameter, headers: apiHandler.header).responseDecodable(of: PhotoDetailResponseModel.self) { response in
+        print("parameter : ",apiHandler.parameter)
+        AF.request(apiHandler.endPoint, method: apiHandler.method, parameters: apiHandler.parameter, headers: apiHandler.header)
+            .responseDecodable(of: T.self) { response in
+                debugPrint(response)
             switch response.result {
             case .success(let result):
                 print("success")
-                complitionHandler(result, response.response?.statusCode ?? 0)
+                let networkResultType = self.returnErrorType(response.response?.statusCode ?? 0)
+                complitionHandler(result, networkResultType)
             case .failure(let error):
                 print("failure\n", error)
             }
         }
-        
-    }
-    
-    func getPhotoTopic(apiHandler: UnsplashTargetType,
-                       complitionHandler: @escaping ([PhotoTopicResponseModel], Int) -> (Void),
-                       failHandler: @escaping () -> Void)
-    {
-        
-        AF.request(apiHandler.endPoint, method: apiHandler.method, headers: apiHandler.header).responseDecodable(of: [PhotoTopicResponseModel].self) { response in
-            switch response.result {
-            case .success(let result):
-                print("success")
-                complitionHandler(result, response.response?.statusCode ?? 0)
-            case .failure(let error):
-                print("failure\n", error)
-                failHandler()
-            }
-        }
-        
     }
     
 }
 
+
+
+//Generic 활용: (Type Annotation) 호출.ver
+//        NetworkManager.shared.getUnsplashAPIWithTypeAnnotation(apiHandler: .getPhotoDetail(imageID: imageID))
+//        { (result: PhotoDetailResponseModel, networkResultType)  in
+//            switch networkResultType {
+//            case .success:
+//                print("result!!! : \(result)")
+//            case .badRequest, .unauthorized, .forbidden, .notFound, .serverError, .anotherError:
+//                let alert = networkResultType.alert
+//                self.present(alert, animated: true)
+//            }
+//        }
+
+//Generic 활용: (Meta Type) 호출.ver
+//        NetworkManager.shared.getUnsplashAPIWithMetaType(apiHandler: .getPhotoDetail(imageID: imageID), responseModel: PhotoDetailResponseModel.self) { result, networkResultType in
+//            switch networkResultType {
+//            case .success:
+//                print("networkResultType : Success")
+//            case .badRequest, .unauthorized, .forbidden, .notFound, .serverError, .anotherError:
+//                let alert = networkResultType.alert
+//                self.present(alert, animated: true)
+//            }
+//        }

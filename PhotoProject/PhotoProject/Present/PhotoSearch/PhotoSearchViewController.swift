@@ -87,30 +87,33 @@ private extension PhotoSearchViewController {
     }
     
     func getPhotoSearchData(query: String, page: Int, perPage: Int, orderBy: String, color: String? = nil) {
-        NetworkManager.shared.getPhotoSearch(apiHandler: .getPhotoSearch(query: query,
-                                                                         page: page,
-                                                                         perPage: perPage,
-                                                                         orderBy: orderBy,
-                                                                         color: color)) { result,statusCode  in
-            switch statusCode {
-            case (200..<299):
-                self.searchList.append(contentsOf: result.results)
-                self.mainView.searchResultState = (self.searchList.count != 0) ? .some : .none
-                self.mainView.searchResultState(state: self.mainView.searchResultState)
-                if !self.searchList.isEmpty && (self.page == 1) {
-                    self.mainView.setBtnAbled()
-                    self.setScrollToTop()
+        NetworkManager.shared.getUnsplashAPIWithMetaType(
+            apiHandler: .getPhotoSearch(query: query,
+                                        page: page,
+                                        perPage: perPage,
+                                        orderBy: orderBy,
+                                        color: color),
+            responseModel: PhotoSearchResponseModel.self) { result, networkResultType in
+                switch networkResultType {
+                case .success:
+                    print("networkResultType : Success")
+                    self.searchList.append(contentsOf: result.results)
+                    self.mainView.searchResultState = (self.searchList.count != 0) ? .some : .none
+                    self.mainView.searchResultState(state: self.mainView.searchResultState)
+                    if !self.searchList.isEmpty && (self.page == 1) {
+                        self.mainView.setBtnAbled()
+                        self.setScrollToTop()
+                    }
+                    
+                    //호출 오버 방지
+                    if result.total - (page * perPage) < 0 {
+                        self.isEnd = true
+                    }
+                case .badRequest, .unauthorized, .forbidden, .notFound, .serverError, .anotherError:
+                    let alert = networkResultType.alert
+                    self.present(alert, animated: true)
                 }
-                
-                //호출 오버 방지
-                if result.total - (page * perPage) < 0 {
-                    self.isEnd = true
-                }
-                
-            default:
-                return print("getPhotoSearchData Error")
             }
-        }
     }
     
 }
@@ -249,11 +252,10 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
         let item = searchList[indexPath.item]
         let imageID = item.id
         
-        NetworkManager.shared.getPhotoDetail(apiHandler: .getPhotoDetail(imageID: imageID)) {
-            result,
-            statusCode in
-            switch statusCode {
-            case (200..<299):
+        NetworkManager.shared.getUnsplashAPIWithMetaType(apiHandler: .getPhotoDetail(imageID: imageID), responseModel: PhotoDetailResponseModel.self) { result, networkResultType in
+            switch networkResultType {
+            case .success:
+                print("networkResultType: success")
                 let profileImageURL = item.user.profile_image.medium
                 let profileName = item.user.name
                 let createAt = item.created_at
@@ -262,6 +264,7 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
                 let selectedImageHeight = item.height
                 let downloadCount = result.downloads.historical.change
                 let viewCount = result.views.historical.change
+                
                 var day30ViewCount: [Int] = []
                 for i in result.views.historical.values {
                     day30ViewCount.append(i.value)
@@ -307,8 +310,9 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
                                                        monthDownload: monthDownload)
                 
                 self.navigationController?.pushViewController(vc, animated: true)
-            default:
-                return print("getPhotoSearchData Error")
+            case .badRequest, .unauthorized, .forbidden, .notFound, .serverError, .anotherError:
+                let alert = networkResultType.alert
+                self.present(alert, animated: true)
             }
         }
         collectionView.reloadItems(at: [indexPath])
