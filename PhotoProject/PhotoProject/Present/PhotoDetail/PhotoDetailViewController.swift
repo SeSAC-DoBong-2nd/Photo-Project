@@ -16,6 +16,7 @@ final class PhotoDetailViewController: BaseViewController {
     
     override func loadView() {
         view = mainView
+        print(#function)
     }
     
     override func viewWillAppear(_ animated: Bool) {

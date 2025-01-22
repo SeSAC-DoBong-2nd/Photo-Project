@@ -44,25 +44,36 @@ final class PhotoDetailView: BaseView {
         addSubviews(underLineView, scrollView)
         scrollView.addSubview(contentView)
         
+//        contentView.addSubviews(profileContainerView,
+//                                heartBtn,
+//                                mainPosterImage,
+//                                infoContainerView, chartLabel, chartSegmentedControl, combinedChartView)
         contentView.addSubviews(profileContainerView,
                                 heartBtn,
                                 mainPosterImage,
-                                infoContainerView, chartLabel, chartSegmentedControl, combinedChartView)
+                                infoLabel,
+                                                              sizeLabel,
+                                                              sizeNumLabel,
+                                                              viewLabel,
+                                                              viewNumLabel,
+                                                              downloadLabel,
+                                                              downloadNumLabel, chartLabel, chartSegmentedControl, combinedChartView)
         
         profileContainerView.addSubviews(profileImageView,
                                          nameLabel,
                                          creatAtLabel)
         
-        infoContainerView.addSubviews(infoLabel,
-                                      sizeLabel,
-                                      sizeNumLabel,
-                                      viewLabel,
-                                      viewNumLabel,
-                                      downloadLabel,
-                                      downloadNumLabel)
+//        infoContainerView.addSubviews(infoLabel,
+//                                      sizeLabel,
+//                                      sizeNumLabel,
+//                                      viewLabel,
+//                                      viewNumLabel,
+//                                      downloadLabel,
+//                                      downloadNumLabel)
     }
     
     override func setStyle() {
+        print(#function)
         underLineView.backgroundColor = .lightGray
         
         profileImageView.do {
@@ -172,14 +183,19 @@ final class PhotoDetailView: BaseView {
             $0.horizontalEdges.equalToSuperview()
         }
         
-        infoContainerView.snp.makeConstraints {
-            $0.top.equalTo(mainPosterImage.snp.bottom).offset(15)
-            $0.horizontalEdges.equalToSuperview().inset(15)
-        }
+//        infoContainerView.snp.makeConstraints {
+//            $0.top.equalTo(mainPosterImage.snp.bottom).offset(15)
+//            $0.horizontalEdges.equalToSuperview().inset(15)
+//        }
         
         infoLabel.snp.makeConstraints {
-            $0.top.leading.equalToSuperview()
+            $0.top.equalTo(mainPosterImage.snp.bottom).offset(15)
+            $0.leading.equalToSuperview()
         }
+        
+//        infoLabel.snp.makeConstraints {
+//            $0.top.leading.equalToSuperview()
+//        }
         
         sizeLabel.snp.makeConstraints {
             $0.bottom.equalTo(infoLabel.snp.bottom)
@@ -243,14 +259,19 @@ final class PhotoDetailView: BaseView {
 
 
 /*
- 미해결 1.line 94에 아래와 같은 코드를 사용하면 왜 레이아웃 에러가 날까
+ 1.아래와 같은 코드를 사용하면 왜 레이아웃 에러가 날까
+    - 미해결:
  profileContainerView.snp.makeConstraints {
      $0.top.equalTo(underLineView.snp.bottom).offset(2)
      $0.leading.equalToSuperview().offset(15)
      $0.trailing.lessThanOrEqualTo(heartBtn.snp.leading).offset(-10)
      $0.height.equalTo(50)
  }
- 해결 / 2. 아래 레이아웃 에러가 왜 나는지 모르겠다..
+ 
+ 2. 아래 레이아웃 에러가 왜 나는지 모르겠다..
+   - 해결: PhotoDetailView의 setLayout 함수가 실행될 때에는 vc에 loadView의 코드가 실행되기 이전이기에 PhotoDetailView 자체의 크기가 없는 것이다.
+          따라서 'PhotoProject.PhotoDetailView:0x101d050e0.height == 0'과 같이 계산되는 것.
+          이에 대한 해결책으로 loadView이후 진행되는 viewWillAppear 함수 속 setDataUI() 내용에 레이아웃을 잡는 내용을 추가하여 해결하였습니다.
  (
      "<SnapKit.LayoutConstraint:0x600002606a00@PhotoDetailView.swift#78 UIView:0x101d05320.top == UILayoutGuide:0x600003b089a0.top>",
      "<SnapKit.LayoutConstraint:0x6000026055c0@PhotoDetailView.swift#85 UIScrollView:0x103009e00.top == UIView:0x101d05320.bottom + 2.0>",
@@ -259,12 +280,16 @@ final class PhotoDetailView: BaseView {
      "<NSLayoutConstraint:0x600002138370 'UIViewSafeAreaLayoutGuide-top' V:|-(0)-[UILayoutGuide:0x600003b089a0'UIViewSafeAreaLayoutGuide']   (active, names: '|':PhotoProject.PhotoDetailView:0x101d050e0 )>"
  )
  
- 해결 / 3. view안에 label들로만 채운다면 view snp 설정할 때 height을 주지않아도 알아서 계산으로 들어가는데, 그 view의 bottom을 기준으로 다른 프로퍼티의 top을 잡으니 레이아웃이 원하는대로 되지않는다. 뷰가 그려지는 사이클이 꼬여서 그런거 같은데, 이걸 해결할 수 있는 방법이 있을까
+ 3. view안에 label들로만 채운다면 view snp 설정할 때 height을 주지않아도 알아서 계산으로 들어가는데, 그 view의 bottom을 기준으로 다른 프로퍼티의 top을 잡으니 레이아웃이 원하는대로 되지않는다. 뷰가 그려지는 사이클이 꼬여서 그런거 같은데, 이걸 해결할 수 있는 방법이 있을까
+    - 미해결:
  
- 해결 / 4. segmentControl이 왜 안 눌리는가..
+ 4. segmentControl이 왜 안 눌리는가..
+    - 해결: chartSegmentedControl의 addSubView를 infoContainerView에 넣어두고 infoContainerView의 height을 잡아주지 않으니 클릭되지 않았다.
+        
  
- 미해결 / 5. 레이아웃 문제로 스크롤이 안돼서 차트를 확인 못하는 구만..
-   - 이게 아님. 해결했음에도 스크롤이 안 되는 중..
+ 5. 레이아웃 문제로 스크롤이 안돼서 차트를 확인 못하는 구만..
+    - 이게 아님. 해결했음에도 스크롤이 안 되는 중..
+    - 미해결:
  */
 
 
