@@ -103,7 +103,7 @@ private extension PhotoTopicViewController {
                     for i in 0..<self.horizontalSections.count {
                         self.mainView.topicCollectionView.scrollToItem(at: IndexPath(item: 0, section: i),
                                                                        at: .left,
-                                                                       animated: true)
+                                                                       animated: false)
                     }
                 }
                 print("지금 group 작업 끝!")
