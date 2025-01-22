@@ -20,9 +20,11 @@ final class UIAlertManager {
     
     static func showActionSheet(title: String, message: String, actionArr: [String]) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        
         for i in actionArr {
             alert.addAction(UIAlertAction(title: i, style: .default))
         }
+        
         return alert
     }
     

@@ -25,7 +25,6 @@
 		9E57016B2D3BC56700D62846 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5701652D3BC56700D62846 /* UILabel+Extension.swift */; };
 		9E57016C2D3BC56700D62846 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5701662D3BC56700D62846 /* UITextField+Extension.swift */; };
 		9E57016D2D3BC56700D62846 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5701642D3BC56700D62846 /* UIImageView+Extension.swift */; };
-		9E57016E2D3BC56700D62846 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5701632D3BC56700D62846 /* UIButton+Extension.swift */; };
 		9E5701702D3BC67000D62846 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E57016F2D3BC67000D62846 /* UIStackView+Extension.swift */; };
 		9ED690FA2D3BC821007E76E8 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED690F92D3BC821007E76E8 /* TabBarViewController.swift */; };
 		9ED690FC2D3BC870007E76E8 /* PhotoSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED690FB2D3BC870007E76E8 /* PhotoSearchViewController.swift */; };
@@ -63,7 +62,6 @@
 		9E57015E2D3BBF9200D62846 /* DateFormatterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterManager.swift; sourceTree = "<group>"; };
 		9E57015F2D3BBF9200D62846 /* UIAlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertManager.swift; sourceTree = "<group>"; };
 		9E5701622D3BC56700D62846 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
-		9E5701632D3BC56700D62846 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		9E5701642D3BC56700D62846 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		9E5701652D3BC56700D62846 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		9E5701662D3BC56700D62846 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
@@ -242,7 +240,6 @@
 			isa = PBXGroup;
 			children = (
 				9E5701622D3BC56700D62846 /* Bundle+Extension.swift */,
-				9E5701632D3BC56700D62846 /* UIButton+Extension.swift */,
 				9E5701642D3BC56700D62846 /* UIImageView+Extension.swift */,
 				9E5701652D3BC56700D62846 /* UILabel+Extension.swift */,
 				9E5701662D3BC56700D62846 /* UITextField+Extension.swift */,
@@ -440,7 +437,6 @@
 				9E57016C2D3BC56700D62846 /* UITextField+Extension.swift in Sources */,
 				9E57016D2D3BC56700D62846 /* UIImageView+Extension.swift in Sources */,
 				9ED691252D3D37F7007E76E8 /* PhotoTopicView.swift in Sources */,
-				9E57016E2D3BC56700D62846 /* UIButton+Extension.swift in Sources */,
 				9E5701222D3BBAF800D62846 /* SceneDelegate.swift in Sources */,
 				9ED690FE2D3BC87B007E76E8 /* PhotoDetailViewController.swift in Sources */,
 				9ED6912A2D3D3BF8007E76E8 /* PhotoTopicCollectionHeaderView.swift in Sources */,

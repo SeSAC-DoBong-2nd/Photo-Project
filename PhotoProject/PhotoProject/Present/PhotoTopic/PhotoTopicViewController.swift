@@ -14,7 +14,6 @@ final class PhotoTopicViewController: BaseViewController {
     private let page = 1
     private let perpage = 10
     private var isRefreshEnabled = true
-    
     private var topicHeaderTitleArr: [String] = ["", "", ""]
     private lazy var horizontalSections: [[PhotoTopicResponseModel]] = [[], [], []] {
         didSet {
@@ -37,13 +36,6 @@ final class PhotoTopicViewController: BaseViewController {
         setRefreshControl()
     }
     
-    override func setHierarchy() {}
-    
-    override func setLayout() {}
-    
-    override func setStyle() {
-    }
-    
 }
 
 private extension PhotoTopicViewController {
@@ -60,8 +52,11 @@ private extension PhotoTopicViewController {
     func setDelegate() {
         mainView.topicCollectionView.delegate = self
         mainView.topicCollectionView.dataSource = self
-        mainView.topicCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.cellIdentifier)
-        mainView.topicCollectionView.register(PhotoTopicCollectionHeaderView.self, forSupplementaryViewOfKind: PhotoTopicCollectionHeaderView.elementKinds, withReuseIdentifier: PhotoTopicCollectionHeaderView.identifier)
+        mainView.topicCollectionView.register(SearchResultCollectionViewCell.self,
+                                              forCellWithReuseIdentifier: SearchResultCollectionViewCell.cellIdentifier)
+        mainView.topicCollectionView.register(PhotoTopicCollectionHeaderView.self,
+                                              forSupplementaryViewOfKind: PhotoTopicCollectionHeaderView.elementKinds,
+                                              withReuseIdentifier: PhotoTopicCollectionHeaderView.identifier)
     }
     
     func getPhotoTopicData(isRefreshControl: Bool? = false) {

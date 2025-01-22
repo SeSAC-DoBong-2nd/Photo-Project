@@ -18,7 +18,6 @@ final class PhotoSearchViewController: BaseViewController {
     private lazy var orderBy = mainView.toggleButtonState.rawValue
     private var selectedColorFilterBtn: String? = nil
     private var isEnd = false
-    
     private var searchList: [Result] = [] {
         didSet {
             mainView.searchCollectionView.reloadData()
@@ -38,8 +37,7 @@ final class PhotoSearchViewController: BaseViewController {
         setSearchController()
         setDelegate()
         setAddTarget()
-        
-        mainView.toggleButton.isHidden = true
+        mainView.toggleButton.isHidden = true //왜 적용 안 되지
     }
     
     override func setStyle() {
@@ -65,7 +63,9 @@ private extension PhotoSearchViewController {
                                                     action: #selector(tappedBtn),
                                                     for: .touchUpInside)
         }
-        mainView.toggleButton.addTarget(self, action: #selector(toggleBtnTapped), for: .touchUpInside)
+        mainView.toggleButton.addTarget(self,
+                                        action: #selector(toggleBtnTapped),
+                                        for: .touchUpInside)
     }
     
     func setSearchController() {
@@ -87,8 +87,11 @@ private extension PhotoSearchViewController {
     }
     
     func getPhotoSearchData(query: String, page: Int, perPage: Int, orderBy: String, color: String? = nil) {
-//        query: query, page: page, perPage: perPage, orderBy: orderBy, color: color
-        NetworkManager.shared.getPhotoSearch(apiHandler: .getPhotoSearch(query: query, page: page, perPage: perPage, orderBy: orderBy, color: color)) { result,statusCode  in
+        NetworkManager.shared.getPhotoSearch(apiHandler: .getPhotoSearch(query: query,
+                                                                         page: page,
+                                                                         perPage: perPage,
+                                                                         orderBy: orderBy,
+                                                                         color: color)) { result,statusCode  in
             switch statusCode {
             case (200..<299):
                 self.searchList.append(contentsOf: result.results)
@@ -205,8 +208,6 @@ extension PhotoSearchViewController: UIScrollViewDelegate {
 extension PhotoSearchViewController: UICollectionViewDataSourcePrefetching {
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        print(#function, indexPaths)
-        
         for i in indexPaths {
             if (searchList.count - 6) == i.item && isEnd == false  {
                 page += 1
@@ -227,8 +228,6 @@ extension PhotoSearchViewController: UICollectionViewDataSourcePrefetching {
 extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(#function)
-        print("self.searchList.count \(self.searchList.count)")
         return searchList.count
     }
     
@@ -251,7 +250,6 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
             statusCode in
             switch statusCode {
             case (200..<299):
-                print("result : \n", result)
                 let profileImageURL = item.user.profile_image.medium
                 let profileName = item.user.name
                 let createAt = item.created_at

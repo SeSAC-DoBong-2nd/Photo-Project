@@ -23,6 +23,7 @@ final class PhotoDetailView: BaseView {
     private let profileImageView = UIImageView()
     private let nameLabel = UILabel()
     private let creatAtLabel = UILabel()
+    
     private let heartBtn = UIButton()
     
     private let mainPosterImage = UIImageView()
@@ -44,32 +45,23 @@ final class PhotoDetailView: BaseView {
         addSubviews(underLineView, scrollView)
         scrollView.addSubview(contentView)
         
-//        contentView.addSubviews(profileContainerView,
-//                                heartBtn,
-//                                mainPosterImage,
-//                                infoContainerView, chartLabel, chartSegmentedControl, combinedChartView)
         contentView.addSubviews(profileContainerView,
                                 heartBtn,
                                 mainPosterImage,
                                 infoLabel,
-                                                              sizeLabel,
-                                                              sizeNumLabel,
-                                                              viewLabel,
-                                                              viewNumLabel,
-                                                              downloadLabel,
-                                                              downloadNumLabel, chartLabel, chartSegmentedControl, combinedChartView)
+                                sizeLabel,
+                                sizeNumLabel,
+                                viewLabel,
+                                viewNumLabel,
+                                downloadLabel,
+                                downloadNumLabel,
+                                chartLabel,
+                                chartSegmentedControl,
+                                combinedChartView)
         
         profileContainerView.addSubviews(profileImageView,
                                          nameLabel,
                                          creatAtLabel)
-        
-//        infoContainerView.addSubviews(infoLabel,
-//                                      sizeLabel,
-//                                      sizeNumLabel,
-//                                      viewLabel,
-//                                      viewNumLabel,
-//                                      downloadLabel,
-//                                      downloadNumLabel)
     }
     
     override func setStyle() {
@@ -123,7 +115,8 @@ final class PhotoDetailView: BaseView {
     }
     
     func setDataUI(photoDetailModel: PhotoDetailModel) {
-        //view.setLayout이 처음 불리는 시점에는 self.view의 width와 height의 크기가 결정되지 않았었음, 왜냐?! vc의 viewDidLoad가 실행되기 이전에 이미 view.setLayout함수는 끝이 나니까
+        //view.setLayout이 처음 불리는 시점에는 self.view의 width와 height의 크기가 결정되지 않았었음,
+        //  왜냐?! vc의 viewDidLoad가 실행되기 이전에 이미 view.setLayout함수는 끝이 나니까
         DispatchQueue.main.async {
             print("ScrollView Frame: \(self.scrollView.frame)")
             print("ScrollView Content Size: \(self.scrollView.contentSize)")

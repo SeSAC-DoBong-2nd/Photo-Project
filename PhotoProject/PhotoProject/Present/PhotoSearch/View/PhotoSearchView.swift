@@ -16,7 +16,6 @@ final class PhotoSearchView: BaseView {
     var toggleButtonState = ToggleButtonStateType.relevant
     
     private let underLineView = UIView()
-    
     private let scrollView = UIScrollView()
     private let contentsView = UIView()
     private let stackView = UIStackView()
@@ -37,7 +36,11 @@ final class PhotoSearchView: BaseView {
     lazy var searchCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
 
     override func setHierarchy() {
-        addSubviews(underLineView, scrollView, toggleButton, emptyView, searchCollectionView)
+        addSubviews(underLineView,
+                    scrollView,
+                    toggleButton,
+                    emptyView,
+                    searchCollectionView)
         
         scrollView.addSubview(contentsView)
         contentsView.addSubview(stackView)
@@ -104,7 +107,6 @@ final class PhotoSearchView: BaseView {
         scrollView.do {
             $0.layer.backgroundColor = UIColor.white.cgColor
             $0.showsHorizontalScrollIndicator = false
-//            $0.bouncesHorizontally = false
         }
         
         contentsView.do {

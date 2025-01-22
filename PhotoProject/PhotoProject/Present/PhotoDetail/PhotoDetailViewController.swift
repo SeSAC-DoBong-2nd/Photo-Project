@@ -22,8 +22,7 @@ final class PhotoDetailViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard let photoDetailModel
-        else {return}
+        guard let photoDetailModel else {return}
         DispatchQueue.main.async {
             self.mainView.setDataUI(photoDetailModel: photoDetailModel)
             self.setChart(title: "한달 조회 수", dataPoints: photoDetailModel.monthView.monthViewDates, lineValues: photoDetailModel.monthView.monthViewValues)
@@ -36,8 +35,6 @@ final class PhotoDetailViewController: BaseViewController {
         setNavUI()
         setAddtarget()
     }
-    
-    
 
 }
 
@@ -54,7 +51,9 @@ private extension PhotoDetailViewController {
     }
     
     func setAddtarget() {
-        mainView.chartSegmentedControl.addTarget(self, action: #selector(segmentedControlTapped), for: .valueChanged)
+        mainView.chartSegmentedControl.addTarget(self,
+                                                 action: #selector(segmentedControlTapped),
+                                                 for: .valueChanged)
     }
     
     func setChart(title: String, dataPoints: [String], lineValues: [Int]) {
