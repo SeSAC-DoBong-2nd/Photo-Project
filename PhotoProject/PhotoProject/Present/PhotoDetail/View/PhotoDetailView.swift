@@ -48,16 +48,18 @@ final class PhotoDetailView: BaseView {
         contentView.addSubviews(profileContainerView,
                                 heartBtn,
                                 mainPosterImage,
-                                infoLabel,
-                                sizeLabel,
-                                sizeNumLabel,
-                                viewLabel,
-                                viewNumLabel,
-                                downloadLabel,
-                                downloadNumLabel,
+                                infoContainerView,
                                 chartLabel,
                                 chartSegmentedControl,
                                 combinedChartView)
+        
+        infoContainerView.addSubviews(infoLabel,
+                                      sizeLabel,
+                                      sizeNumLabel,
+                                      viewLabel,
+                                      viewNumLabel,
+                                      downloadLabel,
+                                      downloadNumLabel)
         
         profileContainerView.addSubviews(profileImageView,
                                          nameLabel,
@@ -67,11 +69,12 @@ final class PhotoDetailView: BaseView {
     override func setLayout() {
         //view.setLayout이 처음 불리는 시점에는 self.view의 width와 height의 크기가 결정되지 않았었음,
         //  왜냐?! vc의 viewDidLoad가 실행되기 이전에 이미 view.setLayout함수는 끝이 나니까
+        //  loadView 이전 자식뷰 Layout 잡혀 발생하는 상황이라 baseVC에 setChildrenViewLayout함수를 만들어 해결.
         DispatchQueue.main.async {
             print("ScrollView Frame: \(self.scrollView.frame)")
             print("ScrollView Content Size: \(self.scrollView.contentSize)")
         }
-        scrollView.alwaysBounceVertical = true
+        
         underLineView.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview()
@@ -79,7 +82,7 @@ final class PhotoDetailView: BaseView {
         }
         
         scrollView.snp.makeConstraints {
-            $0.horizontalEdges.equalTo(safeAreaLayoutGuide)
+            $0.width.equalTo(safeAreaLayoutGuide)
             $0.top.equalTo(underLineView.snp.bottom).offset(2)
             $0.bottom.equalToSuperview()
         }
@@ -90,7 +93,7 @@ final class PhotoDetailView: BaseView {
         }
         
         profileContainerView.snp.makeConstraints {
-            $0.top.equalTo(underLineView.snp.bottom).offset(2)
+            $0.top.equalToSuperview().offset(2)
             $0.leading.equalToSuperview().offset(15)
             $0.width.greaterThanOrEqualTo(40)
             $0.height.equalTo(50)
@@ -126,19 +129,14 @@ final class PhotoDetailView: BaseView {
             $0.horizontalEdges.equalToSuperview()
         }
         
-//        infoContainerView.snp.makeConstraints {
-//            $0.top.equalTo(mainPosterImage.snp.bottom).offset(15)
-//            $0.horizontalEdges.equalToSuperview().inset(15)
-//        }
-        
-        infoLabel.snp.makeConstraints {
+        infoContainerView.snp.makeConstraints {
             $0.top.equalTo(mainPosterImage.snp.bottom).offset(15)
-            $0.leading.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().inset(15)
         }
         
-//        infoLabel.snp.makeConstraints {
-//            $0.top.leading.equalToSuperview()
-//        }
+        infoLabel.snp.makeConstraints {
+            $0.top.leading.equalToSuperview()
+        }
         
         sizeLabel.snp.makeConstraints {
             $0.bottom.equalTo(infoLabel.snp.bottom)
@@ -171,7 +169,7 @@ final class PhotoDetailView: BaseView {
         }
         
         chartLabel.snp.makeConstraints {
-            $0.top.equalTo(downloadLabel.snp.bottom).offset(50)
+            $0.top.equalTo(downloadNumLabel.snp.bottom).offset(50)
             $0.leading.equalTo(infoLabel.snp.leading)
         }
         
@@ -185,12 +183,14 @@ final class PhotoDetailView: BaseView {
             $0.leading.equalTo(sizeLabel.snp.leading)
             $0.trailing.equalToSuperview().offset(-15)
             $0.height.equalTo(300)
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-15)
         }
     }
     
     override func setStyle() {
         print(#function)
+        infoContainerView.backgroundColor = .blue
+        
         underLineView.backgroundColor = .lightGray
         
         profileImageView.do {
@@ -255,7 +255,7 @@ final class PhotoDetailView: BaseView {
 
 /*
  1.아래와 같은 코드를 사용하면 왜 레이아웃 에러가 날까
-    - 미해결:
+- 미해결:
  profileContainerView.snp.makeConstraints {
      $0.top.equalTo(underLineView.snp.bottom).offset(2)
      $0.leading.equalToSuperview().offset(15)
@@ -267,6 +267,7 @@ final class PhotoDetailView: BaseView {
    - 해결: PhotoDetailView의 setLayout 함수가 실행될 때에는 vc에 loadView의 코드가 실행되기 이전이기에 PhotoDetailView 자체의 크기가 없는 것이다.
           따라서 'PhotoProject.PhotoDetailView:0x101d050e0.height == 0'과 같이 계산되는 것.
           이에 대한 해결책으로 loadView이후 진행되는 viewWillAppear 함수 속 setDataUI() 내용에 레이아웃을 잡는 내용을 추가하여 해결하였습니다.
+          -> 추가개선: BaseVC에 setChildrenViewLayout() 함수를 만들어이를 상속받는 vc loadView 안에서 호출하여 해결하였습니다.
  (
      "<SnapKit.LayoutConstraint:0x600002606a00@PhotoDetailView.swift#78 UIView:0x101d05320.top == UILayoutGuide:0x600003b089a0.top>",
      "<SnapKit.LayoutConstraint:0x6000026055c0@PhotoDetailView.swift#85 UIScrollView:0x103009e00.top == UIView:0x101d05320.bottom + 2.0>",
@@ -276,7 +277,12 @@ final class PhotoDetailView: BaseView {
  )
  
  3. view안에 label들로만 채운다면 view snp 설정할 때 height을 주지않아도 알아서 계산으로 들어가는데, 그 view의 bottom을 기준으로 다른 프로퍼티의 top을 잡으니 레이아웃이 원하는대로 되지않는다. 뷰가 그려지는 사이클이 꼬여서 그런거 같은데, 이걸 해결할 수 있는 방법이 있을까
-    - 미해결:
+- 미해결:
+        스크롤을 고쳤음에도 이거는 안 되는구만..
+ chartLabel.snp.makeConstraints {
+     $0.top.equalTo(infoContainerView.snp.bottom).offset(50)
+     $0.leading.equalTo(infoLabel.snp.leading)
+ }
  
  4. segmentControl이 왜 안 눌리는가..
     - 해결: chartSegmentedControl의 addSubView를 infoContainerView에 넣어두고 infoContainerView의 height을 잡아주지 않으니 클릭되지 않았다.
@@ -284,9 +290,15 @@ final class PhotoDetailView: BaseView {
  
  5. 레이아웃 문제로 스크롤이 안돼서 차트를 확인 못하는 구만..
     - 이게 아님. 해결했음에도 스크롤이 안 되는 중..
-    - 미해결:
+- 해결: profileContainerView를 contentView에 addSubView했으면서, top 레이아웃을 underLineView에 잡고있어서 스크롤이 적용되지 않았다..
+ 
+ 6. 궁금증: 아래 코드에서 top을 안 잡아줘야 바텀과 height, leading과 trailing으로 width가 설정되면서 화면이 그려져야 하는게 아닌가? 왜 안그려지지
+ combinedChartView.snp.makeConstraints {
+     $0.top.equalTo(chartSegmentedControl.snp.bottom).offset(10)
+     $0.leading.equalTo(sizeLabel.snp.leading)
+     $0.trailing.equalToSuperview().offset(-15)
+     $0.height.equalTo(300)
+     $0.bottom.equalToSuperview().offset(-15)
+ }
+        
  */
-
-
-//현재 차트는 구현하였으나, 스크롤이 되지 않고있습니다..
-//차트를 확인하시려면 정말 죄송하지만.. mainPosterImage의 height을 10으로 설정해주시면 차트가 보입니다요..!
