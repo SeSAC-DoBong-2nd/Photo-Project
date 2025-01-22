@@ -18,6 +18,7 @@ final class PhotoSearchViewController: BaseViewController {
     private lazy var orderBy = mainView.toggleButtonState.rawValue
     private var selectedColorFilterBtn: String? = nil
     private var isEnd = false
+    private var scrollViewDidScrollCnt = 0
     private var searchList: [Result] = [] {
         didSet {
             mainView.searchCollectionView.reloadData()
@@ -37,7 +38,6 @@ final class PhotoSearchViewController: BaseViewController {
         setSearchController()
         setDelegate()
         setAddTarget()
-        mainView.toggleButton.isHidden = true //왜 적용 안 되지
     }
     
     override func setStyle() {
@@ -189,9 +189,13 @@ extension PhotoSearchViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         print(#function)
-        DispatchQueue.main.async {
-            self.mainView.toggleButton.isHidden = false
+        if scrollViewDidScrollCnt >= 2 {
+            DispatchQueue.main.async {
+                self.mainView.toggleButton.isHidden = false
+            }
         }
+            
+        scrollViewDidScrollCnt += 1
     }
     
     //스크롤 손가락을 떼었을 때
@@ -316,4 +320,7 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
 
 /*
  1. viewDidLoad까지 toggleisHidden = true를 했는데 첫화면에 무조건 toggleBtn이 보이는 중이다. 왜 그러지
+- 해결
+    - UIScrollViewDelegate scrollViewDidScroll이 viewDidLoad 시 자동으로 불리게 되는 것을 생각하지 못했다.
+    - 그 안에 isHidden = False 코드가 있어 그랬던 것.
  */
