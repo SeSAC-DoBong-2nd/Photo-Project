@@ -30,6 +30,7 @@ final class PhotoSearchViewController: BaseViewController {
     
     override func loadView() {
         view = mainView
+        setChildrenViewLayout(view: mainView)
     }
 
     override func viewDidLoad() {

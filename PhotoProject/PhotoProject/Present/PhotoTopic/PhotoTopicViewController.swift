@@ -24,7 +24,9 @@ final class PhotoTopicViewController: BaseViewController {
     private let mainView = PhotoTopicView()
     
     override func loadView() {
+        print(#function)
         view = mainView
+        setChildrenViewLayout(view: mainView)
     }
     
     override func viewDidLoad() {

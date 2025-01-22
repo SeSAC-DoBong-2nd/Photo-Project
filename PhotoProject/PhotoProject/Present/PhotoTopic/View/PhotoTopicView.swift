@@ -20,6 +20,7 @@ final class PhotoTopicView: BaseView {
     }
     
     override func setLayout() {
+        print("🔥")
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide)
             $0.leading.equalToSuperview().offset(15)

@@ -28,4 +28,8 @@ class BaseViewController: UIViewController {
         view.backgroundColor = .white
     }
     
+    func setChildrenViewLayout<T: BaseView>(view: T) {
+        view.setLayout()
+    }
+    
 }
