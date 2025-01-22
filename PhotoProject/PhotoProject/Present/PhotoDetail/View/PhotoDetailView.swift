@@ -7,10 +7,10 @@
 
 import UIKit
 
-import SnapKit
-import Then
 import Charts
 import DGCharts
+import SnapKit
+import Then
 
 final class PhotoDetailView: BaseView {
     
