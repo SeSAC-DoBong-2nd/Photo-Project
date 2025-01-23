@@ -9,6 +9,9 @@ import UIKit
 import SnapKit
 
 final class ProfileViewController: BaseViewController {
+    
+    let nickname: String?
+    let birthday: String?
 
     let nicknameButton = UIButton()
     let birthdayButton = UIButton()
@@ -18,8 +21,19 @@ final class ProfileViewController: BaseViewController {
     let birthdayLabel = UILabel()
     let levelLabel = UILabel()
     
+    init(nickname: String, birthday: String) {
+        self.nickname = nickname
+        self.birthday = birthday
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
-        nicknameLabel.text = UserDefaultsManager.shared.nickname
+        
     }
     
     override func viewDidLoad() {
@@ -83,6 +97,9 @@ final class ProfileViewController: BaseViewController {
     }
     
     override func setStyle() {
+        nicknameLabel.text = nickname
+        birthdayLabel.text = birthday
+        
         view.backgroundColor = .white
         
         navigationItem.title = "프로필 화면"
@@ -103,7 +120,6 @@ final class ProfileViewController: BaseViewController {
         nicknameLabel.textColor = .lightGray
         nicknameLabel.textAlignment = .right
         
-        birthdayLabel.text = "NO DATE"
         birthdayLabel.textColor = .lightGray
         birthdayLabel.textAlignment = .right
         
@@ -142,7 +158,11 @@ private extension ProfileViewController {
     @objc
     private func birthdayButtonTapped() {
         print(#function)
-        viewTransition(viewController: BirthdayViewController(), transitionStyle: .push)
+        let vc = BirthdayViewController()
+        vc.onChange = { birthday in
+            self.birthdayLabel.text = birthday
+        }
+        viewTransition(viewController: vc, transitionStyle: .push)
     }
     
     @objc

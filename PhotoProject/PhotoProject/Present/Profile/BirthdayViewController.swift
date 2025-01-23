@@ -7,30 +7,51 @@
 
 
 import UIKit
+
 import SnapKit
 
-class BirthdayViewController: UIViewController {
+final class BirthdayViewController: BaseViewController {
 
-    let datePicker = UIDatePicker()
+    private let datePicker = UIDatePicker()
+    var onChange: ((String) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureView()
+        
     }
     
-    @objc func okButtonTapped() {
-        print(#function)
-    }
-    
-    func configureView() {
-        navigationItem.title = "생일"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "확인", style: .plain, target: self, action: #selector(okButtonTapped))
-        view.backgroundColor = .white
+    override func setHierarchy() {
         view.addSubview(datePicker)
-        datePicker.snp.makeConstraints { make in
-            make.centerX.top.equalTo(view.safeAreaLayoutGuide)
+    }
+    
+    override func setLayout() {
+        datePicker.snp.makeConstraints {
+            $0.centerX.top.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+    
+    override func setStyle() {
+        navigationItem.title = "생일"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "확인",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(okButtonTapped))
+        view.backgroundColor = .white
+        
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
     }
+    
+    @objc
+    private func okButtonTapped() {
+        print(#function)
+        
+        let birthday = DateFormatterManager.shard.setDateStringFromDate(date: datePicker.date, format: "yyyy-MM-dd")
+        UserDefaultsManager.shared.birthday = birthday
+        
+        onChange?(birthday)
+        
+        navigationController?.popViewController(animated: true)
+    }
+    
 }

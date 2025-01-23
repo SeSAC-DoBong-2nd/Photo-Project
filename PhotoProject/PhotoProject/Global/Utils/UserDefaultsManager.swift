@@ -31,4 +31,13 @@ final class UserDefaultsManager {
         }
     }
     
+    var birthday: String {
+        get {
+            return UserDefaults.standard.string(forKey: "birthday") ?? "Unknown"
+        }
+        set {
+            return UserDefaults.standard.set(newValue, forKey: "birthday")
+        }
+    }
+    
 }

@@ -364,8 +364,8 @@
 		9EEB88C82D4236EC00E0C6C4 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				9EEB88C32D4236EC00E0C6C4 /* BirthdayViewController.swift */,
 				9EEB88C42D4236EC00E0C6C4 /* LevelViewController.swift */,
+				9EEB88C32D4236EC00E0C6C4 /* BirthdayViewController.swift */,
 				9EEB88C52D4236EC00E0C6C4 /* NicknameViewController.swift */,
 				9EEB88C72D4236EC00E0C6C4 /* ProfileViewController.swift */,
 			);
