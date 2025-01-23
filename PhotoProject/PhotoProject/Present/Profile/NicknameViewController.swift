@@ -43,7 +43,8 @@ final class NicknameViewController: BaseViewController {
         view.backgroundColor = .white
         
         textField.placeholder = "닉네임을 입력해주세요"
-        textField.text = UserDefaultsManager.shared.nickname
+        let nickname = UserDefaultsManager.shared.nickname
+        textField.text = (nickname != "NO NAME") ? nickname : ""
     }
     
     @objc

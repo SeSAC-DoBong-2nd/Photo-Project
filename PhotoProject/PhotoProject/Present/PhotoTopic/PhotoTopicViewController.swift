@@ -180,7 +180,8 @@ private extension PhotoTopicViewController {
     func navRightBtnTapped() {
         print(#function)
         let vc = ProfileViewController(nickname: UserDefaultsManager.shared.nickname,
-                                       birthday: UserDefaultsManager.shared.birthday)
+                                       birthday: UserDefaultsManager.shared.birthday,
+                                       level: UserDefaultsManager.shared.level)
         
         viewTransition(viewController: vc, transitionStyle: .push)
     }

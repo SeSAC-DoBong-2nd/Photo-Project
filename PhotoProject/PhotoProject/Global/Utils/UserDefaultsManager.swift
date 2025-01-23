@@ -24,7 +24,7 @@ final class UserDefaultsManager {
     
     var nickname: String {
         get {
-            return UserDefaults.standard.string(forKey: "nickname") ?? "Unknown"
+            return UserDefaults.standard.string(forKey: "nickname") ?? "NO NAME"
         }
         set {
             return UserDefaults.standard.set(newValue, forKey: "nickname")
@@ -33,11 +33,21 @@ final class UserDefaultsManager {
     
     var birthday: String {
         get {
-            return UserDefaults.standard.string(forKey: "birthday") ?? "Unknown"
+            return UserDefaults.standard.string(forKey: "birthday") ?? "NO DATE"
         }
         set {
             return UserDefaults.standard.set(newValue, forKey: "birthday")
         }
     }
     
+    var level: String {
+        get {
+            return UserDefaults.standard.string(forKey: "level") ?? "NO LEVEL"
+        }
+        set {
+            return UserDefaults.standard.set(newValue, forKey: "level")
+        }
+    }
+    
 }
+//bool, int는 기본 값이 있다.

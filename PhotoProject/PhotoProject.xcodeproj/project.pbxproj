@@ -55,6 +55,7 @@
 		9EEB88CC2D4236EC00E0C6C4 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88C62D4236EC00E0C6C4 /* OnboardingViewController.swift */; };
 		9EEB88CD2D4236EC00E0C6C4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88C72D4236EC00E0C6C4 /* ProfileViewController.swift */; };
 		9EEB88D02D4237DA00E0C6C4 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88CF2D4237DA00E0C6C4 /* UserDefaultsManager.swift */; };
+		9EEB88D32D4252ED00E0C6C4 /* LevelDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88D22D4252ED00E0C6C4 /* LevelDelegateProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +104,7 @@
 		9EEB88C62D4236EC00E0C6C4 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		9EEB88C72D4236EC00E0C6C4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		9EEB88CF2D4237DA00E0C6C4 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		9EEB88D22D4252ED00E0C6C4 /* LevelDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDelegateProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +249,7 @@
 		9E57015D2D3BBF8B00D62846 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				9EEB88D12D4252CE00E0C6C4 /* Protocol */,
 				9ED691072D3BFEA8007E76E8 /* Enums */,
 				9E57015E2D3BBF9200D62846 /* DateFormatterManager.swift */,
 				9E57015F2D3BBF9200D62846 /* UIAlertManager.swift */,
@@ -380,6 +383,14 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		9EEB88D12D4252CE00E0C6C4 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				9EEB88D22D4252ED00E0C6C4 /* LevelDelegateProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -486,6 +497,7 @@
 				9ED691252D3D37F7007E76E8 /* PhotoTopicView.swift in Sources */,
 				9E5701222D3BBAF800D62846 /* SceneDelegate.swift in Sources */,
 				9ED690FE2D3BC87B007E76E8 /* PhotoDetailViewController.swift in Sources */,
+				9EEB88D32D4252ED00E0C6C4 /* LevelDelegateProtocol.swift in Sources */,
 				9ED6912A2D3D3BF8007E76E8 /* PhotoTopicCollectionHeaderView.swift in Sources */,
 				9ED691222D3D2484007E76E8 /* PhotoDetailModel.swift in Sources */,
 				9ED690FC2D3BC870007E76E8 /* PhotoSearchViewController.swift in Sources */,

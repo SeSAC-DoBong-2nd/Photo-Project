@@ -10,20 +10,23 @@ import SnapKit
 
 final class ProfileViewController: BaseViewController {
     
-    let nickname: String?
-    let birthday: String?
+    let nickname: String
+    let birthday: String
+    let level: String
 
     let nicknameButton = UIButton()
     let birthdayButton = UIButton()
     let levelButton = UIButton()
+    let saveButton = UIButton()
     
     let nicknameLabel = UILabel()
     let birthdayLabel = UILabel()
     let levelLabel = UILabel()
     
-    init(nickname: String, birthday: String) {
+    init(nickname: String, birthday: String, level: String) {
         self.nickname = nickname
         self.birthday = birthday
+        self.level = level
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -33,13 +36,14 @@ final class ProfileViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        saveButtonStateUI()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setDelegate()
+        
+        
         setAddTarget()
     }
     
@@ -49,7 +53,8 @@ final class ProfileViewController: BaseViewController {
                          levelButton,
                          nicknameLabel,
                          birthdayLabel,
-                         levelLabel)
+                         levelLabel,
+                         saveButton)
     }
     
     override func setLayout() {
@@ -93,10 +98,17 @@ final class ProfileViewController: BaseViewController {
             $0.leading.equalTo(levelButton.snp.trailing).offset(24)
             $0.height.equalTo(50)
         }
+        
+        saveButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(30)
+            $0.horizontalEdges.equalToSuperview().inset(40)
+            $0.height.equalTo(60)
+        }
 
     }
     
     override func setStyle() {
+        levelLabel.text = level
         nicknameLabel.text = nickname
         birthdayLabel.text = birthday
         
@@ -123,25 +135,22 @@ final class ProfileViewController: BaseViewController {
         birthdayLabel.textColor = .lightGray
         birthdayLabel.textAlignment = .right
         
-        levelLabel.text = "NO LEVEL"
         levelLabel.textColor = .lightGray
         levelLabel.textAlignment = .right
+        
+        saveButton.setTitle("저장하기", for: .normal)
+        saveButton.setTitleColor(.black, for: .normal)
     }
-    
-    
     
 }
 
 private extension ProfileViewController {
     
-    private func setDelegate() {
-        
-    }
-    
-    private func setAddTarget() {
+    func setAddTarget() {
         nicknameButton.addTarget(self, action: #selector(nicknameButtonTapped), for: .touchUpInside)
         birthdayButton.addTarget(self, action: #selector(birthdayButtonTapped), for: .touchUpInside)
         levelButton.addTarget(self, action: #selector(levelButtonTapped), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(notificationOn),
@@ -149,14 +158,28 @@ private extension ProfileViewController {
                                                object: nil)
     }
     
+    func saveButtonStateUI() {
+        let name = UserDefaultsManager.shared.nickname
+        let birthday = UserDefaultsManager.shared.birthday
+        let level = UserDefaultsManager.shared.level
+        
+        let flag = [name,birthday,level].allSatisfy {
+            !["NO NAME", "NO DATE", "NO LEVEL"].contains($0)
+        }
+        
+        saveButton.backgroundColor = flag ? .blue : .lightGray
+        let titleColor: UIColor = flag ? .white : .black
+        saveButton.setTitleColor(titleColor, for: .normal)
+    }
+    
     @objc
-    private func nicknameButtonTapped() {
+    func nicknameButtonTapped() {
         print(#function)
         viewTransition(viewController: NicknameViewController(), transitionStyle: .push)
     }
     
     @objc
-    private func birthdayButtonTapped() {
+    func birthdayButtonTapped() {
         print(#function)
         let vc = BirthdayViewController()
         vc.onChange = { birthday in
@@ -166,9 +189,19 @@ private extension ProfileViewController {
     }
     
     @objc
-    private func levelButtonTapped() {
+    func levelButtonTapped() {
         print(#function)
-        viewTransition(viewController: LevelViewController(), transitionStyle: .push)
+        let vc = LevelViewController()
+        vc.delegate = self
+        viewTransition(viewController: vc, transitionStyle: .push)
+    }
+    
+    @objc
+    func saveButtonTapped() {
+        print(#function)
+        
+        let alert = UIAlertManager.showAlert(title: "저장 성공", message: "🎉축하합니다🎉")
+        present(alert, animated: true)
     }
 
     @objc
@@ -189,12 +222,20 @@ private extension ProfileViewController {
     
     @objc
     func notificationOn(notification: NSNotification) {
-        //이곳에서 값 넣어주기
         if let name = notification.userInfo!["value"] as? String {
             nicknameLabel.text = name
         } else {
             nicknameLabel.text = "데이터가 안 왔음"
         }
+    }
+    
+}
+
+extension ProfileViewController: LevelDelegateProtocol {
+    
+    func setLevelData(levelTitle: String) {
+        print(#function)
+        levelLabel.text = levelTitle
     }
     
 }

@@ -8,13 +8,14 @@
 import UIKit
 import SnapKit
 
-class LevelViewController: BaseViewController {
+final class LevelViewController: BaseViewController {
 
     let segmentedControl = UISegmentedControl(items: ["상", "중", "하"])
     
+    var delegate: LevelDelegateProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
     }
     
@@ -30,19 +31,41 @@ class LevelViewController: BaseViewController {
     }
     
     override func setStyle() {
+        view.backgroundColor = .white
+        
         navigationItem.title = "레벨"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "확인",
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(okButtonTapped))
-        view.backgroundColor = .white
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"),
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(okButtonTapped))
         
-        segmentedControl.selectedSegmentIndex = 0
+        switch UserDefaultsManager.shared.level {
+        case "상":
+            return segmentedControl.selectedSegmentIndex = 0
+        case "중":
+            return segmentedControl.selectedSegmentIndex = 1
+        case "하":
+            return segmentedControl.selectedSegmentIndex = 2
+        default:
+            return segmentedControl.selectedSegmentIndex = 0
+        }
     }
     
     @objc
     private func okButtonTapped() {
+        let index = segmentedControl.selectedSegmentIndex
+        guard let selectedSegTitle = segmentedControl.titleForSegment(at: index)
+        else { return }
         
+        UserDefaultsManager.shared.level = selectedSegTitle
+        
+        delegate?.setLevelData(levelTitle: selectedSegTitle)
+        
+        navigationController?.popViewController(animated: true)
     }
 }
