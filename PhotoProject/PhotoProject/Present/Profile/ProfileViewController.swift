@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: BaseViewController {
 
     let nicknameButton = UIButton()
     let birthdayButton = UIButton()
@@ -20,68 +20,70 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureView()
-    }
-
-    @objc func okButtonTapped() {
-        print(#function)
+        
     }
     
-    func configureView() {
-        navigationItem.title = "프로필 화면"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "탈퇴하기", style: .plain, target: self, action: #selector(okButtonTapped))
+    override func setHierarchy() {
+        view.addSubviews(nicknameButton,
+                         birthdayButton,
+                         levelButton,
+                         nicknameLabel,
+                         birthdayLabel,
+                         levelLabel)
+    }
+    
+    override func setLayout() {
+        nicknameButton.snp.makeConstraints {
+            $0.leading.top.equalTo(view.safeAreaLayoutGuide).inset(24)
+            $0.height.equalTo(50)
+            $0.width.equalTo(100)
+        }
+        
+        birthdayButton.snp.makeConstraints {
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(24)
+            $0.top.equalTo(nicknameButton.snp.bottom).offset(24)
+            $0.height.equalTo(50)
+            $0.width.equalTo(100)
+        }
+
+        levelButton.snp.makeConstraints {
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(24)
+            $0.top.equalTo(birthdayButton.snp.bottom).offset(24)
+            $0.height.equalTo(50)
+            $0.width.equalTo(100)
+        }
+        
+        nicknameLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(24)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
+            $0.leading.equalTo(nicknameButton.snp.trailing).offset(24)
+            $0.height.equalTo(50)
+        }
+        
+        birthdayLabel.snp.makeConstraints {
+            $0.top.equalTo(nicknameLabel.snp.bottom).offset(24)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
+            $0.leading.equalTo(birthdayButton.snp.trailing).offset(24)
+            $0.height.equalTo(50)
+        }
+
+        levelLabel.snp.makeConstraints {
+            $0.top.equalTo(birthdayLabel.snp.bottom).offset(24)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
+            $0.leading.equalTo(levelButton.snp.trailing).offset(24)
+            $0.height.equalTo(50)
+        }
+
+    }
+    
+    override func setStyle() {
         view.backgroundColor = .white
         
-        view.addSubview(nicknameButton)
-        view.addSubview(birthdayButton)
-        view.addSubview(levelButton)
-        
-        view.addSubview(nicknameLabel)
-        view.addSubview(birthdayLabel)
-        view.addSubview(levelLabel)
-        
-        nicknameButton.snp.makeConstraints { make in
-            make.leading.top.equalTo(view.safeAreaLayoutGuide).inset(24)
-            make.height.equalTo(50)
-            make.width.equalTo(100)
-        }
-        
-        birthdayButton.snp.makeConstraints { make in
-            make.leading.equalTo(view.safeAreaLayoutGuide).offset(24)
-            make.top.equalTo(nicknameButton.snp.bottom).offset(24)
-            make.height.equalTo(50)
-            make.width.equalTo(100)
-        }
-
-        levelButton.snp.makeConstraints { make in
-            make.leading.equalTo(view.safeAreaLayoutGuide).offset(24)
-            make.top.equalTo(birthdayButton.snp.bottom).offset(24)
-            make.height.equalTo(50)
-            make.width.equalTo(100)
-        }
-        
-        nicknameLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(24)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
-            make.leading.equalTo(nicknameButton.snp.trailing).offset(24)
-            make.height.equalTo(50)
-        }
-        
-        birthdayLabel.snp.makeConstraints { make in
-            make.top.equalTo(nicknameLabel.snp.bottom).offset(24)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
-            make.leading.equalTo(birthdayButton.snp.trailing).offset(24)
-            make.height.equalTo(50)
-        }
-
-        levelLabel.snp.makeConstraints { make in
-            make.top.equalTo(birthdayLabel.snp.bottom).offset(24)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
-            make.leading.equalTo(levelButton.snp.trailing).offset(24)
-            make.height.equalTo(50)
-        }
-
-        
+        navigationItem.title = "프로필 화면"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "탈퇴하기",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(unSignButtonTapped))
         
         nicknameButton.setTitleColor(.black, for: .normal)
         birthdayButton.setTitleColor(.black, for: .normal)
@@ -103,6 +105,21 @@ class ProfileViewController: UIViewController {
         levelLabel.textColor = .lightGray
         levelLabel.textAlignment = .right
     }
+
+    @objc
+    private func unSignButtonTapped() {
+        print(#function)
+        
+        UserDefaultsManager.shared.isNotFirstLoading = false
+        print("UserDefaultsManager.shared.isNotFirstLoading: \(UserDefaultsManager.shared.isNotFirstLoading)")
+        
+        //rootVC 탭바VC로 변경
+        guard let windowScene =  UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first
+        else { return }
+
+        window.rootViewController = UINavigationController(rootViewController: OnboardingViewController())
+        window.makeKeyAndVisible()
+    }
     
- 
 }

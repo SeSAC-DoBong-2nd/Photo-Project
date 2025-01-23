@@ -179,6 +179,7 @@ private extension PhotoTopicViewController {
     @objc
     func navRightBtnTapped() {
         print(#function)
+        viewTransition(viewController: ProfileViewController(), transitionStyle: .push)
     }
     
     @objc

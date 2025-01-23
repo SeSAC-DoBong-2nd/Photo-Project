@@ -54,6 +54,7 @@
 		9EEB88CB2D4236EC00E0C6C4 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88C52D4236EC00E0C6C4 /* NicknameViewController.swift */; };
 		9EEB88CC2D4236EC00E0C6C4 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88C62D4236EC00E0C6C4 /* OnboardingViewController.swift */; };
 		9EEB88CD2D4236EC00E0C6C4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88C72D4236EC00E0C6C4 /* ProfileViewController.swift */; };
+		9EEB88D02D4237DA00E0C6C4 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88CF2D4237DA00E0C6C4 /* UserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +102,7 @@
 		9EEB88C52D4236EC00E0C6C4 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
 		9EEB88C62D4236EC00E0C6C4 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		9EEB88C72D4236EC00E0C6C4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		9EEB88CF2D4237DA00E0C6C4 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +250,7 @@
 				9ED691072D3BFEA8007E76E8 /* Enums */,
 				9E57015E2D3BBF9200D62846 /* DateFormatterManager.swift */,
 				9E57015F2D3BBF9200D62846 /* UIAlertManager.swift */,
+				9EEB88CF2D4237DA00E0C6C4 /* UserDefaultsManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				9EEB88892D41BD0800E0C6C4 /* ViewTransitionType.swift in Sources */,
 				9ED691092D3BFEEE007E76E8 /* SearchResultStateType.swift in Sources */,
 				9ED691312D3D59E4007E76E8 /* TopicIDType.swift in Sources */,
+				9EEB88D02D4237DA00E0C6C4 /* UserDefaultsManager.swift in Sources */,
 				9E57016A2D3BC56700D62846 /* Bundle+Extension.swift in Sources */,
 				9EEB88C92D4236EC00E0C6C4 /* BirthdayViewController.swift in Sources */,
 				9EEB88CA2D4236EC00E0C6C4 /* LevelViewController.swift in Sources */,

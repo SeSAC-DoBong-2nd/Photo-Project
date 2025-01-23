@@ -6,25 +6,61 @@
 //
 
 import UIKit
-import SnapKit
 
-class OnboardingViewController: UIViewController {
+import SnapKit
+import Then
+
+final class OnboardingViewController: UIViewController {
 
     let button = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .darkGray
+        
+        setHierarchy()
+        setLayout()
+        setStyle()
+    }
+ 
+}
+
+private extension OnboardingViewController {
+    
+    func setHierarchy() {
         view.addSubview(button)
-        button.snp.makeConstraints { make in
-            make.bottom.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(24)
-            make.height.equalTo(50)
-        }
-        button.layer.cornerRadius = 25
-        button.backgroundColor = .white
-        button.setTitleColor(.darkGray, for: .normal)
-        button.setTitle("시작하기", for: .normal)
     }
     
- 
+    func setLayout() {
+        button.snp.makeConstraints {
+            $0.bottom.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(24)
+            $0.height.equalTo(50)
+        }
+    }
+    
+    func setStyle() {
+        view.backgroundColor = .darkGray
+        
+        button.do {
+            $0.layer.cornerRadius = 25
+            $0.backgroundColor = .white
+            $0.setTitleColor(.darkGray, for: .normal)
+            $0.setTitle("시작하기", for: .normal)
+            $0.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        }
+    }
+    
+    @objc
+    func buttonTapped() {
+        UserDefaultsManager.shared.isNotFirstLoading = true
+        print("UserDefaultsManager.shared.isNotFirstLoading: \(UserDefaultsManager.shared.isNotFirstLoading)")
+        
+        //rootVC 탭바VC로 변경
+        guard let windowScene =  UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first
+        else { return }
+
+        window.rootViewController = UINavigationController(rootViewController: TabBarController())
+        window.makeKeyAndVisible()
+    }
+    
 }

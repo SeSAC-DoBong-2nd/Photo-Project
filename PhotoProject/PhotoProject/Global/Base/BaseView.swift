@@ -21,7 +21,9 @@ class BaseView: UIView {
     
     func setLayout() {}
     
-    func setStyle() {}
+    func setStyle() {
+        self.backgroundColor = .white
+    }
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {

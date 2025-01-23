@@ -12,11 +12,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow.init(windowScene: scene)
         
-        window?.rootViewController = TabBarController()
+        let isNotFirstLoading = UserDefaultsManager.shared.isNotFirstLoading
+        print("isNotFirstLoading : \(isNotFirstLoading)")
+        switch isNotFirstLoading {
+        case true:
+            window?.rootViewController = TabBarController()
+        case false:
+            window?.rootViewController = OnboardingViewController()
+        }
         window?.makeKeyAndVisible()
     }
 
