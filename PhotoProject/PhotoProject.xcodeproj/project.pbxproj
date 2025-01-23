@@ -49,6 +49,11 @@
 		9ED691A72D3FE8AE007E76E8 /* UnsplahTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691A62D3FE8AE007E76E8 /* UnsplahTargetType.swift */; };
 		9EEB88872D40E64B00E0C6C4 /* NetworkResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88862D40E64B00E0C6C4 /* NetworkResultType.swift */; };
 		9EEB88892D41BD0800E0C6C4 /* ViewTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88882D41BD0800E0C6C4 /* ViewTransitionType.swift */; };
+		9EEB88C92D4236EC00E0C6C4 /* BirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88C32D4236EC00E0C6C4 /* BirthdayViewController.swift */; };
+		9EEB88CA2D4236EC00E0C6C4 /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88C42D4236EC00E0C6C4 /* LevelViewController.swift */; };
+		9EEB88CB2D4236EC00E0C6C4 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88C52D4236EC00E0C6C4 /* NicknameViewController.swift */; };
+		9EEB88CC2D4236EC00E0C6C4 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88C62D4236EC00E0C6C4 /* OnboardingViewController.swift */; };
+		9EEB88CD2D4236EC00E0C6C4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88C72D4236EC00E0C6C4 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +96,11 @@
 		9ED691A62D3FE8AE007E76E8 /* UnsplahTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplahTargetType.swift; sourceTree = "<group>"; };
 		9EEB88862D40E64B00E0C6C4 /* NetworkResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResultType.swift; sourceTree = "<group>"; };
 		9EEB88882D41BD0800E0C6C4 /* ViewTransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTransitionType.swift; sourceTree = "<group>"; };
+		9EEB88C32D4236EC00E0C6C4 /* BirthdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayViewController.swift; sourceTree = "<group>"; };
+		9EEB88C42D4236EC00E0C6C4 /* LevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
+		9EEB88C52D4236EC00E0C6C4 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
+		9EEB88C62D4236EC00E0C6C4 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		9EEB88C72D4236EC00E0C6C4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,10 +192,12 @@
 		9E5701282D3BBB3E00D62846 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				9EEB88CE2D42372F00E0C6C4 /* Onboarding */,
 				9ED690F82D3BC7E9007E76E8 /* TabBar */,
+				9EEB88C82D4236EC00E0C6C4 /* Profile */,
+				9E57012B2D3BBB6300D62846 /* PhotoTopic */,
 				9E5701292D3BBB4800D62846 /* PhotoSearch */,
 				9E57012A2D3BBB5400D62846 /* PhotoDetail */,
-				9E57012B2D3BBB6300D62846 /* PhotoTopic */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -346,6 +358,25 @@
 			path = PhotoTopic;
 			sourceTree = "<group>";
 		};
+		9EEB88C82D4236EC00E0C6C4 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				9EEB88C32D4236EC00E0C6C4 /* BirthdayViewController.swift */,
+				9EEB88C42D4236EC00E0C6C4 /* LevelViewController.swift */,
+				9EEB88C52D4236EC00E0C6C4 /* NicknameViewController.swift */,
+				9EEB88C72D4236EC00E0C6C4 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		9EEB88CE2D42372F00E0C6C4 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				9EEB88C62D4236EC00E0C6C4 /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -439,6 +470,11 @@
 				9ED691092D3BFEEE007E76E8 /* SearchResultStateType.swift in Sources */,
 				9ED691312D3D59E4007E76E8 /* TopicIDType.swift in Sources */,
 				9E57016A2D3BC56700D62846 /* Bundle+Extension.swift in Sources */,
+				9EEB88C92D4236EC00E0C6C4 /* BirthdayViewController.swift in Sources */,
+				9EEB88CA2D4236EC00E0C6C4 /* LevelViewController.swift in Sources */,
+				9EEB88CB2D4236EC00E0C6C4 /* NicknameViewController.swift in Sources */,
+				9EEB88CC2D4236EC00E0C6C4 /* OnboardingViewController.swift in Sources */,
+				9EEB88CD2D4236EC00E0C6C4 /* ProfileViewController.swift in Sources */,
 				9E57016B2D3BC56700D62846 /* UILabel+Extension.swift in Sources */,
 				9ED691A72D3FE8AE007E76E8 /* UnsplahTargetType.swift in Sources */,
 				9E57016C2D3BC56700D62846 /* UITextField+Extension.swift in Sources */,
