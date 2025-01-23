@@ -18,7 +18,6 @@ final class PhotoDetailViewController: BaseViewController {
     override func loadView() {
         print(#function)
         view = mainView
-        setChildrenViewLayout(view: mainView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -27,6 +26,7 @@ final class PhotoDetailViewController: BaseViewController {
         guard let photoDetailModel else {return}
         DispatchQueue.main.async {
             self.mainView.setDataUI(photoDetailModel: photoDetailModel)
+            self.setChildrenViewLayout(view: self.mainView)
             self.setChart(title: "한달 조회 수", dataPoints: photoDetailModel.monthView.monthViewDates, lineValues: photoDetailModel.monthView.monthViewValues)
         }
     }

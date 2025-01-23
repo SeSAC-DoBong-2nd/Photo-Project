@@ -66,6 +66,11 @@ final class PhotoDetailView: BaseView {
                                          creatAtLabel)
     }
     
+    //layoutIfNeeded 더 연구.
+//    override func layoutIfNeeded() {
+//        <#code#>
+//    }
+    
     override func setLayout() {
         //view.setLayout이 처음 불리는 시점에는 self.view의 width와 height의 크기가 결정되지 않았었음,
         //  왜냐?! vc의 viewDidLoad가 실행되기 이전에 이미 view.setLayout함수는 끝이 나니까
