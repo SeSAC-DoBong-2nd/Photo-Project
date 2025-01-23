@@ -35,9 +35,15 @@ final class NicknameViewController: BaseViewController {
                                                             target: self,
                                                             action: #selector(okButtonTapped))
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"),
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(okButtonTapped))
+        
         view.backgroundColor = .white
         
         textField.placeholder = "닉네임을 입력해주세요"
+        textField.text = UserDefaultsManager.shared.nickname
     }
     
     @objc

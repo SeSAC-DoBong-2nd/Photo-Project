@@ -36,10 +36,19 @@ final class BirthdayViewController: BaseViewController {
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(okButtonTapped))
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"),
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(okButtonTapped))
         view.backgroundColor = .white
         
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
+        
+        let birthday = DateFormatterManager.shard.setDateStringFromString(date: UserDefaultsManager.shared.birthday, format: "yyyy-MM-dd")
+        
+        datePicker.setDate(birthday, animated: true)
     }
     
     @objc
