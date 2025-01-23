@@ -25,19 +25,18 @@
 		9E57016B2D3BC56700D62846 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5701652D3BC56700D62846 /* UILabel+Extension.swift */; };
 		9E57016C2D3BC56700D62846 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5701662D3BC56700D62846 /* UITextField+Extension.swift */; };
 		9E57016D2D3BC56700D62846 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5701642D3BC56700D62846 /* UIImageView+Extension.swift */; };
-		9E57016E2D3BC56700D62846 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5701632D3BC56700D62846 /* UIButton+Extension.swift */; };
 		9E5701702D3BC67000D62846 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E57016F2D3BC67000D62846 /* UIStackView+Extension.swift */; };
 		9ED690FA2D3BC821007E76E8 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED690F92D3BC821007E76E8 /* TabBarViewController.swift */; };
 		9ED690FC2D3BC870007E76E8 /* PhotoSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED690FB2D3BC870007E76E8 /* PhotoSearchViewController.swift */; };
 		9ED690FE2D3BC87B007E76E8 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED690FD2D3BC87B007E76E8 /* PhotoDetailViewController.swift */; };
 		9ED691002D3BC884007E76E8 /* PhotoTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED690FF2D3BC884007E76E8 /* PhotoTopicViewController.swift */; };
 		9ED691032D3BCF0E007E76E8 /* PhotoSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691022D3BCF0E007E76E8 /* PhotoSearchView.swift */; };
-		9ED691062D3BCFF5007E76E8 /* PhotoSearchColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691052D3BCFF5007E76E8 /* PhotoSearchColorButton.swift */; };
-		9ED691092D3BFEEE007E76E8 /* SearchResultState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691082D3BFEEE007E76E8 /* SearchResultState.swift */; };
+		9ED691062D3BCFF5007E76E8 /* PhotoSearchColorButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691052D3BCFF5007E76E8 /* PhotoSearchColorButtonType.swift */; };
+		9ED691092D3BFEEE007E76E8 /* SearchResultStateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691082D3BFEEE007E76E8 /* SearchResultStateType.swift */; };
 		9ED6910C2D3C077B007E76E8 /* PhotoSearchResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6910B2D3C077B007E76E8 /* PhotoSearchResponseModel.swift */; };
 		9ED6910F2D3C09A8007E76E8 /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6910E2D3C09A8007E76E8 /* SearchResultCollectionViewCell.swift */; };
 		9ED691112D3CA546007E76E8 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691102D3CA53D007E76E8 /* NetworkManager.swift */; };
-		9ED691152D3CC244007E76E8 /* ToggleButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691142D3CC244007E76E8 /* ToggleButtonState.swift */; };
+		9ED691152D3CC244007E76E8 /* ToggleButtonStateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691142D3CC244007E76E8 /* ToggleButtonStateType.swift */; };
 		9ED691182D3D0824007E76E8 /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691172D3D0824007E76E8 /* PhotoDetailView.swift */; };
 		9ED6911E2D3D1FA5007E76E8 /* PhotoDetailResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6911D2D3D1FA5007E76E8 /* PhotoDetailResponseModel.swift */; };
 		9ED691222D3D2484007E76E8 /* PhotoDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691212D3D247F007E76E8 /* PhotoDetailModel.swift */; };
@@ -48,6 +47,8 @@
 		9ED691342D3DCA1A007E76E8 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 9ED691332D3DCA1A007E76E8 /* DGCharts */; };
 		9ED6913A2D3DCECC007E76E8 /* Secret.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9ED691392D3DCEC8007E76E8 /* Secret.xcconfig */; };
 		9ED691A72D3FE8AE007E76E8 /* UnsplahTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691A62D3FE8AE007E76E8 /* UnsplahTargetType.swift */; };
+		9EEB88872D40E64B00E0C6C4 /* NetworkResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88862D40E64B00E0C6C4 /* NetworkResultType.swift */; };
+		9EEB88892D41BD0800E0C6C4 /* ViewTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88882D41BD0800E0C6C4 /* ViewTransitionType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,7 +64,6 @@
 		9E57015E2D3BBF9200D62846 /* DateFormatterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterManager.swift; sourceTree = "<group>"; };
 		9E57015F2D3BBF9200D62846 /* UIAlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertManager.swift; sourceTree = "<group>"; };
 		9E5701622D3BC56700D62846 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
-		9E5701632D3BC56700D62846 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		9E5701642D3BC56700D62846 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		9E5701652D3BC56700D62846 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		9E5701662D3BC56700D62846 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
@@ -74,12 +74,12 @@
 		9ED690FD2D3BC87B007E76E8 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
 		9ED690FF2D3BC884007E76E8 /* PhotoTopicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTopicViewController.swift; sourceTree = "<group>"; };
 		9ED691022D3BCF0E007E76E8 /* PhotoSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchView.swift; sourceTree = "<group>"; };
-		9ED691052D3BCFF5007E76E8 /* PhotoSearchColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchColorButton.swift; sourceTree = "<group>"; };
-		9ED691082D3BFEEE007E76E8 /* SearchResultState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultState.swift; sourceTree = "<group>"; };
+		9ED691052D3BCFF5007E76E8 /* PhotoSearchColorButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchColorButtonType.swift; sourceTree = "<group>"; };
+		9ED691082D3BFEEE007E76E8 /* SearchResultStateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultStateType.swift; sourceTree = "<group>"; };
 		9ED6910B2D3C077B007E76E8 /* PhotoSearchResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchResponseModel.swift; sourceTree = "<group>"; };
 		9ED6910E2D3C09A8007E76E8 /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		9ED691102D3CA53D007E76E8 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		9ED691142D3CC244007E76E8 /* ToggleButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleButtonState.swift; sourceTree = "<group>"; };
+		9ED691142D3CC244007E76E8 /* ToggleButtonStateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleButtonStateType.swift; sourceTree = "<group>"; };
 		9ED691172D3D0824007E76E8 /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
 		9ED6911D2D3D1FA5007E76E8 /* PhotoDetailResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailResponseModel.swift; sourceTree = "<group>"; };
 		9ED691212D3D247F007E76E8 /* PhotoDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailModel.swift; sourceTree = "<group>"; };
@@ -89,6 +89,8 @@
 		9ED691302D3D59E4007E76E8 /* TopicIDType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicIDType.swift; sourceTree = "<group>"; };
 		9ED691392D3DCEC8007E76E8 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
 		9ED691A62D3FE8AE007E76E8 /* UnsplahTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplahTargetType.swift; sourceTree = "<group>"; };
+		9EEB88862D40E64B00E0C6C4 /* NetworkResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResultType.swift; sourceTree = "<group>"; };
+		9EEB88882D41BD0800E0C6C4 /* ViewTransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTransitionType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,7 +244,6 @@
 			isa = PBXGroup;
 			children = (
 				9E5701622D3BC56700D62846 /* Bundle+Extension.swift */,
-				9E5701632D3BC56700D62846 /* UIButton+Extension.swift */,
 				9E5701642D3BC56700D62846 /* UIImageView+Extension.swift */,
 				9E5701652D3BC56700D62846 /* UILabel+Extension.swift */,
 				9E5701662D3BC56700D62846 /* UITextField+Extension.swift */,
@@ -271,10 +272,12 @@
 		9ED691072D3BFEA8007E76E8 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				9ED691052D3BCFF5007E76E8 /* PhotoSearchColorButton.swift */,
-				9ED691082D3BFEEE007E76E8 /* SearchResultState.swift */,
-				9ED691142D3CC244007E76E8 /* ToggleButtonState.swift */,
+				9ED691052D3BCFF5007E76E8 /* PhotoSearchColorButtonType.swift */,
+				9ED691082D3BFEEE007E76E8 /* SearchResultStateType.swift */,
+				9ED691142D3CC244007E76E8 /* ToggleButtonStateType.swift */,
 				9ED691302D3D59E4007E76E8 /* TopicIDType.swift */,
+				9EEB88862D40E64B00E0C6C4 /* NetworkResultType.swift */,
+				9EEB88882D41BD0800E0C6C4 /* ViewTransitionType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -432,7 +435,8 @@
 				9E5701212D3BBAF800D62846 /* AppDelegate.swift in Sources */,
 				9E5701702D3BC67000D62846 /* UIStackView+Extension.swift in Sources */,
 				9E5701692D3BC56700D62846 /* UIView+Extension.swift in Sources */,
-				9ED691092D3BFEEE007E76E8 /* SearchResultState.swift in Sources */,
+				9EEB88892D41BD0800E0C6C4 /* ViewTransitionType.swift in Sources */,
+				9ED691092D3BFEEE007E76E8 /* SearchResultStateType.swift in Sources */,
 				9ED691312D3D59E4007E76E8 /* TopicIDType.swift in Sources */,
 				9E57016A2D3BC56700D62846 /* Bundle+Extension.swift in Sources */,
 				9E57016B2D3BC56700D62846 /* UILabel+Extension.swift in Sources */,
@@ -440,7 +444,6 @@
 				9E57016C2D3BC56700D62846 /* UITextField+Extension.swift in Sources */,
 				9E57016D2D3BC56700D62846 /* UIImageView+Extension.swift in Sources */,
 				9ED691252D3D37F7007E76E8 /* PhotoTopicView.swift in Sources */,
-				9E57016E2D3BC56700D62846 /* UIButton+Extension.swift in Sources */,
 				9E5701222D3BBAF800D62846 /* SceneDelegate.swift in Sources */,
 				9ED690FE2D3BC87B007E76E8 /* PhotoDetailViewController.swift in Sources */,
 				9ED6912A2D3D3BF8007E76E8 /* PhotoTopicCollectionHeaderView.swift in Sources */,
@@ -448,16 +451,17 @@
 				9ED690FC2D3BC870007E76E8 /* PhotoSearchViewController.swift in Sources */,
 				9ED691112D3CA546007E76E8 /* NetworkManager.swift in Sources */,
 				9E5701602D3BBF9200D62846 /* DateFormatterManager.swift in Sources */,
-				9ED691152D3CC244007E76E8 /* ToggleButtonState.swift in Sources */,
+				9ED691152D3CC244007E76E8 /* ToggleButtonStateType.swift in Sources */,
 				9E5701612D3BBF9200D62846 /* UIAlertManager.swift in Sources */,
 				9E5701592D3BBF1F00D62846 /* BaseViewController.swift in Sources */,
 				9ED6912F2D3D57D2007E76E8 /* PhotoTopicResponseModel.swift in Sources */,
 				9ED6910F2D3C09A8007E76E8 /* SearchResultCollectionViewCell.swift in Sources */,
 				9ED6911E2D3D1FA5007E76E8 /* PhotoDetailResponseModel.swift in Sources */,
 				9ED691182D3D0824007E76E8 /* PhotoDetailView.swift in Sources */,
-				9ED691062D3BCFF5007E76E8 /* PhotoSearchColorButton.swift in Sources */,
+				9ED691062D3BCFF5007E76E8 /* PhotoSearchColorButtonType.swift in Sources */,
 				9E57015A2D3BBF1F00D62846 /* BaseCollectionViewCell.swift in Sources */,
 				9ED6910C2D3C077B007E76E8 /* PhotoSearchResponseModel.swift in Sources */,
+				9EEB88872D40E64B00E0C6C4 /* NetworkResultType.swift in Sources */,
 				9ED691002D3BC884007E76E8 /* PhotoTopicViewController.swift in Sources */,
 				9ED690FA2D3BC821007E76E8 /* TabBarViewController.swift in Sources */,
 				9E57015B2D3BBF1F00D62846 /* BaseView.swift in Sources */,

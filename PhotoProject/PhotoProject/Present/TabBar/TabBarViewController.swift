@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabBarController: UITabBarController {
+final class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad ()
@@ -16,7 +16,7 @@ class TabBarController: UITabBarController {
         setTabBarAppearence ()
     }
     
-    func setTabBarControllerStyle() {
+    private func setTabBarControllerStyle() {
         let topicVC = UINavigationController(rootViewController: PhotoTopicViewController())
         topicVC.tabBarItem = UITabBarItem(
             title: nil,
@@ -53,7 +53,7 @@ class TabBarController: UITabBarController {
         self.selectedIndex = 0
     }
     
-    func setTabBarAppearence () {
+    private func setTabBarAppearence () {
         let appearence = UITabBarAppearance ()
         appearence.configureWithTransparentBackground()
         appearence.backgroundColor = .white

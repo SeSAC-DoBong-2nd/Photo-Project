@@ -12,11 +12,10 @@ import Then
 
 final class PhotoSearchView: BaseView {
     
-    var searchResultState = SearchResultState.yet
-    var toggleButtonState = ToggleButtonState.relevant
+    var searchResultState = SearchResultStateType.yet
+    var toggleButtonState = ToggleButtonStateType.relevant
     
     private let underLineView = UIView()
-    
     private let scrollView = UIScrollView()
     private let contentsView = UIView()
     private let stackView = UIStackView()
@@ -37,7 +36,11 @@ final class PhotoSearchView: BaseView {
     lazy var searchCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
 
     override func setHierarchy() {
-        addSubviews(underLineView, scrollView, toggleButton, emptyView, searchCollectionView)
+        addSubviews(underLineView,
+                    scrollView,
+                    toggleButton,
+                    emptyView,
+                    searchCollectionView)
         
         scrollView.addSubview(contentsView)
         contentsView.addSubview(stackView)
@@ -104,7 +107,6 @@ final class PhotoSearchView: BaseView {
         scrollView.do {
             $0.layer.backgroundColor = UIColor.white.cgColor
             $0.showsHorizontalScrollIndicator = false
-//            $0.bouncesHorizontally = false
         }
         
         contentsView.do {
@@ -158,7 +160,7 @@ final class PhotoSearchView: BaseView {
         toggleButton.isEnabled = true
     }
     
-    func searchResultState(state: SearchResultState) {
+    func searchResultState(state: SearchResultStateType) {
         emptyView.isHidden = state.isEmptyViewHidden
         searchCollectionView.isHidden = !state.isEmptyViewHidden
         emptyLabel.text = searchResultState.title
@@ -173,7 +175,7 @@ private extension PhotoSearchView {
         for i in 0..<colorFilterBtnArr.count {
             var buttonConfig = UIButton.Configuration.gray()
             
-            let colorFilterBtnTitleArr = PhotoSearchColorButton.allCases
+            let colorFilterBtnTitleArr = PhotoSearchColorButtonType.allCases
             let buttonTitle = colorFilterBtnTitleArr[i].rawValue
 
             var attributedTitle = AttributedString(buttonTitle)

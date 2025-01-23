@@ -10,13 +10,13 @@ import UIKit
 import SnapKit
 import Then
 
-class PhotoTopicCollectionHeaderView: UICollectionReusableView {
+final class PhotoTopicCollectionHeaderView: UICollectionReusableView {
     
     static let elementKinds: String = "PhotoTopicCollectionHeaderView"
     
     static let identifier = "PhotoTopicCollectionHeaderView"
     
-    let headerLabel = UILabel()
+    private let headerLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,17 +26,17 @@ class PhotoTopicCollectionHeaderView: UICollectionReusableView {
         setStyle()
     }
     
-    func setHierarchy() {
+    private func setHierarchy() {
         addSubview(headerLabel)
     }
     
-    func setLayout() {
+    private func setLayout() {
         headerLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(5)
         }
     }
     
-    func setStyle() {
+    private func setStyle() {
         headerLabel.setLabelUI("testHeader", font: .systemFont(ofSize: 18, weight: .black))
     }
     

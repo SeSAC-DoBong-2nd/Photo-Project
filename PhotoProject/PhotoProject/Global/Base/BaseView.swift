@@ -12,8 +12,8 @@ class BaseView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+//        setLayout() //주석 처리로 부모뷰 layout 잡히기 이전 실행되는 것 방지
         setHierarchy()
-        setLayout()
         setStyle()
     }
     

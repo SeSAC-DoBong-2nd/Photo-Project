@@ -18,7 +18,7 @@ final class PhotoSearchViewController: BaseViewController {
     private lazy var orderBy = mainView.toggleButtonState.rawValue
     private var selectedColorFilterBtn: String? = nil
     private var isEnd = false
-    
+    private var scrollViewDidScrollCnt = 0
     private var searchList: [Result] = [] {
         didSet {
             mainView.searchCollectionView.reloadData()
@@ -30,6 +30,7 @@ final class PhotoSearchViewController: BaseViewController {
     
     override func loadView() {
         view = mainView
+        setChildrenViewLayout(view: mainView)
     }
 
     override func viewDidLoad() {
@@ -38,8 +39,6 @@ final class PhotoSearchViewController: BaseViewController {
         setSearchController()
         setDelegate()
         setAddTarget()
-        
-        mainView.toggleButton.isHidden = true
     }
     
     override func setStyle() {
@@ -65,7 +64,9 @@ private extension PhotoSearchViewController {
                                                     action: #selector(tappedBtn),
                                                     for: .touchUpInside)
         }
-        mainView.toggleButton.addTarget(self, action: #selector(toggleBtnTapped), for: .touchUpInside)
+        mainView.toggleButton.addTarget(self,
+                                        action: #selector(toggleBtnTapped),
+                                        for: .touchUpInside)
     }
     
     func setSearchController() {
@@ -86,28 +87,90 @@ private extension PhotoSearchViewController {
         page = 1
     }
     
-    func getPhotoSearchData(query: String, page: Int, perPage: Int, orderBy: String, color: String? = nil) {
-//        query: query, page: page, perPage: perPage, orderBy: orderBy, color: color
-        NetworkManager.shared.getPhotoSearch(apiHandler: .getPhotoSearch(query: query, page: page, perPage: perPage, orderBy: orderBy, color: color)) { result,statusCode  in
-            switch statusCode {
-            case (200..<299):
-                self.searchList.append(contentsOf: result.results)
-                self.mainView.searchResultState = (self.searchList.count != 0) ? .some : .none
-                self.mainView.searchResultState(state: self.mainView.searchResultState)
-                if !self.searchList.isEmpty && (self.page == 1) {
-                    self.mainView.setBtnAbled()
-                    self.setScrollToTop()
-                }
-                
-                //호출 오버 방지
-                if result.total - (page * perPage) < 0 {
-                    self.isEnd = true
-                }
-                
-            default:
-                return print("getPhotoSearchData Error")
-            }
+    func photoDetailModelDataSet(item: Result, result: PhotoDetailResponseModel) -> PhotoDetailModel {
+        let profileImageURL = item.user.profile_image.medium
+        let profileName = item.user.name
+        let createAt = item.created_at
+        let selectedImageURL = item.urls.regular
+        let selectedImageWidth = item.width
+        let selectedImageHeight = item.height
+        let downloadCount = result.downloads.historical.change
+        let viewCount = result.views.historical.change
+        
+        var day30ViewCount: [Int] = []
+        for i in result.views.historical.values {
+            day30ViewCount.append(i.value)
         }
+        var day30DownCount: [Int] = []
+        for i in result.downloads.historical.values {
+            day30DownCount.append(i.value)
+        }
+        var view30Days = [String]()
+        for i in result.views.historical.values {
+            print(i.date)
+            view30Days.append(DateFormatterManager.shard.setDateString(strDate: i.date, format: "MM.dd"))
+        }
+        var view30DaysValue = [Int]()
+        for i in result.views.historical.values {
+            view30DaysValue.append(i.value)
+        }
+        
+        var download30Days = [String]()
+        for i in result.downloads.historical.values {
+            print(i.date)
+            download30Days.append(DateFormatterManager.shard.setDateString(strDate: i.date, format: "MM.dd"))
+        }
+        var download30DaysValue = [Int]()
+        for i in result.downloads.historical.values {
+            download30DaysValue.append(i.value)
+        }
+        
+        let monthView = MonthView(monthViewDates: view30Days, monthViewValues: view30DaysValue)
+        let monthDownload = MonthDownload(monthDownloadDates: download30Days, monthDownloadValues: download30DaysValue)
+        
+        let setPhotoDetailModel = PhotoDetailModel(profileImageURL: profileImageURL,
+                                               profileName: profileName,
+                                               createAt: createAt,
+                                               selectedImageURL: selectedImageURL,
+                                               selectedImageWidth: selectedImageWidth,
+                                               selectedImageHeight: selectedImageHeight,
+                                               downloadCount: downloadCount,
+                                               viewCount: viewCount, monthViewTotalCount: day30ViewCount,
+                                               monthDownloadTotalCount: day30ViewCount,
+                                               monthView: monthView,
+                                               monthDownload: monthDownload)
+        
+        return setPhotoDetailModel
+    }
+    
+    func getPhotoSearchData(query: String, page: Int, perPage: Int, orderBy: String, color: String? = nil) {
+        NetworkManager.shared.getUnsplashAPIWithMetaType(
+            apiHandler: .getPhotoSearch(query: query,
+                                        page: page,
+                                        perPage: perPage,
+                                        orderBy: orderBy,
+                                        color: color),
+            responseModel: PhotoSearchResponseModel.self) { result, networkResultType in
+                switch networkResultType {
+                case .success:
+                    print("networkResultType : Success")
+                    self.searchList.append(contentsOf: result.results)
+                    self.mainView.searchResultState = (self.searchList.count != 0) ? .some : .none
+                    self.mainView.searchResultState(state: self.mainView.searchResultState)
+                    if !self.searchList.isEmpty && (self.page == 1) {
+                        self.mainView.setBtnAbled()
+                        self.setScrollToTop()
+                    }
+                    
+                    //호출 오버 방지
+                    if result.total - (page * perPage) < 0 {
+                        self.isEnd = true
+                    }
+                case .badRequest, .unauthorized, .forbidden, .notFound, .serverError, .anotherError:
+                    let alert = networkResultType.alert
+                    self.present(alert, animated: true)
+                }
+            }
     }
     
 }
@@ -120,7 +183,7 @@ private extension PhotoSearchViewController {
         for i in mainView.colorFilterBtnArr {
             if i == sender {
                 guard let text = i.titleLabel?.text else { return }
-                for j in PhotoSearchColorButton.allCases {
+                for j in PhotoSearchColorButtonType.allCases {
                     if j.rawValue == text {
                         i.isSelected = true
                         selectedColorFilterBtn = j.buttonTitle
@@ -140,14 +203,17 @@ private extension PhotoSearchViewController {
     @objc
     func toggleBtnTapped(_ sender: UIButton) {
         sender.isSelected.toggle()
-        self.mainView.toggleButtonState = sender.isSelected ? .latest : .relevant
+        mainView.toggleButtonState = sender.isSelected ? .latest : .relevant
+        orderBy = mainView.toggleButtonState.rawValue
         
         resetSearchListWithPage()
         
-        self.getPhotoSearchData(query: self.searchText ?? "",
-                            page: self.page,
-                            perPage: self.perPage,
-                            orderBy: orderBy)
+        //color filter가 눌려있다면 color 조건 역시 들어가야하니 selectedColorFilterBtn 변수 사용
+        getPhotoSearchData(query: searchText ?? "",
+                       page: page,
+                       perPage: perPage,
+                       orderBy: orderBy,
+                       color: selectedColorFilterBtn)
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
             self.mainView.toggleButton.isHidden = true
@@ -186,9 +252,13 @@ extension PhotoSearchViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         print(#function)
-        DispatchQueue.main.async {
-            self.mainView.toggleButton.isHidden = false
+        if scrollViewDidScrollCnt >= 2 {
+            DispatchQueue.main.async {
+                self.mainView.toggleButton.isHidden = false
+            }
         }
+            
+        scrollViewDidScrollCnt += 1
     }
     
     //스크롤 손가락을 떼었을 때
@@ -205,8 +275,6 @@ extension PhotoSearchViewController: UIScrollViewDelegate {
 extension PhotoSearchViewController: UICollectionViewDataSourcePrefetching {
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        print(#function, indexPaths)
-        
         for i in indexPaths {
             if (searchList.count - 6) == i.item && isEnd == false  {
                 page += 1
@@ -227,8 +295,6 @@ extension PhotoSearchViewController: UICollectionViewDataSourcePrefetching {
 extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(#function)
-        print("self.searchList.count \(self.searchList.count)")
         return searchList.count
     }
     
@@ -246,67 +312,17 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
         let item = searchList[indexPath.item]
         let imageID = item.id
         
-        NetworkManager.shared.getPhotoDetail(apiHandler: .getPhotoDetail(imageID: imageID)) {
-            result,
-            statusCode in
-            switch statusCode {
-            case (200..<299):
-                print("result : \n", result)
-                let profileImageURL = item.user.profile_image.medium
-                let profileName = item.user.name
-                let createAt = item.created_at
-                let selectedImageURL = item.urls.regular
-                let selectedImageWidth = item.width
-                let selectedImageHeight = item.height
-                let downloadCount = result.downloads.historical.change
-                let viewCount = result.views.historical.change
-                var day30ViewCount: [Int] = []
-                for i in result.views.historical.values {
-                    day30ViewCount.append(i.value)
-                }
-                var day30DownCount: [Int] = []
-                for i in result.downloads.historical.values {
-                    day30DownCount.append(i.value)
-                }
-                var view30Days = [String]()
-                for i in result.views.historical.values {
-                    print(i.date)
-                    view30Days.append(DateFormatterManager.shard.setDateString(strDate: i.date, format: "MM.dd"))
-                }
-                var view30DaysValue = [Int]()
-                for i in result.views.historical.values {
-                    view30DaysValue.append(i.value)
-                }
-                
-                var download30Days = [String]()
-                for i in result.downloads.historical.values {
-                    print(i.date)
-                    download30Days.append(DateFormatterManager.shard.setDateString(strDate: i.date, format: "MM.dd"))
-                }
-                var download30DaysValue = [Int]()
-                for i in result.downloads.historical.values {
-                    download30DaysValue.append(i.value)
-                }
-                
-                let monthView = MonthView(monthViewDates: view30Days, monthViewValues: view30DaysValue)
-                let monthDownload = MonthDownload(monthDownloadDates: download30Days, monthDownloadValues: download30DaysValue)
+        NetworkManager.shared.getUnsplashAPIWithMetaType(apiHandler: .getPhotoDetail(imageID: imageID), responseModel: PhotoDetailResponseModel.self) { result, networkResultType in
+            switch networkResultType {
+            case .success:
+                print("networkResultType: success")
                 
                 let vc = PhotoDetailViewController()
-                vc.photoDetailModel = PhotoDetailModel(profileImageURL: profileImageURL,
-                                                       profileName: profileName,
-                                                       createAt: createAt,
-                                                       selectedImageURL: selectedImageURL,
-                                                       selectedImageWidth: selectedImageWidth,
-                                                       selectedImageHeight: selectedImageHeight,
-                                                       downloadCount: downloadCount,
-                                                       viewCount: viewCount, monthViewTotalCount: day30ViewCount,
-                                                       monthDownloadTotalCount: day30ViewCount,
-                                                       monthView: monthView,
-                                                       monthDownload: monthDownload)
-                
-                self.navigationController?.pushViewController(vc, animated: true)
-            default:
-                return print("getPhotoSearchData Error")
+                vc.photoDetailModel = self.photoDetailModelDataSet(item: item, result: result)
+                self.viewTransition(viewController: vc, transitionStyle: .push)
+            case .badRequest, .unauthorized, .forbidden, .notFound, .serverError, .anotherError:
+                let alert = networkResultType.alert
+                self.present(alert, animated: true)
             }
         }
         collectionView.reloadItems(at: [indexPath])
@@ -318,4 +334,7 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
 
 /*
  1. viewDidLoad까지 toggleisHidden = true를 했는데 첫화면에 무조건 toggleBtn이 보이는 중이다. 왜 그러지
+- 해결
+    - UIScrollViewDelegate scrollViewDidScroll이 viewDidLoad 시 자동으로 불리게 되는 것을 생각하지 못했다.
+    - 그 안에 isHidden = False 코드가 있어 그랬던 것.
  */
