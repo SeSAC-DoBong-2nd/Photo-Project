@@ -30,6 +30,20 @@ final class DateFormatterManager {
         return outputDate.string(from: date)
     }
     
+    func setDateStringFromDate(date: Date, format: String) -> String {
+        let outputDate = DateFormatter()
+        outputDate.dateFormat = format
+        
+        return outputDate.string(from: date)
+    }
+    
+    func setDateStringFromString(date: String, format: String) -> Date {
+        let outputDate = DateFormatter()
+        outputDate.dateFormat = format
+        
+        return outputDate.date(from: date) ?? Date()
+    }
+    
     func setDateInChat(strDate: String) -> String {
         let inputDate = DateFormatter()
         //strDate 형식에 맞는 포맷 설정
