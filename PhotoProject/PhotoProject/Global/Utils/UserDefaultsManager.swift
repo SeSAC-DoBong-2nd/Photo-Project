@@ -22,4 +22,13 @@ final class UserDefaultsManager {
         }
     }
     
+    var nickname: String {
+        get {
+            return UserDefaults.standard.string(forKey: "nickname") ?? "Unknown"
+        }
+        set {
+            return UserDefaults.standard.set(newValue, forKey: "nickname")
+        }
+    }
+    
 }

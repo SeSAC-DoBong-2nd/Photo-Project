@@ -18,6 +18,10 @@ final class ProfileViewController: BaseViewController {
     let birthdayLabel = UILabel()
     let levelLabel = UILabel()
     
+    override func viewWillAppear(_ animated: Bool) {
+        nicknameLabel.text = UserDefaultsManager.shared.nickname
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -95,7 +99,7 @@ final class ProfileViewController: BaseViewController {
         birthdayButton.setTitle("생일", for: .normal)
         levelButton.setTitle("레벨", for: .normal)
 
-        nicknameLabel.text = "NO NAME"
+        
         nicknameLabel.textColor = .lightGray
         nicknameLabel.textAlignment = .right
         
@@ -122,6 +126,11 @@ private extension ProfileViewController {
         nicknameButton.addTarget(self, action: #selector(nicknameButtonTapped), for: .touchUpInside)
         birthdayButton.addTarget(self, action: #selector(birthdayButtonTapped), for: .touchUpInside)
         levelButton.addTarget(self, action: #selector(levelButtonTapped), for: .touchUpInside)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(notificationOn),
+                                               name: NSNotification.Name("nickname"),
+                                               object: nil)
     }
     
     @objc
@@ -143,7 +152,7 @@ private extension ProfileViewController {
     }
 
     @objc
-    private func unSignButtonTapped() {
+    func unSignButtonTapped() {
         print(#function)
         
         UserDefaultsManager.shared.isNotFirstLoading = false
@@ -156,6 +165,16 @@ private extension ProfileViewController {
 
         window.rootViewController = UINavigationController(rootViewController: OnboardingViewController())
         window.makeKeyAndVisible()
+    }
+    
+    @objc
+    func notificationOn(notification: NSNotification) {
+        //이곳에서 값 넣어주기
+        if let name = notification.userInfo!["value"] as? String {
+            nicknameLabel.text = name
+        } else {
+            nicknameLabel.text = "데이터가 안 왔음"
+        }
     }
     
 }
