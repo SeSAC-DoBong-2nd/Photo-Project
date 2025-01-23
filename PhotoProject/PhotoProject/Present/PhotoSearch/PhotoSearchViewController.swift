@@ -313,7 +313,7 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
                                                        monthView: monthView,
                                                        monthDownload: monthDownload)
                 
-                self.navigationController?.pushViewController(vc, animated: true)
+                self.viewTransition(viewController: vc, transitionStyle: .push)
             case .badRequest, .unauthorized, .forbidden, .notFound, .serverError, .anotherError:
                 let alert = networkResultType.alert
                 self.present(alert, animated: true)

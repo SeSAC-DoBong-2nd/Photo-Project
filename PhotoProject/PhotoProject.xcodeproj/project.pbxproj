@@ -48,6 +48,7 @@
 		9ED6913A2D3DCECC007E76E8 /* Secret.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9ED691392D3DCEC8007E76E8 /* Secret.xcconfig */; };
 		9ED691A72D3FE8AE007E76E8 /* UnsplahTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691A62D3FE8AE007E76E8 /* UnsplahTargetType.swift */; };
 		9EEB88872D40E64B00E0C6C4 /* NetworkResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88862D40E64B00E0C6C4 /* NetworkResultType.swift */; };
+		9EEB88892D41BD0800E0C6C4 /* ViewTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88882D41BD0800E0C6C4 /* ViewTransitionType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 		9ED691392D3DCEC8007E76E8 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
 		9ED691A62D3FE8AE007E76E8 /* UnsplahTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplahTargetType.swift; sourceTree = "<group>"; };
 		9EEB88862D40E64B00E0C6C4 /* NetworkResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResultType.swift; sourceTree = "<group>"; };
+		9EEB88882D41BD0800E0C6C4 /* ViewTransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTransitionType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +277,7 @@
 				9ED691142D3CC244007E76E8 /* ToggleButtonStateType.swift */,
 				9ED691302D3D59E4007E76E8 /* TopicIDType.swift */,
 				9EEB88862D40E64B00E0C6C4 /* NetworkResultType.swift */,
+				9EEB88882D41BD0800E0C6C4 /* ViewTransitionType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				9E5701212D3BBAF800D62846 /* AppDelegate.swift in Sources */,
 				9E5701702D3BC67000D62846 /* UIStackView+Extension.swift in Sources */,
 				9E5701692D3BC56700D62846 /* UIView+Extension.swift in Sources */,
+				9EEB88892D41BD0800E0C6C4 /* ViewTransitionType.swift in Sources */,
 				9ED691092D3BFEEE007E76E8 /* SearchResultStateType.swift in Sources */,
 				9ED691312D3D59E4007E76E8 /* TopicIDType.swift in Sources */,
 				9E57016A2D3BC56700D62846 /* Bundle+Extension.swift in Sources */,
