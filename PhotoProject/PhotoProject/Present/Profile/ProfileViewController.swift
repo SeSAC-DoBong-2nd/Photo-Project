@@ -21,6 +21,8 @@ final class ProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setDelegate()
+        setAddTarget()
     }
     
     override func setHierarchy() {
@@ -104,6 +106,40 @@ final class ProfileViewController: BaseViewController {
         levelLabel.text = "NO LEVEL"
         levelLabel.textColor = .lightGray
         levelLabel.textAlignment = .right
+    }
+    
+    
+    
+}
+
+private extension ProfileViewController {
+    
+    private func setDelegate() {
+        
+    }
+    
+    private func setAddTarget() {
+        nicknameButton.addTarget(self, action: #selector(nicknameButtonTapped), for: .touchUpInside)
+        birthdayButton.addTarget(self, action: #selector(birthdayButtonTapped), for: .touchUpInside)
+        levelButton.addTarget(self, action: #selector(levelButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc
+    private func nicknameButtonTapped() {
+        print(#function)
+        viewTransition(viewController: NicknameViewController(), transitionStyle: .push)
+    }
+    
+    @objc
+    private func birthdayButtonTapped() {
+        print(#function)
+        viewTransition(viewController: BirthdayViewController(), transitionStyle: .push)
+    }
+    
+    @objc
+    private func levelButtonTapped() {
+        print(#function)
+        viewTransition(viewController: LevelViewController(), transitionStyle: .push)
     }
 
     @objc
