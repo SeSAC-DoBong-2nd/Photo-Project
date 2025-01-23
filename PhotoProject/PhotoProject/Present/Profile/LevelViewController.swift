@@ -6,18 +6,14 @@
 //
 
 import UIKit
+
 import SnapKit
 
 final class LevelViewController: BaseViewController {
 
-    let segmentedControl = UISegmentedControl(items: ["상", "중", "하"])
-    
     var delegate: LevelDelegateProtocol?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
+    private let segmentedControl = UISegmentedControl(items: ["상", "중", "하"])
     
     override func setHierarchy() {
         view.addSubview(segmentedControl)

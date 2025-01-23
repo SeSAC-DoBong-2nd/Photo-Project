@@ -6,16 +6,13 @@
 //
 
 import UIKit
+
 import SnapKit
+import Then
 
 final class NicknameViewController: BaseViewController {
 
     private let textField = UITextField()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
     
     override func setHierarchy() {
         view.addSubview(textField)
@@ -42,9 +39,11 @@ final class NicknameViewController: BaseViewController {
         
         view.backgroundColor = .white
         
-        textField.placeholder = "닉네임을 입력해주세요"
         let nickname = UserDefaultsManager.shared.nickname
-        textField.text = (nickname != "NO NAME") ? nickname : ""
+        textField.do {
+            $0.placeholder = "닉네임을 입력해주세요"
+            $0.text = (nickname != "NO NAME") ? nickname : ""
+        }
     }
     
     @objc

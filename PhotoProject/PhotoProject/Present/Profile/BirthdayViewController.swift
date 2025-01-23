@@ -12,13 +12,9 @@ import SnapKit
 
 final class BirthdayViewController: BaseViewController {
 
-    private let datePicker = UIDatePicker()
     var onChange: ((String) -> Void)?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
+    private let datePicker = UIDatePicker()
     
     override func setHierarchy() {
         view.addSubview(datePicker)
@@ -43,12 +39,13 @@ final class BirthdayViewController: BaseViewController {
                                                             action: #selector(okButtonTapped))
         view.backgroundColor = .white
         
-        datePicker.preferredDatePickerStyle = .wheels
-        datePicker.datePickerMode = .date
-        
         let birthday = DateFormatterManager.shard.setDateStringFromString(date: UserDefaultsManager.shared.birthday, format: "yyyy-MM-dd")
         
-        datePicker.setDate(birthday, animated: true)
+        datePicker.do {
+            $0.preferredDatePickerStyle = .wheels
+            $0.datePickerMode = .date
+            $0.setDate(birthday, animated: true)
+        }
     }
     
     @objc

@@ -6,7 +6,9 @@
 //
 
 import UIKit
+
 import SnapKit
+import Then
 
 final class ProfileViewController: BaseViewController {
     
@@ -14,14 +16,14 @@ final class ProfileViewController: BaseViewController {
     let birthday: String
     let level: String
 
-    let nicknameButton = UIButton()
-    let birthdayButton = UIButton()
-    let levelButton = UIButton()
-    let saveButton = UIButton()
+    private let nicknameButton = UIButton()
+    private let birthdayButton = UIButton()
+    private let levelButton = UIButton()
+    private let saveButton = UIButton()
     
-    let nicknameLabel = UILabel()
-    let birthdayLabel = UILabel()
-    let levelLabel = UILabel()
+    private let nicknameLabel = UILabel()
+    private let birthdayLabel = UILabel()
+    private let levelLabel = UILabel()
     
     init(nickname: String, birthday: String, level: String) {
         self.nickname = nickname
@@ -41,8 +43,6 @@ final class ProfileViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
         setAddTarget()
     }
@@ -120,26 +120,42 @@ final class ProfileViewController: BaseViewController {
                                                             target: self,
                                                             action: #selector(unSignButtonTapped))
         
-        nicknameButton.setTitleColor(.black, for: .normal)
-        birthdayButton.setTitleColor(.black, for: .normal)
-        levelButton.setTitleColor(.black, for: .normal)
+        nicknameButton.do {
+            $0.setTitleColor(.black, for: .normal)
+            $0.setTitle("닉네임", for: .normal)
+        }
         
-        nicknameButton.setTitle("닉네임", for: .normal)
-        birthdayButton.setTitle("생일", for: .normal)
-        levelButton.setTitle("레벨", for: .normal)
+        birthdayButton.do {
+            $0.setTitleColor(.black, for: .normal)
+            $0.setTitle("생일", for: .normal)
+        }
+        
+        levelButton.do {
+            $0.setTitleColor(.black, for: .normal)
+            $0.setTitle("레벨", for: .normal)
+        }
+        
+        saveButton.do {
+            $0.setTitle("저장하기", for: .normal)
+            $0.titleLabel?.font = .boldSystemFont(ofSize: 16)
+            $0.layer.cornerRadius = 10
+            $0.layer.borderWidth = 3
+        }
 
+        nicknameLabel.do {
+            $0.textColor = .lightGray
+            $0.textAlignment = .right
+        }
         
-        nicknameLabel.textColor = .lightGray
-        nicknameLabel.textAlignment = .right
+        birthdayLabel.do {
+            $0.textColor = .lightGray
+            $0.textAlignment = .right
+        }
         
-        birthdayLabel.textColor = .lightGray
-        birthdayLabel.textAlignment = .right
-        
-        levelLabel.textColor = .lightGray
-        levelLabel.textAlignment = .right
-        
-        saveButton.setTitle("저장하기", for: .normal)
-        saveButton.setTitleColor(.black, for: .normal)
+        levelLabel.do {
+            $0.textColor = .lightGray
+            $0.textAlignment = .right
+        }
     }
     
 }
@@ -167,9 +183,10 @@ private extension ProfileViewController {
             !["NO NAME", "NO DATE", "NO LEVEL"].contains($0)
         }
         
-        saveButton.backgroundColor = flag ? .blue : .lightGray
         let titleColor: UIColor = flag ? .white : .black
         saveButton.setTitleColor(titleColor, for: .normal)
+        saveButton.backgroundColor = flag ? .systemBlue.withAlphaComponent(1.0) : .lightGray.withAlphaComponent(0.6)
+        saveButton.layer.borderColor = flag ? UIColor.green.cgColor : UIColor.clear.cgColor
     }
     
     @objc
@@ -208,7 +225,11 @@ private extension ProfileViewController {
     func unSignButtonTapped() {
         print(#function)
         
-        UserDefaultsManager.shared.isNotFirstLoading = false
+        //Reset UserDefaults
+        if let bundleID = Bundle.main.bundleIdentifier {
+           UserDefaults.standard.removePersistentDomain(forName: bundleID)
+        }
+        
         print("UserDefaultsManager.shared.isNotFirstLoading: \(UserDefaultsManager.shared.isNotFirstLoading)")
         
         //rootVC 탭바VC로 변경
