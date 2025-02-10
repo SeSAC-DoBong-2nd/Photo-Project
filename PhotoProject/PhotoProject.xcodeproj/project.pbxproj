@@ -48,6 +48,8 @@
 		9ED6913A2D3DCECC007E76E8 /* Secret.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9ED691392D3DCEC8007E76E8 /* Secret.xcconfig */; };
 		9ED691A72D3FE8AE007E76E8 /* UnsplahTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691A62D3FE8AE007E76E8 /* UnsplahTargetType.swift */; };
 		9ED79EC22D5A42E2006107D7 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED79EC12D5A42E2006107D7 /* Observable.swift */; };
+		9ED79EC52D5A4357006107D7 /* PhotoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED79EC42D5A4357006107D7 /* PhotoDetailViewModel.swift */; };
+		9ED79EC72D5A4380006107D7 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED79EC62D5A4380006107D7 /* ViewModelProtocol.swift */; };
 		9EEB88872D40E64B00E0C6C4 /* NetworkResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88862D40E64B00E0C6C4 /* NetworkResultType.swift */; };
 		9EEB88892D41BD0800E0C6C4 /* ViewTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88882D41BD0800E0C6C4 /* ViewTransitionType.swift */; };
 		9EEB88C92D4236EC00E0C6C4 /* BirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88C32D4236EC00E0C6C4 /* BirthdayViewController.swift */; };
@@ -98,6 +100,8 @@
 		9ED691392D3DCEC8007E76E8 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
 		9ED691A62D3FE8AE007E76E8 /* UnsplahTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplahTargetType.swift; sourceTree = "<group>"; };
 		9ED79EC12D5A42E2006107D7 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		9ED79EC42D5A4357006107D7 /* PhotoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewModel.swift; sourceTree = "<group>"; };
+		9ED79EC62D5A4380006107D7 /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 		9EEB88862D40E64B00E0C6C4 /* NetworkResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResultType.swift; sourceTree = "<group>"; };
 		9EEB88882D41BD0800E0C6C4 /* ViewTransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTransitionType.swift; sourceTree = "<group>"; };
 		9EEB88C32D4236EC00E0C6C4 /* BirthdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayViewController.swift; sourceTree = "<group>"; };
@@ -221,6 +225,7 @@
 		9E57012A2D3BBB5400D62846 /* PhotoDetail */ = {
 			isa = PBXGroup;
 			children = (
+				9ED79EC32D5A434B006107D7 /* ViewModel */,
 				9ED691202D3D247A007E76E8 /* Model */,
 				9ED691162D3D0815007E76E8 /* View */,
 				9ED690FD2D3BC87B007E76E8 /* PhotoDetailViewController.swift */,
@@ -367,6 +372,14 @@
 			path = PhotoTopic;
 			sourceTree = "<group>";
 		};
+		9ED79EC32D5A434B006107D7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9ED79EC42D5A4357006107D7 /* PhotoDetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		9EEB88C82D4236EC00E0C6C4 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,6 +403,7 @@
 			isa = PBXGroup;
 			children = (
 				9EEB88D22D4252ED00E0C6C4 /* LevelDelegateProtocol.swift */,
+				9ED79EC62D5A4380006107D7 /* ViewModelProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -506,6 +520,7 @@
 				9ED691222D3D2484007E76E8 /* PhotoDetailModel.swift in Sources */,
 				9ED690FC2D3BC870007E76E8 /* PhotoSearchViewController.swift in Sources */,
 				9ED691112D3CA546007E76E8 /* NetworkManager.swift in Sources */,
+				9ED79EC52D5A4357006107D7 /* PhotoDetailViewModel.swift in Sources */,
 				9E5701602D3BBF9200D62846 /* DateFormatterManager.swift in Sources */,
 				9ED691152D3CC244007E76E8 /* ToggleButtonStateType.swift in Sources */,
 				9E5701612D3BBF9200D62846 /* UIAlertManager.swift in Sources */,
@@ -519,6 +534,7 @@
 				9ED6910C2D3C077B007E76E8 /* PhotoSearchResponseModel.swift in Sources */,
 				9EEB88872D40E64B00E0C6C4 /* NetworkResultType.swift in Sources */,
 				9ED691002D3BC884007E76E8 /* PhotoTopicViewController.swift in Sources */,
+				9ED79EC72D5A4380006107D7 /* ViewModelProtocol.swift in Sources */,
 				9ED690FA2D3BC821007E76E8 /* TabBarViewController.swift in Sources */,
 				9E57015B2D3BBF1F00D62846 /* BaseView.swift in Sources */,
 				9ED691032D3BCF0E007E76E8 /* PhotoSearchView.swift in Sources */,
