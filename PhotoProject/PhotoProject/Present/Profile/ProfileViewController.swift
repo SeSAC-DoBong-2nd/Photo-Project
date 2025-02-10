@@ -30,7 +30,7 @@ final class ProfileViewController: BaseViewController {
         self.birthday = birthday
         self.level = level
         
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
     
     required init?(coder: NSCoder) {
