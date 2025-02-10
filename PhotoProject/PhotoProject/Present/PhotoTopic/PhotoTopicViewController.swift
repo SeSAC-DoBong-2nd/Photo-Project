@@ -68,6 +68,16 @@ private extension PhotoTopicViewController {
                                                                for: .valueChanged)
     }
     
+    func handlingHistoricalData(historicalData: Historical) -> ([String], [Int], [Int]) {
+        let dates = historicalData.values.map {
+            DateFormatterManager.shard.setDateString(strDate: $0.date, format: "MM.dd")
+        }
+        let values = historicalData.values.map { $0.value }
+        let totalCount = values
+        
+        return (dates, values, totalCount)
+    }
+    
     func photoDetailModelDataSet(item: PhotoTopicResponseModel, result: PhotoDetailResponseModel) -> PhotoDetailModel {
         let profileImageURL = item.user.profile_image.medium
         let profileName = item.user.name
@@ -77,52 +87,27 @@ private extension PhotoTopicViewController {
         let selectedImageHeight = item.height
         let downloadCount = result.downloads.historical.change
         let viewCount = result.views.historical.change
-        
-        var day30ViewCount: [Int] = []
-        for i in result.views.historical.values {
-            day30ViewCount.append(i.value)
-        }
-        var day30DownCount: [Int] = []
-        for i in result.downloads.historical.values {
-            day30DownCount.append(i.value)
-        }
-        var view30Days = [String]()
-        for i in result.views.historical.values {
-            print(i.date)
-            view30Days.append(DateFormatterManager.shard.setDateString(strDate: i.date, format: "MM.dd"))
-        }
-        var view30DaysValue = [Int]()
-        for i in result.views.historical.values {
-            view30DaysValue.append(i.value)
-        }
-        
-        var download30Days = [String]()
-        for i in result.downloads.historical.values {
-            print(i.date)
-            download30Days.append(DateFormatterManager.shard.setDateString(strDate: i.date, format: "MM.dd"))
-        }
-        var download30DaysValue = [Int]()
-        for i in result.downloads.historical.values {
-            download30DaysValue.append(i.value)
-        }
-        
+
+        let (view30Days, view30DaysValue, day30ViewCount) = handlingHistoricalData(historicalData: result.views.historical)
+        let (download30Days, download30DaysValue, day30DownCount) = handlingHistoricalData(historicalData: result.downloads.historical)
+
         let monthView = MonthView(monthViewDates: view30Days, monthViewValues: view30DaysValue)
         let monthDownload = MonthDownload(monthDownloadDates: download30Days, monthDownloadValues: download30DaysValue)
-        
-        
-        let setPhotoDetailModel = PhotoDetailModel(profileImageURL: profileImageURL,
-                                               profileName: profileName,
-                                               createAt: createAt,
-                                               selectedImageURL: selectedImageURL,
-                                               selectedImageWidth: selectedImageWidth,
-                                               selectedImageHeight: selectedImageHeight,
-                                               downloadCount: downloadCount,
-                                               viewCount: viewCount, monthViewTotalCount: day30ViewCount,
-                                               monthDownloadTotalCount: day30ViewCount,
-                                               monthView: monthView,
-                                               monthDownload: monthDownload)
-        
-        return setPhotoDetailModel
+
+        return PhotoDetailModel(
+            profileImageURL: profileImageURL,
+            profileName: profileName,
+            createAt: createAt,
+            selectedImageURL: selectedImageURL,
+            selectedImageWidth: selectedImageWidth,
+            selectedImageHeight: selectedImageHeight,
+            downloadCount: downloadCount,
+            viewCount: viewCount,
+            monthViewTotalCount: day30ViewCount,
+            monthDownloadTotalCount: day30DownCount,
+            monthView: monthView,
+            monthDownload: monthDownload
+        )
     }
     
     func getPhotoTopicData(isRefreshControl: Bool? = false) {
