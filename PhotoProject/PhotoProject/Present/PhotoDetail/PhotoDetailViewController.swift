@@ -7,13 +7,17 @@
 
 import UIKit
 
-import DGCharts
-
 final class PhotoDetailViewController: BaseViewController {
     
-    var photoDetailModel: PhotoDetailModel?
+    private let viewModel: PhotoDetailViewModel
     
     private let mainView = PhotoDetailView()
+    
+    init(viewModel: PhotoDetailViewModel) {
+        self.viewModel = viewModel
+        
+        super.init()
+    }
     
     override func loadView() {
         print(#function)
@@ -23,21 +27,37 @@ final class PhotoDetailViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard let photoDetailModel else {return}
-        DispatchQueue.main.async {
-            self.mainView.setDataUI(photoDetailModel: photoDetailModel)
-            self.setChildrenViewLayout(view: self.mainView)
-            self.setChart(title: "한달 조회 수", dataPoints: photoDetailModel.monthView.monthViewDates, lineValues: photoDetailModel.monthView.monthViewValues)
-        }
+        viewModel.input.loadPhotoDetailData.value = ()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setNavUI()
         setAddtarget()
+        bindViewModel()
     }
-
+    
+    private func bindViewModel() {
+        viewModel.output.setPhotoDetailData.lazyBind { [weak self] result in
+            guard let self, let result else {return}
+            let photoDetailModel = result
+            DispatchQueue.main.async {
+                self.mainView.setDataUI(photoDetailModel: photoDetailModel)
+                self.setChildrenViewLayout(view: self.mainView)
+            }
+        }
+        
+        viewModel.output.setChart.lazyBind { [weak self] chartResult in
+            guard let self, let chartResult else {return}
+            let title = (mainView.chartSegmentedControl.selectedSegmentIndex == 0) ? "한달 조회 수" : "한달 다운로드 수"
+            DispatchQueue.main.async {
+                self.mainView.setChart(title: title, dataPoints:
+                                        chartResult.dates, lineValues: chartResult.values)
+            }
+        }
+    }
+    
 }
 
 //MARK: - private extension
@@ -58,36 +78,6 @@ private extension PhotoDetailViewController {
                                                  for: .valueChanged)
     }
     
-    func setChart(title: String, dataPoints: [String], lineValues: [Int]) {
-        var lineDataEntries: [ChartDataEntry] = []
-                
-        for i in 0..<dataPoints.count {
-            let lineDataEntry = ChartDataEntry(x: Double(i), y: Double(lineValues[i]))
-            lineDataEntries.append(lineDataEntry)
-        }
-
-        let lineChartDataSet = LineChartDataSet(entries: lineDataEntries, label: title)
-        
-        lineChartDataSet.colors = [.cyan]
-        lineChartDataSet.circleColors = [.blue]
-
-        let data: CombinedChartData = CombinedChartData()
-        
-        data.lineData = LineChartData(dataSet: lineChartDataSet)
-        
-        lineChartDataSet.mode = .cubicBezier
-        lineChartDataSet.circleHoleRadius = 2.0
-        lineChartDataSet.circleRadius = 3
-
-        // 콤비 데이터 지정
-        mainView.combinedChartView.data = data
-        
-        mainView.combinedChartView.do {
-            $0.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
-            $0.backgroundColor = .clear
-        }
-    }
-    
 }
 
 //MARK: - @objc private extension
@@ -100,19 +90,7 @@ private extension PhotoDetailViewController {
     
     @objc
     func segmentedControlTapped(_ sender: UISegmentedControl) {
-        guard let monthView = photoDetailModel?.monthView,
-              let monthDownload = photoDetailModel?.monthDownload
-        else { return print("segmentedControlTapped") }
-        
-        switch sender.selectedSegmentIndex {
-        case 0:
-            print("000")
-            self.setChart(title: "한달 조회 수", dataPoints: monthView.monthViewDates, lineValues: monthView.monthViewValues)
-        case 1:
-            print("111")
-            self.setChart(title: "한달 다운로드 수", dataPoints: monthDownload.monthDownloadDates, lineValues: monthDownload.monthDownloadValues)
-        default: return
-        }
+        viewModel.input.loadChart.value = sender.selectedSegmentIndex
     }
     
 }

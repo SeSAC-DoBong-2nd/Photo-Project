@@ -59,7 +59,7 @@ private extension OnboardingViewController {
               let window = windowScene.windows.first
         else { return }
 
-        window.rootViewController = UINavigationController(rootViewController: TabBarController())
+        window.rootViewController = TabBarController()
         window.makeKeyAndVisible()
     }
     

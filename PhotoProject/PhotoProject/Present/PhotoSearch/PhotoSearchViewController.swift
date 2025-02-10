@@ -87,6 +87,16 @@ private extension PhotoSearchViewController {
         page = 1
     }
     
+    func handlingHistoricalData(historicalData: Historical) -> ([String], [Int], [Int]) {
+        let dates = historicalData.values.map {
+            DateFormatterManager.shard.setDateString(strDate: $0.date, format: "MM.dd")
+        }
+        let values = historicalData.values.map { $0.value }
+        let totalCount = values
+        
+        return (dates, values, totalCount)
+    }
+    
     func photoDetailModelDataSet(item: Result, result: PhotoDetailResponseModel) -> PhotoDetailModel {
         let profileImageURL = item.user.profile_image.medium
         let profileName = item.user.name
@@ -96,51 +106,27 @@ private extension PhotoSearchViewController {
         let selectedImageHeight = item.height
         let downloadCount = result.downloads.historical.change
         let viewCount = result.views.historical.change
-        
-        var day30ViewCount: [Int] = []
-        for i in result.views.historical.values {
-            day30ViewCount.append(i.value)
-        }
-        var day30DownCount: [Int] = []
-        for i in result.downloads.historical.values {
-            day30DownCount.append(i.value)
-        }
-        var view30Days = [String]()
-        for i in result.views.historical.values {
-            print(i.date)
-            view30Days.append(DateFormatterManager.shard.setDateString(strDate: i.date, format: "MM.dd"))
-        }
-        var view30DaysValue = [Int]()
-        for i in result.views.historical.values {
-            view30DaysValue.append(i.value)
-        }
-        
-        var download30Days = [String]()
-        for i in result.downloads.historical.values {
-            print(i.date)
-            download30Days.append(DateFormatterManager.shard.setDateString(strDate: i.date, format: "MM.dd"))
-        }
-        var download30DaysValue = [Int]()
-        for i in result.downloads.historical.values {
-            download30DaysValue.append(i.value)
-        }
-        
-        let monthView = MonthView(monthViewDates: view30Days, monthViewValues: view30DaysValue)
-        let monthDownload = MonthDownload(monthDownloadDates: download30Days, monthDownloadValues: download30DaysValue)
-        
-        let setPhotoDetailModel = PhotoDetailModel(profileImageURL: profileImageURL,
-                                               profileName: profileName,
-                                               createAt: createAt,
-                                               selectedImageURL: selectedImageURL,
-                                               selectedImageWidth: selectedImageWidth,
-                                               selectedImageHeight: selectedImageHeight,
-                                               downloadCount: downloadCount,
-                                               viewCount: viewCount, monthViewTotalCount: day30ViewCount,
-                                               monthDownloadTotalCount: day30ViewCount,
-                                               monthView: monthView,
-                                               monthDownload: monthDownload)
-        
-        return setPhotoDetailModel
+
+        let (view30Days, view30DaysValue, day30ViewCount) = handlingHistoricalData(historicalData: result.views.historical)
+        let (download30Days, download30DaysValue, day30DownCount) = handlingHistoricalData(historicalData: result.downloads.historical)
+
+        let monthView = MonthData(dates: view30Days, values: view30DaysValue)
+        let monthDownload = MonthData(dates: download30Days, values: download30DaysValue)
+
+        return PhotoDetailModel(
+            profileImageURL: profileImageURL,
+            profileName: profileName,
+            createAt: createAt,
+            selectedImageURL: selectedImageURL,
+            selectedImageWidth: selectedImageWidth,
+            selectedImageHeight: selectedImageHeight,
+            downloadCount: downloadCount,
+            viewCount: viewCount,
+            monthViewTotalCount: day30ViewCount,
+            monthDownloadTotalCount: day30DownCount,
+            monthView: monthView,
+            monthDownload: monthDownload
+        )
     }
     
     func getPhotoSearchData(query: String, page: Int, perPage: Int, orderBy: String, color: String? = nil) {
@@ -316,9 +302,9 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
             switch networkResultType {
             case .success:
                 print("networkResultType: success")
+                let photoDetailModel = self.photoDetailModelDataSet(item: item, result: result)
+                let vc = PhotoDetailViewController(viewModel: PhotoDetailViewModel(photoDetailModel: photoDetailModel, isSuccessLoad: true))
                 
-                let vc = PhotoDetailViewController()
-                vc.photoDetailModel = self.photoDetailModelDataSet(item: item, result: result)
                 self.viewTransition(viewController: vc, transitionStyle: .push)
             case .badRequest, .unauthorized, .forbidden, .notFound, .serverError, .anotherError:
                 let alert = networkResultType.alert

@@ -17,16 +17,11 @@ struct PhotoDetailModel {
     let viewCount: Int
     let monthViewTotalCount: [Int]
     let monthDownloadTotalCount: [Int]
-    let monthView: MonthView
-    let monthDownload: MonthDownload
+    let monthView: MonthData
+    let monthDownload: MonthData
 }
 
-struct MonthView {
-    let monthViewDates: [String]
-    let monthViewValues: [Int]
-}
-
-struct MonthDownload {
-    let monthDownloadDates: [String]
-    let monthDownloadValues: [Int]
+struct MonthData {
+    let dates: [String]
+    let values: [Int]
 }
