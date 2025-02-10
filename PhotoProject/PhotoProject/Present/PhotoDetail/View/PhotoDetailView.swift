@@ -254,6 +254,36 @@ final class PhotoDetailView: BaseView {
         downloadNumLabel.text = photoDetailModel.downloadCount.formatted()
     }
     
+    func setChart(title: String, dataPoints: [String], lineValues: [Int]) {
+        var lineDataEntries: [ChartDataEntry] = []
+        
+        for i in 0..<dataPoints.count {
+            let lineDataEntry = ChartDataEntry(x: Double(i), y: Double(lineValues[i]))
+            lineDataEntries.append(lineDataEntry)
+        }
+        
+        let lineChartDataSet = LineChartDataSet(entries: lineDataEntries, label: title)
+        
+        lineChartDataSet.colors = [.cyan]
+        lineChartDataSet.circleColors = [.blue]
+        
+        let data: CombinedChartData = CombinedChartData()
+        
+        data.lineData = LineChartData(dataSet: lineChartDataSet)
+        
+        lineChartDataSet.mode = .cubicBezier
+        lineChartDataSet.circleHoleRadius = 2.0
+        lineChartDataSet.circleRadius = 3
+        
+        // 콤비 데이터 지정
+        combinedChartView.data = data
+        
+        combinedChartView.do {
+            $0.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
+            $0.backgroundColor = .clear
+        }
+    }
+    
 }
 
 
