@@ -110,8 +110,8 @@ private extension PhotoSearchViewController {
         let (view30Days, view30DaysValue, day30ViewCount) = handlingHistoricalData(historicalData: result.views.historical)
         let (download30Days, download30DaysValue, day30DownCount) = handlingHistoricalData(historicalData: result.downloads.historical)
 
-        let monthView = MonthView(monthViewDates: view30Days, monthViewValues: view30DaysValue)
-        let monthDownload = MonthDownload(monthDownloadDates: download30Days, monthDownloadValues: download30DaysValue)
+        let monthView = MonthData(dates: view30Days, values: view30DaysValue)
+        let monthDownload = MonthData(dates: download30Days, values: download30DaysValue)
 
         return PhotoDetailModel(
             profileImageURL: profileImageURL,
@@ -302,9 +302,9 @@ extension PhotoSearchViewController: UICollectionViewDelegate, UICollectionViewD
             switch networkResultType {
             case .success:
                 print("networkResultType: success")
+                let photoDetailModel = self.photoDetailModelDataSet(item: item, result: result)
+                let vc = PhotoDetailViewController(viewModel: PhotoDetailViewModel(photoDetailModel: photoDetailModel, isSuccessLoad: true))
                 
-                let vc = PhotoDetailViewController()
-                vc.photoDetailModel = self.photoDetailModelDataSet(item: item, result: result)
                 self.viewTransition(viewController: vc, transitionStyle: .push)
             case .badRequest, .unauthorized, .forbidden, .notFound, .serverError, .anotherError:
                 let alert = networkResultType.alert
