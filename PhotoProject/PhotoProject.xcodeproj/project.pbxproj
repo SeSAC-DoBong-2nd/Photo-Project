@@ -47,6 +47,7 @@
 		9ED691342D3DCA1A007E76E8 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 9ED691332D3DCA1A007E76E8 /* DGCharts */; };
 		9ED6913A2D3DCECC007E76E8 /* Secret.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9ED691392D3DCEC8007E76E8 /* Secret.xcconfig */; };
 		9ED691A72D3FE8AE007E76E8 /* UnsplahTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED691A62D3FE8AE007E76E8 /* UnsplahTargetType.swift */; };
+		9ED79EC22D5A42E2006107D7 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED79EC12D5A42E2006107D7 /* Observable.swift */; };
 		9EEB88872D40E64B00E0C6C4 /* NetworkResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88862D40E64B00E0C6C4 /* NetworkResultType.swift */; };
 		9EEB88892D41BD0800E0C6C4 /* ViewTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88882D41BD0800E0C6C4 /* ViewTransitionType.swift */; };
 		9EEB88C92D4236EC00E0C6C4 /* BirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB88C32D4236EC00E0C6C4 /* BirthdayViewController.swift */; };
@@ -96,6 +97,7 @@
 		9ED691302D3D59E4007E76E8 /* TopicIDType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicIDType.swift; sourceTree = "<group>"; };
 		9ED691392D3DCEC8007E76E8 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
 		9ED691A62D3FE8AE007E76E8 /* UnsplahTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplahTargetType.swift; sourceTree = "<group>"; };
+		9ED79EC12D5A42E2006107D7 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		9EEB88862D40E64B00E0C6C4 /* NetworkResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResultType.swift; sourceTree = "<group>"; };
 		9EEB88882D41BD0800E0C6C4 /* ViewTransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTransitionType.swift; sourceTree = "<group>"; };
 		9EEB88C32D4236EC00E0C6C4 /* BirthdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayViewController.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				9E57015E2D3BBF9200D62846 /* DateFormatterManager.swift */,
 				9E57015F2D3BBF9200D62846 /* UIAlertManager.swift */,
 				9EEB88CF2D4237DA00E0C6C4 /* UserDefaultsManager.swift */,
+				9ED79EC12D5A42E2006107D7 /* Observable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				9E57016A2D3BC56700D62846 /* Bundle+Extension.swift in Sources */,
 				9EEB88C92D4236EC00E0C6C4 /* BirthdayViewController.swift in Sources */,
 				9EEB88CA2D4236EC00E0C6C4 /* LevelViewController.swift in Sources */,
+				9ED79EC22D5A42E2006107D7 /* Observable.swift in Sources */,
 				9EEB88CB2D4236EC00E0C6C4 /* NicknameViewController.swift in Sources */,
 				9EEB88CC2D4236EC00E0C6C4 /* OnboardingViewController.swift in Sources */,
 				9EEB88CD2D4236EC00E0C6C4 /* ProfileViewController.swift in Sources */,
